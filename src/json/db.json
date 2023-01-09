@@ -2,6 +2,26 @@
     "user": [
         {
             "id": 1,
+            "user_id": "",
+            "password": "",
+            "username": "James",
+            "phone": "012-3456789",
+            "position": "management"
+        },
+        {
+            "id": 2,
+            "name": "Nguyễn Văn B",
+            "phone": "013-3456789"
+        },
+        {
+            "id": 3,
+            "name": "Nguyễn Văn A",
+            "phone": "014-3456789"
+        }
+    ],
+    "driver": [
+        {
+            "id": 1,
             "name": "Nguyễn Văn A",
             "phone": "012-3456789"
         },
