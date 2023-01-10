@@ -1,71 +1,95 @@
 {
-    "user": [
-        {
-            "id": 1,
-            "user_id": "",
-            "password": "",
-            "username": "James",
-            "phone": "012-3456789",
-            "position": "management"
-        },
-        {
-            "id": 2,
-            "name": "Nguyễn Văn B",
-            "phone": "013-3456789"
-        },
-        {
-            "id": 3,
-            "name": "Nguyễn Văn A",
-            "phone": "014-3456789"
-        }
-    ],
-    "driver": [
-        {
-            "id": 1,
-            "name": "Nguyễn Văn A",
-            "phone": "012-3456789"
-        },
-        {
-            "id": 2,
-            "name": "Nguyễn Văn B",
-            "phone": "013-3456789"
-        },
-        {
-            "id": 3,
-            "name": "Nguyễn Văn A",
-            "phone": "014-3456789"
-        }
-    ],
-    "truck": [
-        {
-            "id": 1,
-            "truck_type": "5 tons",
-            "price": "1,000,000,000",
-            "dimension": "12-2-1.5",
-            "parking_address": "No.128 Hoàn Kiếm, HN",
-            "production_year": "2010",
-            "status": "In-used",
-            "description": ""
-        },
-        {
-            "id": 2,
-            "truck_type": "10 tons",
-            "price": "1,500,000,000",
-            "dimension": "9.8-1.8-1.8",
-            "parking_address": "No.128 Hoàn Kiếm, HN",
-            "production_year": "2011",
-            "status": "New",
-            "description": ""
-        },
-        {
-            "id": 3,
-            "truck_type": "20 tons",
-            "price": "2,000,000,000",
-            "dimension": "10-2-2",
-            "parking_address": "No.128 Hoàn Kiếm, HN",
-            "production_year": "2012",
-            "status": "Suspended",
-            "description": ""
-        }
-    ]
+  "users": [
+    {
+      "id": 0,
+      "name": "james"
+    },
+    {
+      "id": 1,
+      "name": "123"
+    }
+  ],
+  "trucks": [
+    {
+      "id": 1,
+      "truck_type": "5 tons",
+      "cargo_type": "Computer, Electronics",
+      "price": "1,000,000,000",
+      "dimension": "12-2-1.5",
+      "parking_address": "No.128 Hoàn Kiếm, HN",
+      "production_year": "2010",
+      "status": "In-used",
+      "description": ""
+    },
+    {
+      "id": 2,
+      "truck_type": "10 tons",
+      "cargo_type": "Vegetables",
+      "price": "1,500,000,000",
+      "dimension": "9.8-1.8-1.8",
+      "parking_address": "No.128 Hoàn Kiếm, HN",
+      "production_year": "2011",
+      "status": "New",
+      "description": ""
+    },
+    {
+      "id": 3,
+      "truck_type": "20 tons",
+      "cargo_type": "Kid Toys, Computer",
+      "price": "2,000,000,000",
+      "dimension": "10-2-2",
+      "parking_address": "No.128 Hoàn Kiếm, HN",
+      "production_year": "2012",
+      "status": "Suspended",
+      "description": ""
+    }
+  ],
+  "cargos": [
+    {
+      "id": 1,
+      "cargo_type": "Computer"
+    },
+    {
+      "id": 2,
+      "cargo_type": "Electronic"
+    },
+    {
+      "id": 3,
+      "cargo_type": "Vegetables"
+    },
+    {
+      "id": 4,
+      "cargo_type": "Kid Toys"
+    },
+    {
+      "id": 5,
+      "cargo_type": "Fruits"
+    },
+    {
+      "id": 6,
+      "cargo_type": "Drinks"
+    },
+    {
+      "id": 7,
+      "cargo_type": "Sport Equipment"
+    },
+    {
+      "id": 8,
+      "cargo_type": "Frozen Foods"
+    }
+  ],
+  "drivers": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn A"
+    },
+    {
+      "id": 2,
+      "name": "Nguyễn Văn B"
+    },
+    {
+      "id": 3,
+      "name": "Nguyễn Văn A"
+    }
+  ]
 }
