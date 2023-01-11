@@ -1,12 +1,16 @@
 {
   "users": [
     {
-      "id": 0,
-      "name": "james"
+      "id": "abc",
+      "name": "james",
+      "email": "abc@abc.com",
+      "password": "abcABC123!@#"
     },
     {
-      "id": 1,
-      "name": "123"
+      "id": "def",
+      "name": "John",
+      "email": "john@john.com",
+      "password": "*SKKi29ps10"
     }
   ],
   "trucks": [

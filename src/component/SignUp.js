@@ -5,18 +5,22 @@ import * as Yup from "yup";
 import { Button } from "@mui/material";
 
 function SignUp() {
+
+
     const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     const formik = useFormik({
         initialValues: {
             id: "",
-            password: ""
+            password: "",
+            name: ""
         },
         validationSchema: Yup.object({
             id: Yup.string()
                 .max(15, "Must be 15 characters or less")
                 .required("required"),
             password: Yup.string()
-            .matches(passwordRules, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+                .min(8, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+                .matches(passwordRules, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
         }),
         onSubmit: (values) => {
             console.log(values);
