@@ -30,6 +30,7 @@ function SignUp() {
     console.log(formik.touched);
 
     return (
+        <div className="signup"> Sign Up
         <form onSubmit={formik.handleSubmit}>
             <div className="input-container">
                 <input
@@ -57,6 +58,7 @@ function SignUp() {
             </div>
             <Button type="submit" variant="outlined">Sign Up</Button>
         </form>
+        </div>
     )
 }
 

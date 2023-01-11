@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { signout } from "./redux/userSlice";
 
-const signOut = () => {
+const SignOut = () => {
+    const dispatch = useDispatch();
     const handlesignout = (e) => {
         e.preventDefault();
 
-        const dispatch = useDispatch();
         dispatch(signout());
     };
 
@@ -17,4 +17,4 @@ const signOut = () => {
     )
 }
 
-export default signOut;
+export default SignOut;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { login } from "./redux/userSlice";
+import { signin } from './redux/userSlice';
 
 
 const SignIn = () => {
@@ -15,7 +15,7 @@ const SignIn = () => {
         e.preventDefault();
 
         dispatch(
-            login({
+            signin({
                 id: id,
                 password: password,
                 loggedIn: true
@@ -24,9 +24,9 @@ const SignIn = () => {
     }
 
     return (
-        <div className="login">
-            <form className="login__form" onSubmit={(e) => handleSubmit(e)}>
-                <h1>Login Here</h1>
+        <div className="signin">
+            <form className="signin__form" onSubmit={(e) => handleSubmit(e)}>
+                <h1>Sign In Here</h1>
                 <input
                     type="id"
                     placeholder="ID"
@@ -39,7 +39,7 @@ const SignIn = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button type="submit" variant="outlined"> Login </Button>
+                <Button type="submit" variant="outlined"> Sign In </Button>
             </form>
         </div>
     )
