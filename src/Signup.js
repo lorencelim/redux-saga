@@ -4,21 +4,19 @@ import * as Yup from "yup";
 
 import { Button } from "@mui/material";
 
-export default function Signup() {
+function SignUp() {
+    const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            password: "",
+            id: "",
+            password: ""
         },
         validationSchema: Yup.object({
-            firstName: Yup.string()
+            id: Yup.string()
                 .max(15, "Must be 15 characters or less")
                 .required("required"),
             password: Yup.string()
-                .required(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-                    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-                  )
+            .matches(passwordRules, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
         }),
         onSubmit: (values) => {
             console.log(values);
@@ -31,15 +29,15 @@ export default function Signup() {
         <form onSubmit={formik.handleSubmit}>
             <div className="input-container">
                 <input
-                    id="firstName"
-                    name="firstName"
+                    id="id"
+                    name="id"
                     type="text"
-                    placeholder="First Name"
+                    placeholder="ID"
                     onChange={formik.handleChange}
-                    value={formik.values.firstName}
                     onBlur={formik.handleBlur}
+                    value={formik.values.id}
                 />
-                {formik.touched.firstName && formik.errors.firstName ? <p>{formik.errors.firstName}</p> : null}
+                {formik.errors.id ? <p>{formik.errors.id}</p> : null}
             </div>
             <div className="input-container">
                 <input
@@ -51,9 +49,11 @@ export default function Signup() {
                     value={formik.values.password}
                     onBlur={formik.handleBlur}
                 />
-                {formik.touched.password && formik.errors.password ? <p>{formik.errors.password}</p> : null}
+                {formik.errors.password ? <p>{formik.errors.password}</p> : null}
             </div>
-            <Button type="submit" variant="outlined">Login</Button>
+            <Button type="submit" variant="outlined">Sign Up</Button>
         </form>
     )
 }
+
+export default SignUp;
