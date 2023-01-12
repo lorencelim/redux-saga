@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import { useSelector } from 'react-redux';
-import { selectUser } from './component/redux/userSlice';
-import Header from './component/Header';
+import Header from './component/header';
+import Footer from './component/footer';
+import Main from './component/main';
 
 function App() {
 
-  const user = useSelector(selectUser);
-
   return (
     <div className="App">
-          <Header />
+          <Header />  
+          <Main />
+          <Footer />
     </div>
   );
 }

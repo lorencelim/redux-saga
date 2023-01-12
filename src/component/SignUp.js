@@ -19,7 +19,7 @@ function SignUp() {
                 .max(15, "Must be 15 characters or less")
                 .required("required"),
             password: Yup.string()
-                .min(8, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+                .required("required")
                 .matches(passwordRules, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
         }),
         onSubmit: (values) => {
@@ -31,33 +31,33 @@ function SignUp() {
 
     return (
         <div className="signup"> Sign Up
-        <form onSubmit={formik.handleSubmit}>
-            <div className="input-container">
-                <input
-                    id="id"
-                    name="id"
-                    type="text"
-                    placeholder="ID"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.id}
-                />
-                {formik.errors.id ? <p>{formik.errors.id}</p> : null}
-            </div>
-            <div className="input-container">
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    onBlur={formik.handleBlur}
-                />
-                {formik.errors.password ? <p>{formik.errors.password}</p> : null}
-            </div>
-            <Button type="submit" variant="outlined">Sign Up</Button>
-        </form>
+            <form onSubmit={formik.handleSubmit}>
+                <div className="input-container">
+                    <input
+                        id="id"
+                        name="id"
+                        type="text"
+                        placeholder="ID"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.id}
+                    />
+                    {formik.errors.id ? <p>{formik.errors.id}</p> : null}
+                </div>
+                <div className="input-container">
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                        onBlur={formik.handleBlur}
+                    />
+                    {formik.errors.password ? <p>{formik.errors.password}</p> : null}
+                </div>
+                <Button type="submit" variant="outlined">Sign Up</Button>
+            </form>
         </div>
     )
 }
