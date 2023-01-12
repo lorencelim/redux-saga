@@ -4,7 +4,7 @@ import TruckManagement from "./truckManagement";
 import UserManagement from "./userManagement";
 
 
-const Main = () => {
+function Main(){
     return (
         <div className="m">
             <Router>
