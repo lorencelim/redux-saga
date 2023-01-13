@@ -1,10 +1,9 @@
-import React from "react";
-
-function Footer(){
-return(
-    <div> This is Footer </div>
-)
-
+const Footer = ({ length }) =>{
+    return (
+        <footer>
+            <div> {length} List {length === 1 ? "item" : "items" }</div>
+        </footer>
+    )
 }
 
 export default Footer;

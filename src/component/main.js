@@ -1,23 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
-import TruckManagement from "./truckManagement";
-import UserManagement from "./userManagement";
+import { Link, Outlet } from 'react-router-dom';
 
 
-function Main(){
+function Main() {
     return (
         <div className="m">
-            <Router>
                 <nav>
-                    <Link to='TruckManagement'> Truck Management </Link>
-                    <Link to='UserManagement'> User Management </Link>
+                    <Link to='/main/truckManagement'> Truck Management </Link>
+                    <Link to='main/userManagement'> User Management </Link>
                 </nav>
-                <Routes>
-                    <Route path='TruckManagement' element={<TruckManagement />} />
-                    <Route path='UserManagement' element={<UserManagement />} />
-                </Routes>
-            </Router>
+                <Outlet />
         </div>
+
     )
 }
 
