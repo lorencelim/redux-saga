@@ -6,20 +6,20 @@ import apiRequest from './app/api/dbapi';
 
 
 function App() {
-  const API_URL = 'http://localhost:3001/items';
-  const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState('');
+  const API_URL = 'http://localhost:3001/trucks';
+  const [trucks, setTrucks] = useState([]);
+  const [newTruck, setNewTruck] = useState('');
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
 
-    const fetchItems = async () => {
+    const fetchTrucks = async () => {
       try {
         const response = await fetch(API_URL);
         if (!response.ok) throw Error('Did not receive expected data');
-        const listItems = await response.json();
-        setItems(listItems);
+        const listTrucks = await response.json();
+        setTrucks(listTrucks);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
@@ -28,40 +28,40 @@ function App() {
       }
     }
     setTimeout(() => {
-      fetchItems();
+      fetchTrucks();
     }, 1000)
 
   }, [])
 
-  const addItem = async (item) => {
-    const id = items.length ? items[items.length - 1].id + 1 : 1;
-    const myNewItem = { id, checked: false, item };
-    const listItems = [...items, myNewItem];
-    setItems(listItems);
+  const addTruck = async (truck) => {
+    const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
+    const myNewTruck = { id, truck };
+    const listTrucks = [...trucks, myNewTruck];
+    setTrucks(listTrucks);
 
     const postOptions ={
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(myNewItem)
+      body: JSON.stringify(myNewTruck)
     }
     const result = await apiRequest(API_URL, postOptions);
     if (result) setFetchError(result);
   }
 
   const handleCheck = async (id) => {
-    const listItems = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked} : item);
-    setItems(listItems);
+    const listTrucks = trucks.map((truck) =>
+      truck.id === id ? { ...truck, checked: !truck.checked} : truck);
+    setTrucks(listTrucks);
 
-    const myItem = listItems.filter((item) => item.id === id);
+    const myTruck = listTrucks.filter((truck) => truck.id === id);
     const updateOptions = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'applicaiton/json'
       },
-      body: JSON.stringify({ checked: myItem[0].checked})
+      body: JSON.stringify({ checked: myTruck[0].checked})
     };
     const reqUrl = `${API_URL}/${id}`;
     const result = await apiRequest(reqUrl, updateOptions);
@@ -69,8 +69,8 @@ function App() {
   }
 
   const handleDelete = async (id) => {
-    const listItems = items.filter((item) => item.id !== id);
-    setItems(listItems);
+    const listTrucks = trucks.filter((truck) => truck.id !== id);
+    setTrucks(listTrucks);
 
     const deleteOptions = {method: 'DELETE'};
     const reqUrl = `${API_URL}/${id}`;
@@ -80,9 +80,9 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newItem) return;
-    addItem(newItem);
-    setNewItem('');
+    if (!newTruck) return;
+    addTruck(newTruck);
+    setNewTruck('');
   }
 
 
@@ -90,13 +90,13 @@ function App() {
     <div className="App">
       <main>
         <Header title='Truck Management'
-          items={items} handleCheck={handleCheck} handleDelete={handleDelete}
-          newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}
+          trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
+          newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
         />
-        {isLoading && <p>Loading Items...</p>}
+        {isLoading && <p>Loading Trucks...</p>}
         {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
       </main>
-      <Footer length={items.length} />
+      <Footer length={trucks.length} />
     </div >
   );
 }

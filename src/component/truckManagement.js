@@ -1,30 +1,30 @@
 // import { iteratorSymbol } from "immer/dist/internal";
 // import api from '../app/api/dbapi'
 import TableList from "../TableList";
-import AddItem from "../AddItem";
+import AddTruck from "../AddTruck";
 import { useState } from "react";
-import SearchItem from "../SearchItem";
+import SearchTruck from "../SearchTruck";
 
 
-const TruckManagement = ({ items, handleCheck, handleDelete,
-    newItem, setNewItem, handleSubmit
+const TruckManagement = ({ trucks, handleCheck, handleDelete,
+    newTruck, setNewTruck, handleSubmit
 
 }) => {
     const [search, setSearch] = useState('');
     return (
         <main>
-            <AddItem
-                newItem={newItem}
-                setNewItem={setNewItem}
+            <AddTruck
+                newTruck={newTruck}
+                setNewTruck={setNewTruck}
                 handleSubmit={handleSubmit}
             />
-            <SearchItem
+            <SearchTruck
                 search={search}
                 setSearch={setSearch}
             />
-            {items.length ? (
+            {trucks.length ? (
                 <TableList
-                    items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+                    trucks={trucks.filter(truck => ((truck.truck).toLowerCase()).includes(search.toLowerCase()))}
                     handleCheck={handleCheck}
                     handleDelete={handleDelete}
                 />

@@ -1,15 +1,14 @@
 import React from 'react'
 
-const TableList = ({ items, handleCheck, handleDelete }) => {
+const TableList = ({ trucks, handleCheck, handleDelete }) => {
     return (
-        <table items={items}>
+        <table trucks={trucks}>
             <thead>
                 <tr>
                     <th> Truck Plate </th>
                     <th> Cargo Type </th>
                     <th> Driver </th>
                     <th> Truck Type </th>
-                    <th> Price </th>
                     <th> Dimension </th>
                     <th> Parking Address </th>
                     <th> Production Year </th>
@@ -18,12 +17,18 @@ const TableList = ({ items, handleCheck, handleDelete }) => {
                 </tr>
             </thead>
             <tbody>
-                {items.map(item => (
-                    <tr key={item.id} item={item}>
-                        <td>{item.vehicle}</td>
-                        <td>{item.checked}</td>
-                        <td>{item.item}</td>
-                        <td><button onClick={() => handleDelete(item.id)}>
+                {trucks.map(truck => (
+                    <tr key={truck.id} truck={truck}>
+                        <td>{truck.truck_plate}</td>
+                        <td>{truck.cargo_type}</td>
+                        <td>{truck.driver}</td>
+                        <td>{truck.truck_type}</td>
+                        <td>{truck.dimension}</td>
+                        <td>{truck.parking_address}</td>
+                        <td>{truck.production_year}</td>
+                        <td>{truck.status}</td>
+                        
+                        <td><button onClick={() => handleDelete(truck.id)}>
                             Delete
                         </button></td>
 

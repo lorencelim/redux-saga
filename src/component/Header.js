@@ -11,8 +11,8 @@ import TruckManagement from "./truckManagement";
 import UserManagement from "./userManagement";
 
 
-function Header({ title, items, handleCheck, handleDelete,
-  newItem, setNewItem, handleSubmit,
+function Header({ title, trucks, handleCheck, handleDelete,
+  newTruck, setNewTruck, handleSubmit,
 }) {
 
   // const [items, setItems] = useState([
@@ -72,8 +72,8 @@ function Header({ title, items, handleCheck, handleDelete,
           <Routes>
             <Route path='/' element={<Main />}>
                 <Route path='/main/truckManagement' element={
-                  <TruckManagement items={items} handleCheck={handleCheck} handleDelete={handleDelete}
-                    newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}
+                  <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
+                    newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
 
                   />
                 }> Truck Management </Route>

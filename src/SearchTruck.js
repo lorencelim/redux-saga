@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SearchItem = ({search, setSearch}) => {
+const SearchTruck = ({search, setSearch}) => {
     return (
         <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
             <label html='search'>Search</label>
@@ -8,7 +8,7 @@ const SearchItem = ({search, setSearch}) => {
                 id='search'
                 type='text'
                 role='searchbox'
-                placeholder='Search Items'
+                placeholder='Search Truck'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
@@ -16,4 +16,4 @@ const SearchItem = ({search, setSearch}) => {
     )
 }
 
-export default SearchItem
+export default SearchTruck

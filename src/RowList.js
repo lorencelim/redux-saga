@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RowList = ({ items, handleCheck, handleDelete }) => {
+const RowList = ({ trucks, handleCheck, handleDelete }) => {
         <tr>
             <th> Truck Plate </th>
             <th> Cargo Type </th>
@@ -13,19 +13,19 @@ const RowList = ({ items, handleCheck, handleDelete }) => {
             <th> Status </th>
             <th> Description </th>
         </tr>
-    {items.map((item) => {
+    {trucks.map((truck) => {
             return (
                 <tr>
-                    <td><input type="item" key={item.id} /></td>
+                    <td><input type="truck" key={truck.id} /></td>
                     <td><input
                         type="checkbox"
-                        onChange={() => handleCheck(item.id)}
-                        checked={item.checked} /></td>
+                        onChange={() => handleCheck(truck.id)}
+                        checked={truck.checked} /></td>
                     <td><label
-                        onDoubleClick={() => handleCheck(item.id)}
-                    >{item.item}</label></td>
+                        onDoubleClick={() => handleCheck(truck.id)}
+                    >{truck.truck}</label></td>
                     <td><button
-                        onClick={() => handleDelete(item.id)
+                        onClick={() => handleDelete(truck.id)
                         }>Delete</button></td>
                 </tr>
             )

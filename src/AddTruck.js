@@ -1,27 +1,27 @@
 import React, { useRef } from 'react'
 
-const AddItem = ({newItem, setNewItem, handleSubmit}) => {
+const AddTruck = ({newTruck, setNewTruck, handleSubmit}) => {
     const inputRef = useRef();
     return (
         <form className='addForm' onSubmit={handleSubmit}>
-            <label htmlFor='addItem'>Add Item</label>
+            <label htmlFor='addTruck'>Add Truck</label>
             <input
                 autoFocus
                 ref={inputRef}
-                id='addItem'
+                id='addTruck'
                 type='text'
-                placeholder='Add Item'
+                placeholder='Add Truck'
                 required
-                value={newItem}
-                onChange={(e) => setNewItem(e.target.value)}
+                value={newTruck}
+                onChange={(e) => setNewTruck(e.target.value)}
             />
             <button
                 type='submit'
-                aria-label='Add Item'
+                aria-label='Add Truck'
                 onClick={() => inputRef.current.focus()}
-            >Add Item</button>
+            >Add Truck</button>
         </form>
     )
 }
 
-export default AddItem
+export default AddTruck
