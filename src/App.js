@@ -1,58 +1,104 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './component/header';
 import Footer from './component/footer';
+import apiRequest from './app/api/dbapi';
+
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      checked: true,
-      item: "abc"
-    },
-    {
-      id: 2,
-      checked: true,
-      item: "efg"
-    },
-    {
-      id: 3,
-      checked: false,
-      item: "zxc"
-    },
-    {
-      id: 4,
-      checked: false,
-      item: "opi"
+  const API_URL = 'http://localhost:3001/items';
+  const [items, setItems] = useState([]);
+  const [newItem, setNewItem] = useState('');
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw Error('Did not receive expected data');
+        const listItems = await response.json();
+        setItems(listItems);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  ]);
+    setTimeout(() => {
+      fetchItems();
+    }, 1000)
 
-  const [newItem, setNewItem] = useState('')
+  }, [])
 
-  const handleCheck = (id) => {
-    const listItems = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item);
+  const addItem = async (item) => {
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const myNewItem = { id, checked: false, item };
+    const listItems = [...items, myNewItem];
     setItems(listItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
+
+    const postOptions ={
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myNewItem)
+    }
+    const result = await apiRequest(API_URL, postOptions);
+    if (result) setFetchError(result);
   }
 
-  const handleDelete = (id) => {
+  const handleCheck = async (id) => {
+    const listItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked} : item);
+    setItems(listItems);
+
+    const myItem = listItems.filter((item) => item.id === id);
+    const updateOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'applicaiton/json'
+      },
+      body: JSON.stringify({ checked: myItem[0].checked})
+    };
+    const reqUrl = `${API_URL}/${id}`;
+    const result = await apiRequest(reqUrl, updateOptions);
+    if (result) setFetchError(result);
+  }
+
+  const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
+
+    const deleteOptions = {method: 'DELETE'};
+    const reqUrl = `${API_URL}/${id}`;
+    const result = await apiRequest(reqUrl, deleteOptions);
+    if (result) setFetchError(result);
   }
 
   const handleSubmit = (e) => {
-    console.log('submitted')
+    e.preventDefault();
+    if (!newItem) return;
+    addItem(newItem);
+    setNewItem('');
   }
 
 
-    return (
-      <div className="App">
-        <Header title='Truck Management' items={items} handleCheck={handleCheck} handleDelete={handleDelete}/>
-        <Footer length={items.length} />
-      </div >
-    );
-  }
+  return (
+    <div className="App">
+      <main>
+        <Header title='Truck Management'
+          items={items} handleCheck={handleCheck} handleDelete={handleDelete}
+          newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}
+        />
+        {isLoading && <p>Loading Items...</p>}
+        {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+      </main>
+      <Footer length={items.length} />
+    </div >
+  );
+}
 
-  export default App;
+export default App;

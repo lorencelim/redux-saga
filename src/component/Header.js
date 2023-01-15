@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from './redux/userSlice';
@@ -11,7 +11,9 @@ import TruckManagement from "./truckManagement";
 import UserManagement from "./userManagement";
 
 
-function Header({ title, items, handleCheck, handleDelete }) {
+function Header({ title, items, handleCheck, handleDelete,
+  newItem, setNewItem, handleSubmit,
+}) {
 
   // const [items, setItems] = useState([
   //   {
@@ -69,10 +71,13 @@ function Header({ title, items, handleCheck, handleDelete }) {
           </nav>
           <Routes>
             <Route path='/' element={<Main />}>
-              <Route path='/main/truckManagement' element={
-                <TruckManagement items={items} handleCheck={handleCheck} handleDelete={handleDelete} />
-              }> Truck Management </Route>
-              <Route path='/main/userManagement' element={<UserManagement />}></Route>
+                <Route path='/main/truckManagement' element={
+                  <TruckManagement items={items} handleCheck={handleCheck} handleDelete={handleDelete}
+                    newItem={newItem} setNewItem={setNewItem} handleSubmit={handleSubmit}
+
+                  />
+                }> Truck Management </Route>
+                <Route path='/main/userManagement' element={<UserManagement />}></Route>
             </Route>
             <Route path='/SignIn' element={<SignIn />}> Sign In </Route>
             <Route path='/SignUp' element={<SignUp />}> Sign Up </Route>

@@ -42,7 +42,7 @@
       "id": 3,
       "truck_plate": "30A-50494",
       "truck_type": "20 tons",
-      "cargo_type": "Kid Toys, Computer", 
+      "cargo_type": "Kid Toys, Computer",
       "price": "2,000,000,000",
       "dimension": "10-2-2",
       "parking_address": "No.128 Hoàn Kiếm, HN",
@@ -98,6 +98,25 @@
       "id": 3,
       "name": "Nguyễn Văn A"
     }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "vehicle": "Car",
+      "checked": true,
+      "item": "Apple"
+    },
+    {
+      "id": 2,
+      "vehicle": "Motor",
+      "checked": true,
+      "item": "Banana"
+    },
+    {
+      "id": 3,
+      "vehicle": "Lorry",
+      "checked": false,
+      "item": "Table"
+    }
   ]
 }
-

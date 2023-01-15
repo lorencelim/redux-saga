@@ -1,6 +1,23 @@
-import axios from 'axios';
+const apiRequest = async (url = '', optionsObj = null, errMsg =null) => {
 
-export default axios.create({
-    baseURL:"http://localhost:3001",
-});
+    try{
+        const response = await fetch (url, optionsObj);
+        if(!response.ok) throw Error('Please reload the app');
+    } catch (err) {
+        errMsg = err.message;
+    }  finally {
+        return errMsg;
+    }
+}
+
+export default apiRequest;
+
+
+
+
+// import axios from 'axios';
+
+// export default axios.create({
+//     baseURL:"http://localhost:3001",
+// });
 
