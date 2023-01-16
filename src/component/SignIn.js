@@ -97,7 +97,7 @@ return (
                         autoComplete="off"
                         onChange={(e) => setUser(e.target.value)}
                         value={user}
-                        Required
+                        Required= "Required"
                     />
                     <label htmlFor="password">Password:</label>
                     <input
@@ -105,7 +105,7 @@ return (
                         id="password"
                         onChange={(e) => setPwd(e.target.value)}
                         value={pwd}
-                        Required
+                        Required= "Required"
                     />
                     <button> Sign In </button>
                 </form>
