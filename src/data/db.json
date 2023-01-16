@@ -1,16 +1,16 @@
 {
   "users": [
     {
-      "id": "abc",
-      "name": "james",
-      "email": "abc@abc.com",
-      "password": "abcABC123!@#"
+      "user": "ABC",
+      "pwd": "aA2$", 
+      "roles": "admin", 
+      "accessToken": ""
     },
     {
-      "id": "def",
-      "name": "John",
-      "email": "john@john.com",
-      "password": "*SKKi29ps10"
+      "user": "abc",
+      "pwd": "bB2$", 
+      "roles": "management", 
+      "accessToken": ""
     }
   ],
   "trucks": [
@@ -25,8 +25,7 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2010",
       "status": "In-used",
-      "description": "",
-      "truck": "first truck"
+      "description": ""
     },
     {
       "id": 2,
@@ -39,8 +38,7 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2011",
       "status": "New",
-      "description": "",
-      "truck": "second truck"
+      "description": ""
     },
     {
       "id": 3,
@@ -53,8 +51,7 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2012",
       "status": "Suspended",
-      "description": "",
-      "truck": "third truck"
+      "description": ""
     }
   ],
   "cargos": [

@@ -4,13 +4,13 @@ const AddTruck = ({newTruck, setNewTruck, handleSubmit}) => {
     const inputRef = useRef();
     return (
         <form className='addForm' onSubmit={handleSubmit}>
-            <label htmlFor='addTruck'>Add Truck</label>
+            <label htmlFor='addTruckPlate'>Add Truck</label>
             <input
                 autoFocus
                 ref={inputRef}
-                id='addTruck'
+                id='addTruckPlate'
                 type='text'
-                placeholder='Add Truck'
+                placeholder='Add Truck Plate'
                 required
                 value={newTruck}
                 onChange={(e) => setNewTruck(e.target.value)}

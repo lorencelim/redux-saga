@@ -2,17 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from './redux/userSlice';
-import Home from "./home";
-import SignUp from "./signUp";
-import SignIn from "./signIn";
 import SignOut from "./signOut";
-import Main from "./main"
-import TruckManagement from "./truckManagement";
-import UserManagement from "./userManagement";
+
 
 
 function Header({ title, trucks, handleCheck, handleDelete,
   newTruck, setNewTruck, handleSubmit,
+  fetchError, setFetchError, isLoading, setIsLoading
 }) {
 
   // const [items, setItems] = useState([
@@ -62,28 +58,12 @@ function Header({ title, trucks, handleCheck, handleDelete,
     <header>
       <div>
         <h1>{title}</h1>
-        <Router>
-          <nav>
-            <Link to="/"> Main </Link>
-            <Link to="SignIn"> SignIn </Link>
-            <Link to="SignUp"> SignUp </Link>
-            <Link to="Home"> Home </Link>
-          </nav>
-          <Routes>
-            <Route path='/' element={<Main />}>
-                <Route path='/main/truckManagement' element={
-                  <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
-                    newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
 
-                  />
-                }> Truck Management </Route>
-                <Route path='/main/userManagement' element={<UserManagement />}></Route>
-            </Route>
-            <Route path='/SignIn' element={<SignIn />}> Sign In </Route>
-            <Route path='/SignUp' element={<SignUp />}> Sign Up </Route>
-            <Route path='/Home' element={<Home />}> Home </Route>
-          </Routes>
-        </Router>
+          <nav>
+            <Link to="/SignIn/Main/TruckManagement"> Truck Management</Link>
+            <Link to="/SignIn/Main/UserManagement"> User Management</Link>
+          </nav>
+
         <div>{user ? <SignOut /> : null}</div>
       </div>
     </header>

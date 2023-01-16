@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './component/header';
-import Footer from './component/footer';
+import SignIn from './component/signIn';
 import apiRequest from './app/api/dbapi';
-
+import { BrowserRouter as Router, Link, Routes, Route, BrowserRouter } from 'react-router-dom';
+import Main from './component/Main';
+import TruckManagement from './component/truckManagement/truckManagement';
+import UserManagement from './component/userManagement';
+import Header from './component/header';
 
 function App() {
   const API_URL = 'http://localhost:3001/trucks';
@@ -33,13 +36,13 @@ function App() {
 
   }, [])
 
-  const addTruck = async (truck) => {
+  const addTruck = async (truck_plate) => {
     const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
-    const myNewTruck = { id, truck };
+    const myNewTruck = { id, truck_plate };
     const listTrucks = [...trucks, myNewTruck];
     setTrucks(listTrucks);
 
-    const postOptions ={
+    const postOptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -52,7 +55,7 @@ function App() {
 
   const handleCheck = async (id) => {
     const listTrucks = trucks.map((truck) =>
-      truck.id === id ? { ...truck, checked: !truck.checked} : truck);
+      truck.id === id ? { ...truck, checked: !truck.checked } : truck);
     setTrucks(listTrucks);
 
     const myTruck = listTrucks.filter((truck) => truck.id === id);
@@ -61,7 +64,7 @@ function App() {
       headers: {
         'Content-Type': 'applicaiton/json'
       },
-      body: JSON.stringify({ checked: myTruck[0].checked})
+      body: JSON.stringify({ checked: myTruck[0].checked })
     };
     const reqUrl = `${API_URL}/${id}`;
     const result = await apiRequest(reqUrl, updateOptions);
@@ -72,7 +75,7 @@ function App() {
     const listTrucks = trucks.filter((truck) => truck.id !== id);
     setTrucks(listTrucks);
 
-    const deleteOptions = {method: 'DELETE'};
+    const deleteOptions = { method: 'DELETE' };
     const reqUrl = `${API_URL}/${id}`;
     const result = await apiRequest(reqUrl, deleteOptions);
     if (result) setFetchError(result);
@@ -89,14 +92,31 @@ function App() {
   return (
     <div className="App">
       <main>
-        <Header title='Truck Management'
-          trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
-          newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
-        />
-        {isLoading && <p>Loading Trucks...</p>}
-        {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+        <BrowserRouter>
+        <nav>
+          </nav>
+          <Routes>
+            <Route path='/' element={<SignIn />}> Sign In
+              <Route path='/SignIn/Main' element={<Main />}>
+                <Route path='/SignIn/Main/TruckManagement' element={
+                  <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
+                    newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
+                    fetchError={fetchError} setFetchError={setFetchError} isLoading={isLoading} setIsLoading={setIsLoading}
+                  />
+                }> Truck Management
+                </Route>
+                <Route path='/SignIn/Main/UserManagement' element={
+                <UserManagement 
+                />}> User Management 
+                </Route>
+              </Route>
+              <Route path='/SignIn/Header' element={<Header />}> Header </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        {/* {isLoading && <p>Loading Trucks...</p>} */}
+        {/* {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>} */}
       </main>
-      <Footer length={trucks.length} />
     </div >
   );
 }
