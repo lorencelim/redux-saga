@@ -3,9 +3,9 @@ import { useEffect, useState, useRef, useContext } from "react";
 // import { signin } from './redux/userSlice';
 import { Link } from "react-router-dom";
 import axios from "../app/api/axios";
-import AuthContext from "./context/AuthProvider"
+import AuthContext from "./context/AuthProvider";
 
-const SIGNIN_URL = '/auth';
+const SIGNIN_URL = '/users';
 
 const SignIn = () => {
     const { setAuth } = useContext(AuthContext);
@@ -39,10 +39,11 @@ const SignIn = () => {
     //     )
     // }
 
-    const handleLoginSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(SIGNIN_URL, JSON.stringify({ user, pwd }),
+            const response = await axios.post(SIGNIN_URL,
+                JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -89,11 +90,11 @@ const SignIn = () => {
                         "errmsg" : "offscreen"}
                         aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
-                    <form onSubmit={handleLoginSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <label htmlFor="username">Username:</label>
                         <input
                             type="text"
-                            id="username"
+                            id="user"
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
@@ -103,7 +104,7 @@ const SignIn = () => {
                         <label htmlFor="password">Password:</label>
                         <input
                             type="password"
-                            id="password"
+                            id="pwd"
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             Required="Required"
@@ -112,6 +113,9 @@ const SignIn = () => {
                     </form>
                     <nav>
                         <Link to="/SignUp"> SignUp </Link>
+                        <Link to="/SignIn/Main"> Main </Link>
+                        <Link to="/SignIn/Main/TruckManagement"> TruckManagement </Link>
+                        <Link to="/SignIn/Main/UserManagement"> UserManagement </Link>
                     </nav>
                 </section>
             )}
@@ -120,28 +124,6 @@ const SignIn = () => {
 
 
 }
-
-{/* <div className="signin">
-                <form className="signin__form" onSubmit={(e) => handleSubmit(e)}>
-                    <h1>Sign In Here</h1>
-                    <input
-                        type="user"
-                        placeholder="ID"
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
-                    />
-                    <input
-                        type="pwd"
-                        placeholder="Password"
-                        value={pwd}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button type="submit" variant="outlined"> Sign In </Button>
-                </form>
-            </div>
-        </>
-    )
-} */}
 
 
 export default SignIn;

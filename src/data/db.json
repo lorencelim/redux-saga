@@ -2,12 +2,12 @@
   "users": [
     {
       "user": "ABC",
-      "pwd": "aA2$", 
+      "pwd": "aA2$",
       "roles": "admin"
     },
     {
-      "user": "abc",
-      "pwd": "bB2$", 
+      "user": "efg",
+      "pwd": "bB2$",
       "roles": "management"
     }
   ],

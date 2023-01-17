@@ -3,7 +3,7 @@ import './App.css';
 import SignIn from './component/signIn';
 import SignUp from './component/signUp';
 import apiRequest from './app/api/dbapi';
-import { BrowserRouter as Router, Link, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './component/Main';
 import TruckManagement from './component/truckManagement/truckManagement';
 import UserManagement from './component/userManagement';
@@ -94,7 +94,6 @@ function App() {
     <div className="App">
       <main>
         <BrowserRouter>
-
           <Routes>
             <Route path='/' element={<SignIn />}>
               <Route path='/SignIn/Main' element={<Main />} />
