@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useContext } from "react";
 // import { useDispatch } from "react-redux";
 // import { signin } from './redux/userSlice';
+import { Link } from "react-router-dom";
 import axios from "../app/api/axios";
 import AuthContext from "./context/AuthProvider"
 
@@ -72,54 +73,50 @@ const SignIn = () => {
 
 
 
-return (
-    <>
-        {success ? (
-            <section>
-                <h1>you are logged in!</h1>
-                <br />
-                <p>
-                    <a href="/">Go to Home</a>
-                </p>
-            </section>
-        ) : (
-            <section>
-                <p ref={errRef} className={errMsg ?
-                    "errmsg" : "offscreen"}
-                    aria-live="assertive">{errMsg}</p>
-                <h1>Sign In</h1>
-                <form onSubmit={handleLoginSubmit}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        ref={userRef}
-                        autoComplete="off"
-                        onChange={(e) => setUser(e.target.value)}
-                        value={user}
-                        Required= "Required"
-                    />
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        onChange={(e) => setPwd(e.target.value)}
-                        value={pwd}
-                        Required= "Required"
-                    />
-                    <button> Sign In </button>
-                </form>
-                <p>
-                    Need an Account?<br />
-                    <span className="line">
-
-                        <a href="/SignUp">Sign Up</a>
-                    </span>
-                </p>
-            </section>
-        )}
-    </>
-)
+    return (
+        <>
+            {success ? (
+                <section>
+                    <h1>you are logged in!</h1>
+                    <br />
+                    <p>
+                        <a href="/">Go to Home</a>
+                    </p>
+                </section>
+            ) : (
+                <section>
+                    <p ref={errRef} className={errMsg ?
+                        "errmsg" : "offscreen"}
+                        aria-live="assertive">{errMsg}</p>
+                    <h1>Sign In</h1>
+                    <form onSubmit={handleLoginSubmit}>
+                        <label htmlFor="username">Username:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            Required="Required"
+                        />
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            Required="Required"
+                        />
+                        <button> Sign In </button>
+                    </form>
+                    <nav>
+                        <Link to="/SignUp"> SignUp </Link>
+                    </nav>
+                </section>
+            )}
+        </>
+    )
 
 
 }

@@ -3,14 +3,12 @@
     {
       "user": "ABC",
       "pwd": "aA2$", 
-      "roles": "admin", 
-      "accessToken": ""
+      "roles": "admin"
     },
     {
       "user": "abc",
       "pwd": "bB2$", 
-      "roles": "management", 
-      "accessToken": ""
+      "roles": "management"
     }
   ],
   "trucks": [

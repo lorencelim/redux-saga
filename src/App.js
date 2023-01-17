@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import SignIn from './component/signIn';
+import SignUp from './component/signUp';
 import apiRequest from './app/api/dbapi';
 import { BrowserRouter as Router, Link, Routes, Route, BrowserRouter } from 'react-router-dom';
 import Main from './component/Main';
@@ -93,30 +94,24 @@ function App() {
     <div className="App">
       <main>
         <BrowserRouter>
-        <nav>
-          </nav>
+
           <Routes>
-            <Route path='/' element={<SignIn />}> Sign In
-              <Route path='/SignIn/Main' element={<Main />}>
-                <Route path='/SignIn/Main/TruckManagement' element={
-                  <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
-                    newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
-                    fetchError={fetchError} setFetchError={setFetchError} isLoading={isLoading} setIsLoading={setIsLoading}
-                  />
-                }> Truck Management
-                </Route>
-                <Route path='/SignIn/Main/UserManagement' element={
-                <UserManagement 
-                />}> User Management 
-                </Route>
-              </Route>
-              <Route path='/SignIn/Header' element={<Header />}> Header </Route>
+            <Route path='/' element={<SignIn />}>
+              <Route path='/SignIn/Main' element={<Main />} />
+              <Route path='/SignIn/Main/TruckManagement' element={
+                <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
+                  newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
+                  fetchError={fetchError} setFetchError={setFetchError} isLoading={isLoading} setIsLoading={setIsLoading}
+                />} />
+              <Route path='/SignIn/Main/UserManagement' element={<UserManagement />} />
             </Route>
-          </Routes>
-        </BrowserRouter>
-        {/* {isLoading && <p>Loading Trucks...</p>} */}
-        {/* {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>} */}
-      </main>
+            <Route path='/SignUp' element={<SignUp />} />
+            <Route path='/SignIn/Header' element={<Header />} />
+        </Routes>
+      </BrowserRouter>
+      {/* {isLoading && <p>Loading Trucks...</p>} */}
+      {/* {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>} */}
+    </main>
     </div >
   );
 }
