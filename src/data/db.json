@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "user": "ABC",
-      "pwd": "aA2$",
-      "roles": "admin"
+      "username": "abc",
+      "password": "aA2$",
+      "roles": "Admin"
     },
     {
-      "user": "efg",
-      "pwd": "bB2$",
-      "roles": "management"
+      "username": "efg",
+      "password": "bB2$",
+      "roles": "Management"
     }
   ],
   "trucks": [

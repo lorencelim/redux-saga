@@ -1,6 +1,7 @@
 import React from 'react'
 
 const RowList = ({ trucks, handleCheck, handleDelete }) => {
+
         <tr>
             <th> Truck Plate </th>
             <th> Cargo Type </th>

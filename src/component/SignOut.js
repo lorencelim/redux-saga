@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { signout } from "./redux/userSlice";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { signout } from './redux/UserSlice';
 
 const SignOut = () => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const SignOut = () => {
 
     return (
         <div>
-            <button className="logout__button" onClick={(e) => handlesignout(e)}> Logout </button>
+            <button className='logout__button' onClick={(e) => handlesignout(e)}> Logout </button>
         </div>
     )
 }

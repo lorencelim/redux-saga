@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import SignIn from './component/signIn';
-import SignUp from './component/signUp';
+import SignIn from './component/SignIn';
+import SignUp from './component/SignUp';
 import apiRequest from './app/api/dbapi';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './component/Main';
-import TruckManagement from './component/truckManagement/truckManagement';
-import UserManagement from './component/userManagement';
-import Header from './component/header';
+import TruckManagement from './component/truckManagement/TruckManagement';
+import UserManagement from './component/UserManagement';
+import axios from './app/api/axios';
 
 function App() {
-  const API_URL = 'http://localhost:3001/trucks';
+  const TRUCKS_URL = '/trucks';
   const [trucks, setTrucks] = useState([]);
   const [newTruck, setNewTruck] = useState('');
   const [fetchError, setFetchError] = useState(null);
@@ -20,9 +19,12 @@ function App() {
 
     const fetchTrucks = async () => {
       try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw Error('Did not receive expected data');
-        const listTrucks = await response.json();
+        const response = await axios.get(TRUCKS_URL,
+        {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.data) throw Error('Did not receive expected data');
+        const listTrucks = await response.data;
         setTrucks(listTrucks);
         setFetchError(null);
       } catch (err) {
@@ -34,8 +36,9 @@ function App() {
     setTimeout(() => {
       fetchTrucks();
     }, 1000)
-
   }, [])
+  
+
 
   const addTruck = async (truck_plate) => {
     const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
@@ -43,14 +46,14 @@ function App() {
     const listTrucks = [...trucks, myNewTruck];
     setTrucks(listTrucks);
 
-    const postOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(myNewTruck)
+    const trucksPost = async () => {
+      const response = await axios.post(TRUCKS_URL,
+        {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(myNewTruck)
+        });
     }
-    const result = await apiRequest(API_URL, postOptions);
+    const result = await apiRequest(TRUCKS_URL, trucksPost);
     if (result) setFetchError(result);
   }
 
@@ -67,7 +70,7 @@ function App() {
       },
       body: JSON.stringify({ checked: myTruck[0].checked })
     };
-    const reqUrl = `${API_URL}/${id}`;
+    const reqUrl = `${TRUCKS_URL}/${id}`;
     const result = await apiRequest(reqUrl, updateOptions);
     if (result) setFetchError(result);
   }
@@ -77,7 +80,7 @@ function App() {
     setTrucks(listTrucks);
 
     const deleteOptions = { method: 'DELETE' };
-    const reqUrl = `${API_URL}/${id}`;
+    const reqUrl = `${TRUCKS_URL}/${id}`;
     const result = await apiRequest(reqUrl, deleteOptions);
     if (result) setFetchError(result);
   }
@@ -95,22 +98,19 @@ function App() {
       <main>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<SignIn />}>
-              <Route path='/SignIn/Main' element={<Main />} />
-              <Route path='/SignIn/Main/TruckManagement' element={
+            <Route path='/' element={<SignIn />} />
+              <Route path='/SignUp' element={<SignUp />} />
+              <Route path='/TruckManagement' element={
                 <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
                   newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
-                  fetchError={fetchError} setFetchError={setFetchError} isLoading={isLoading} setIsLoading={setIsLoading}
+                  
                 />} />
-              <Route path='/SignIn/Main/UserManagement' element={<UserManagement />} />
-            </Route>
-            <Route path='/SignUp' element={<SignUp />} />
-            <Route path='/SignIn/Header' element={<Header />} />
-        </Routes>
-      </BrowserRouter>
-      {/* {isLoading && <p>Loading Trucks...</p>} */}
-      {/* {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>} */}
-    </main>
+              <Route path='/UserManagement' element={<UserManagement />} />
+          </Routes>
+        </BrowserRouter>
+        {isLoading && <p>Loading Trucks...</p>}
+        {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+      </main>
     </div >
   );
 }

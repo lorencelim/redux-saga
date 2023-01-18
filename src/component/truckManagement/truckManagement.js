@@ -8,9 +8,9 @@ import SearchTruck from "./SearchTruck"
 
 const TruckManagement = ({ trucks, handleCheck, handleDelete,
     newTruck, setNewTruck, handleSubmit,
-    fetchError, setFetchError, isLoading
 }) => {
     const [search, setSearch] = useState('');
+
     return (
         <main>
             <AddTruck
@@ -31,20 +31,7 @@ const TruckManagement = ({ trucks, handleCheck, handleDelete,
             ) : null}
 
 
-            {isLoading && <p>Loading Trucks...</p>}
 
-
-            {/* <ul>
-                {items.map((item) => (
-                    <li className="item" key={item.id}>
-                        <input
-                            type="checkbox" checked={item.checked}
-                        />
-                        <label>{item.item}</label>
-                        <button>This is button</button>
-                    </li>
-                ))}
-            </ul> */}
         </main>
     )
 
@@ -128,8 +115,9 @@ const TruckManagement = ({ trucks, handleCheck, handleDelete,
 }
 
 
-
-
+TruckManagement.defaultProps = {
+    title: "Title"
+}
 
 
 
