@@ -23,7 +23,8 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2010",
       "status": "In-used",
-      "description": ""
+      "description": "",
+      "truck": "abc"
     },
     {
       "id": 2,
@@ -36,7 +37,8 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2011",
       "status": "New",
-      "description": ""
+      "description": "",
+      "truck": "efg"
     },
     {
       "id": 3,
@@ -50,54 +52,6 @@
       "production_year": "2012",
       "status": "Suspended",
       "description": ""
-    }
-  ],
-  "cargos": [
-    {
-      "id": 1,
-      "cargo_type": "Computer"
-    },
-    {
-      "id": 2,
-      "cargo_type": "Electronic"
-    },
-    {
-      "id": 3,
-      "cargo_type": "Vegetables"
-    },
-    {
-      "id": 4,
-      "cargo_type": "Kid Toys"
-    },
-    {
-      "id": 5,
-      "cargo_type": "Fruits"
-    },
-    {
-      "id": 6,
-      "cargo_type": "Drinks"
-    },
-    {
-      "id": 7,
-      "cargo_type": "Sport Equipment"
-    },
-    {
-      "id": 8,
-      "cargo_type": "Frozen Foods"
-    }
-  ],
-  "drivers": [
-    {
-      "id": 1,
-      "name": "Nguyễn Văn A"
-    },
-    {
-      "id": 2,
-      "name": "Nguyễn Văn B"
-    },
-    {
-      "id": 3,
-      "name": "Nguyễn Văn A"
     }
   ],
   "items": [

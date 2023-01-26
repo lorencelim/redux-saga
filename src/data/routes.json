@@ -1,5 +1,4 @@
 {
     "/users/:username": "/users?username=:username"
 
-
 }

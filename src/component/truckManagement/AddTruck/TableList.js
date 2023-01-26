@@ -1,7 +1,7 @@
 import React from 'react'
-import ReadRow from './ReadRow';
 
-const TableList = ({ trucks, handleCheck, handleDelete }) => {
+
+const TableList = ({ trucks, handleDelete }) => {
     return (
         <table trucks={trucks}>
             <thead>
@@ -34,7 +34,8 @@ const TableList = ({ trucks, handleCheck, handleDelete }) => {
                         <td>
                             <button>Edit</button>
                             <button onClick={() => handleDelete(truck.id)}>
-                                Delete</button>
+                                Delete
+                            </button>
                         </td>
 
                     </tr>

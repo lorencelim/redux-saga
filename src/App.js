@@ -7,37 +7,37 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TruckManagement from './component/truckManagement/TruckManagement';
 import UserManagement from './component/UserManagement';
 import axios from './app/api/axios';
+import AddTruck from './component/truckManagement/AddTruck/AddTruck';
+
 
 function App() {
   const TRUCKS_URL = '/trucks';
   const [trucks, setTrucks] = useState([]);
   const [newTruck, setNewTruck] = useState('');
   const [fetchError, setFetchError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
 
     const fetchTrucks = async () => {
       try {
-        const response = await axios.get(TRUCKS_URL,
-        {
-            headers: { 'Content-Type': 'application/json' },
-        });
-        if (!response.data) throw Error('Did not receive expected data');
-        const listTrucks = await response.data;
-        setTrucks(listTrucks);
-        setFetchError(null);
+        const response = await axios.get(TRUCKS_URL);
+        setTrucks(response.data);
       } catch (err) {
-        setFetchError(err.message);
-      } finally {
-        setIsLoading(false);
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else {
+          console.log(`Error: ${err.message}`)
+        }
       }
     }
     setTimeout(() => {
       fetchTrucks();
     }, 1000)
   }, [])
-  
+
 
 
   const addTruck = async (truck_plate) => {
@@ -46,16 +46,23 @@ function App() {
     const listTrucks = [...trucks, myNewTruck];
     setTrucks(listTrucks);
 
-    const trucksPost = async () => {
-      const response = await axios.post(TRUCKS_URL,
-        {
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(myNewTruck)
-        });
+    const postOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myNewTruck)
     }
-    const result = await apiRequest(TRUCKS_URL, trucksPost);
+    const result = await apiRequest(TRUCKS_URL, postOptions);
     if (result) setFetchError(result);
   }
+
+  // if (response.statusText === 'OK') {
+  //   setTrucks(listTrucks);
+  // } else {
+  //   setFetchError(response.status);
+  // }
+
 
   const handleCheck = async (id) => {
     const listTrucks = trucks.map((truck) =>
@@ -99,17 +106,19 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<SignIn />} />
-              <Route path='/SignUp' element={<SignUp />} />
-              <Route path='/TruckManagement' element={
-                <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
-                  newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
-                  
-                />} />
-              <Route path='/UserManagement' element={<UserManagement />} />
+            <Route path='/SignUp' element={<SignUp />} />
+            <Route path='/TruckManagement' element={
+              <TruckManagement trucks={trucks} handleCheck={handleCheck} handleDelete={handleDelete}
+              />} />
+            <Route path='/AddTruck' element={
+              <AddTruck
+                newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
+              />} />
+            <Route path='/UserManagement' element={<UserManagement />} />
           </Routes>
         </BrowserRouter>
-        {isLoading && <p>Loading Trucks...</p>}
-        {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+        {/* {isLoading && <p>Loading Trucks...</p>}
+        {fetchError && !isLoading && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>} */}
       </main>
     </div >
   );

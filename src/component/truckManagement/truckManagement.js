@@ -1,38 +1,70 @@
 // import { iteratorSymbol } from "immer/dist/internal";
 // import api from '../app/api/dbapi'
-import TableList from "./TableList";
-import AddTruck from "./AddTruck";
-import { useState } from "react";
+import TableList from "./AddTruck/TableList";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import SearchTruck from "./SearchTruck"
 
 
-const TruckManagement = ({ trucks, handleCheck, handleDelete,
-    newTruck, setNewTruck, handleSubmit,
+const TruckManagement = ({ trucks, handleDelete
 }) => {
+    // const TRUCKS_URL = '/trucks';
+    // const [trucks, setTrucks] = useState([]);
+    // const [newTruck, setNewTruck] = useState('');
+    // const [fetchError, setFetchError] = useState(null);
     const [search, setSearch] = useState('');
 
+    // useEffect(() => {
+    //     const filteredResults = trucks.filter((truck) => {
+    //         ((truck.truck_plate).toLowerCase()).includes(serach.toLowerCase())
+
+    //         setSearchResults(filteredResults.reverse());
+    //     }, [trucks, search])
+
+    //     const handleSubmit = async (e) => {
+    //         e.preventDefault();
+    //         const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
+    //         const newTruck = { id, truck_plate: setTruckPlate, truck_type: setTruckType, cargo_type: setCargoType, driver: setDriver, price: setPrice, dimension: setDimension, parking_address: setParkingAddress, production_year: setProductionYear }
+    //         try {
+    //             const response = await axios.post(TRUCKS_URL, newTruck);
+    //             const allTrucks = [...trucks, response.data];
+    //             setTrucks(allTrucks);
+    //             setTruckPlate('');
+    //             setCargoType('');
+    //             setDriver('');
+    //             setPrice('');
+    //             setDimension('');
+    //             setParkingAddress('');
+    //             setProductionYear('');
+    //             history.push('/');
+    //         } catch (err) {
+    //             console.log(`Error: ${err.message}`);
+    //         }
+    //     }
+
+    // })
+
     return (
-        <main>
-            <AddTruck
-                newTruck={newTruck}
-                setNewTruck={setNewTruck}
-                handleSubmit={handleSubmit}
-            />
+        <div>
+            <nav>
+                <button><Link to="/AddTruck"
+                > Add Truck </Link>
+                </button>
+            </nav>
             <SearchTruck
                 search={search}
                 setSearch={setSearch}
             />
-            {trucks.length ? (
-                <TableList
-                    trucks={trucks.filter(truck => ((truck.truck_plate).toLowerCase()).includes(search.toLowerCase()))}
-                    handleCheck={handleCheck}
-                    handleDelete={handleDelete}
-                />
-            ) : null}
+            <main>
+                {trucks.length ? (
+                    <TableList
+                        trucks={trucks.filter(truck => ((truck.truck_plate).toLowerCase()).includes(search.toLowerCase()))}
+                        handleDelete={handleDelete}
+                    />
+                ) : null}
+            </main>
+        </div>
 
-
-
-        </main>
     )
 
 

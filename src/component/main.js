@@ -6,8 +6,8 @@ function Main() {
     return (
         <div className='main'>
                 <nav>
-                    <Link to='/Main/truckManagement'> Truck Management </Link>
-                    <Link to='Main/userManagement'> User Management </Link>
+                    <Link to='/TruckManagement'> Truck Management </Link>
+                    <Link to='/UserManagement'> User Management </Link>
                 </nav>
                 <Outlet />
         </div>
