@@ -13,6 +13,7 @@
   ],
   "trucks": [
     {
+      "id": 1,
       "truck_plate": "30A-50493",
       "truck_type": "5 tons",
       "cargo_type": "Computer, Electronics",
@@ -20,11 +21,8 @@
       "price": "1,000,000,000",
       "dimension": "12-2-1.5",
       "parking_address": "No.128 Hoàn Kiếm, HN",
-      "production_year": "2010",
-      "status": "In-used",
-      "description": "",
-      "truck": "abc",
-      "id": 1
+      "production_year": "2015",
+      "status": "Test 1"
     },
     {
       "truck_plate": "30A-12345",

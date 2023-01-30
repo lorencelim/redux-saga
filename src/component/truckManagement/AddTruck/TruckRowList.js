@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TruckRowList = ({ truck, handleDelete, handleEditClick }) => {
+const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
     return (
         <>
             <td>{truck.truck_plate}</td>
@@ -12,7 +12,7 @@ const TruckRowList = ({ truck, handleDelete, handleEditClick }) => {
             <td>{truck.production_year}</td>
             <td>{truck.status}</td>
             <td>
-                <button type="button" onClick={(e) => handleEditClick(e, truck)}>
+                <button type="button" onClick={(e) => handleTruckEdit(e, truck)}>
                     Edit
                 </button>
                 <button onClick={() => handleDelete(truck.id)}>

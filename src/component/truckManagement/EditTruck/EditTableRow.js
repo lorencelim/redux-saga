@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) => {
+const EditTableRow = ({editFormData, handleTruckChange, handleTruckCancel, truck, handleUpdateTruck }) => {
   return (
     <>
       <td>
@@ -10,7 +10,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Truck Plate" 
         name="truck_plate"
         value={editFormData.truck_plate}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -20,7 +20,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Cargo Type"
         name="carge_type"
         value={editFormData.cargo_type}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -30,7 +30,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Driver" 
         name="driver"
         value={editFormData.driver}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -40,7 +40,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Truck Type"
         name="truck_type"
         value={editFormData.truck_type}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -50,7 +50,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Truck Dimension" 
         name="dimension"
         value={editFormData.dimension}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -60,7 +60,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Parking Address" 
         name="parking_address"
         value={editFormData.parking_address}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -70,7 +70,7 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Production Year"
         name="production_year"
         value={editFormData.production_year}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
@@ -80,12 +80,12 @@ const EditTableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =
         placeholder="Status" 
         name="status"
         value={editFormData.status}
-        onChange={handleEditFormChange}
+        onChange={handleTruckChange}
         ></input>
       </td>
       <td>
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
+        <button type="button" onClick={handleUpdateTruck(truck.id)}>Save</button>
+        <button type="button" onClick={handleTruckCancel}>Cancel</button>
       </td>
     </>
   )

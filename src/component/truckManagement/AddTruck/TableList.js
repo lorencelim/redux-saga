@@ -3,11 +3,7 @@ import axios from '../../../app/api/axios';
 import EdiTableRow from '../EditTruck/EditTableRow';
 import TruckRowList from './TruckRowList';
 
-
-
 const TableList = ({ trucks, handleDelete, setTrucks }) => {
-
-    const [editTruckId, setEditTruckId] = useState(null);
 
     const [editFormData, setEditFormData] = useState({
         truck_plate: "",
@@ -19,9 +15,11 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
         parking_address: "",
         production_year: "",
         status: ""
-    })
+    });
 
-    const handleEditFormChange = (e) => {
+    const [editTruckId, setEditTruckId] = useState(null);
+
+    const handleTruckChange = (e) => {
         e.preventDefault();
 
         const fieldName = e.target.getAttribute("name");
@@ -33,8 +31,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
         setEditFormData(newFormData);
     }
 
-    const handleEditFormSubmit = async (e, id) => {
-        e.preventDefault();
+    const handleUpdateTruck = async (id) => {
         const updatedTruck = {
             id: editTruckId,
             truck_plate: editFormData.truck_plate,
@@ -47,25 +44,16 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
             production_year: editFormData.production_year,
             status: editFormData.status
         }
-        try{
+        try {
             const response = await axios.put(`/trucks/${id}`, updatedTruck);
-            console.log(response.data)
-            setTrucks(trucks.map(truck => truck.id === id ? {...response.data} : truck));
+            setTrucks(trucks.map(truck => truck.id === id ? { ...response.data } : truck));
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
-        // const newTrucks = [...trucks];
-
-        // const index = trucks.findIndex((truck)=> truck.id === editTruckId)
-    
-        // newTrucks[index] = editedTruck;
-
-        // // setTrcuks(newTrucks);
-        // setEditTruckId(null);
     }
 
 
-    const handleEditClick = (e, truck) => {
+    const handleTruckEdit = (e, truck) => {
         e.preventDefault();
         setEditTruckId(truck.id);
 
@@ -80,16 +68,15 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
             production_year: truck.production_year,
             status: truck.status
         };
-
         setEditFormData(formValues);
     };
 
-    const handleCancelClick = () => {
+    const handleTruckCancel = () => {
         setEditTruckId(null);
     };
 
     return (
-        <form onSubmit={handleEditFormSubmit}>
+        <form>
             <table trucks={trucks}>
                 <thead>
                     <tr>
@@ -109,11 +96,20 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
                         <tr key={truck.id}>
                             <Fragment>
                                 {editTruckId === truck.id ? (
-                                    <EdiTableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} 
-                                    handleCancelClick={handleCancelClick}
+                                    <EdiTableRow
+                                        editFormData={editFormData}
+                                        handleTruckChange={handleTruckChange}
+                                        handleTruckCancel={handleTruckCancel}
+                                        truck={truck}
+                                        handleUpdateTruck={handleUpdateTruck}
                                     />
                                 ) : (
-                                    <TruckRowList truck={truck} handleDelete={handleDelete} handleEditClick={handleEditClick} />
+                                    <TruckRowList
+                                        truck={truck}
+                                        handleDelete={handleDelete}
+                                        handleTruckCancel={handleTruckCancel}
+                                        handleTruckEdit={handleTruckEdit}
+                                    />
                                 )}
                             </Fragment>
                         </tr>

@@ -2,13 +2,11 @@ import { useEffect, useState, useRef, useContext } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { signin } from './redux/userSlice';
 import { Navigate } from 'react-router-dom';
-import axios from '../app/api/axios';
-import AuthContext from './context/AuthProvider';
+import axios from '../../app/api/axios';
 
 
 const SignIn = () => {
     const SIGNIN_URL = '/users';
-    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -41,7 +39,6 @@ const SignIn = () => {
 
             if (user === response.data[0].username &&
                 pwd === response.data[0].password) {
-                setAuth({ user, pwd });
                 setUser('');
                 setPwd('');
                 setSuccess(true);
