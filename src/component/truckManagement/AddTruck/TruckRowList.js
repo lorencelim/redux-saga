@@ -9,7 +9,7 @@ const TruckRowList = ({ truck, handleDelete, handleEditClick }) => {
             <td>{truck.truck_type}</td>
             <td>{truck.dimension}</td>
             <td>{truck.parking_address}</td>
-            <td>{truck.production_year}</td>1
+            <td>{truck.production_year}</td>
             <td>{truck.status}</td>
             <td>
                 <button type="button" onClick={(e) => handleEditClick(e, truck)}>

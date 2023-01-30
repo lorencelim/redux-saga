@@ -183,7 +183,7 @@ function App() {
               />} />
             <Route path='/AddTruck' element={
               <AddTruck
-                newTruck={newTruck} setNewTruck={setNewTruck} 
+                newTruck={newTruck} setNewTruck={setNewTruck}  setTrucks={setTrucks}
               />} />
             <Route path='/UserManagement' element={<UserManagement />} />
           </Routes>

@@ -33,7 +33,8 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
         setEditFormData(newFormData);
     }
 
-    const handleEditFormSubmit = async (id) => {
+    const handleEditFormSubmit = async (e, id) => {
+        e.preventDefault();
         const updatedTruck = {
             id: editTruckId,
             truck_plate: editFormData.truck_plate,
@@ -48,6 +49,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
         }
         try{
             const response = await axios.put(`/trucks/${id}`, updatedTruck);
+            console.log(response.data)
             setTrucks(trucks.map(truck => truck.id === id ? {...response.data} : truck));
         } catch (err) {
             console.log(`Error: ${err.message}`);
