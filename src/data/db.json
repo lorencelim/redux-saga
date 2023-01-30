@@ -13,7 +13,6 @@
   ],
   "trucks": [
     {
-      "id": 1,
       "truck_plate": "30A-50493",
       "truck_type": "5 tons",
       "cargo_type": "Computer, Electronics",
@@ -24,10 +23,10 @@
       "production_year": "2010",
       "status": "In-used",
       "description": "",
-      "truck": "abc"
+      "truck": "abc",
+      "id": 1
     },
     {
-      "id": 2,
       "truck_plate": "30A-12345",
       "truck_type": "10 tons",
       "cargo_type": "Vegetables",
@@ -38,10 +37,10 @@
       "production_year": "2011",
       "status": "New",
       "description": "",
-      "truck": "efg"
+      "truck": "efg",
+      "id": 2
     },
     {
-      "id": 3,
       "truck_plate": "30A-50494",
       "truck_type": "20 tons",
       "cargo_type": "Kid Toys, Computer",
@@ -51,7 +50,8 @@
       "parking_address": "No.128 Hoàn Kiếm, HN",
       "production_year": "2012",
       "status": "Suspended",
-      "description": ""
+      "description": "",
+      "id": 3
     }
   ],
   "items": [

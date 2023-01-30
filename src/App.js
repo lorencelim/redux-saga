@@ -11,17 +11,17 @@ import AddTruck from './component/truckManagement/AddTruck/AddTruck';
 
 
 function App() {
-  const TRUCKS_URL = '/trucks';
   const [trucks, setTrucks] = useState([]);
-  const [newTruck, setNewTruck] = useState('');
+  const [newTruck, setNewTruck] = useState(axios);
   const [fetchError, setFetchError] = useState(null);
   // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
 
+
+  useEffect(() => {
     const fetchTrucks = async () => {
       try {
-        const response = await axios.get(TRUCKS_URL);
+        const response = await axios.get('/trucks');
         setTrucks(response.data);
       } catch (err) {
         if (err.response) {
@@ -38,12 +38,30 @@ function App() {
     }, 1000)
   }, [])
 
+  // useEffect(() => {
+  //   const filteredResults = trucks.filter((truck) =>
+  //     (truck.truck_plate).toLowerCase()).includes(search.toLowerCase());
+
+  //   setSearchResults(filteredResults.reverse());
+  // }, [posts, search])
+
 
 
   const addTruck = async (truck_plate) => {
+    //     console.log(truck);
+    //     const request = {
+    //       id: nanoid(), ...truck
+    //     };
+
+    //   const response = await axios.post('/trucks', request);
+    //   console.log(response);
+    //   setTrucks([...trucks, response.data])
+    // };
+
+
     const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
     const myNewTruck = { id, truck_plate };
-    const listTrucks = [...trucks, myNewTruck];
+    const listTrucks = [...trucks, newTruck];
     setTrucks(listTrucks);
 
     const postOptions = {
@@ -51,10 +69,10 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(myNewTruck)
+      body: JSON.stringify(newTruck)
     }
-    const result = await apiRequest(TRUCKS_URL, postOptions);
-    if (result) setFetchError(result);
+    const result = await axios.post('/trucks', postOptions);
+    if (result) setFetchError(result)
   }
 
   // if (response.statusText === 'OK') {
@@ -77,28 +95,81 @@ function App() {
       },
       body: JSON.stringify({ checked: myTruck[0].checked })
     };
-    const reqUrl = `${TRUCKS_URL}/${id}`;
+    const reqUrl = `${'/trucks'}/${id}`;
     const result = await apiRequest(reqUrl, updateOptions);
     if (result) setFetchError(result);
   }
 
+
+  const handleEdit = async (id) => {
+
+  }
+
   const handleDelete = async (id) => {
-    const listTrucks = trucks.filter((truck) => truck.id !== id);
-    setTrucks(listTrucks);
-
-    const deleteOptions = { method: 'DELETE' };
-    const reqUrl = `${TRUCKS_URL}/${id}`;
-    const result = await apiRequest(reqUrl, deleteOptions);
-    if (result) setFetchError(result);
+    try{
+      await axios.delete(`trucks/${id}`);
+      const listTrucks = trucks.filter(truck => truck.id !== id);
+      setTrucks(listTrucks);
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newTruck) return;
-    addTruck(newTruck);
-    setNewTruck('');
-  }
+  // const handleAddFormChange = (e) => {
+  //   e.preventDefault();
 
+  //   const fieldName = e.target.getAttribute('name');
+  //   const fieldValue = e.target.value;
+
+  //   const newFormData = { ...addFormData };
+  //   newFormData[fieldName] = fieldValue;
+
+  //   setAddFormData(newFormData);
+  //   console.log(addFormData)
+  // };
+
+  // const handleAddFormSubmit = (e) => {
+  //   e.preventDefault();
+  //   const newTruck1 = {
+  //     id: nanoid(),
+  //     truck_plate: addFormData.truck_plate,
+  //     truck_type: addFormData.truck_type,
+  //     cargo_type: addFormData.cargo_type,
+  //     driver: addFormData.driver,
+  //     price: addFormData.price,
+  //     dimension: addFormData.dimension,
+  //     parking_address: addFormData.parking_address,
+  //     production_year: addFormData.production_year,
+  //     status: addFormData.status
+  //   };
+
+  //   const newTrucks = [...trucks, newTruck1];
+  //   setTrucks(newTrucks);
+
+  // };
+
+  // const onSubmit = async (values, actions) => {
+  //   await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  //   if (!newTruck) return;
+  //   addTruck(newTruck);
+  //   setNewTruck('');
+  // }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const id = trucks.length ? trucks[trucks.length - 1].id + 1 : 1;
+  //   const newTruck = { id, truck_plate };
+  //   try {
+  //     const response = await axios.post('/trucks', newTruck);
+  //     const allTrucks = [...trucks, response.data];
+  //     setTrucks(allTrucks);
+  //     setTruck_plate('');
+
+  //   } catch (err) {
+  //     console.log(`Error: ${err.message}`);
+  //   }
+  // }
 
   return (
     <div className="App">
@@ -112,7 +183,7 @@ function App() {
               />} />
             <Route path='/AddTruck' element={
               <AddTruck
-                newTruck={newTruck} setNewTruck={setNewTruck} handleSubmit={handleSubmit}
+                newTruck={newTruck} setNewTruck={setNewTruck} 
               />} />
             <Route path='/UserManagement' element={<UserManagement />} />
           </Routes>
