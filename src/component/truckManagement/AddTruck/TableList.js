@@ -5,7 +5,7 @@ import TruckRowList from './TruckRowList';
 
 const TableList = ({ trucks, handleDelete, setTrucks }) => {
 
-    const [editFormData, setEditFormData] = useState({
+    const [truckUpdateData, setTruckUpdateData] = useState({
         truck_plate: "",
         truck_type: "",
         cargo_type: "",
@@ -21,32 +21,32 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
 
     const handleTruckChange = (e) => {
         e.preventDefault();
-
         const fieldName = e.target.getAttribute("name");
         const fieldValue = e.target.value;
-
-        const newFormData = { ...editFormData };
+        const newFormData = { ...truckUpdateData };
         newFormData[fieldName] = fieldValue;
-
-        setEditFormData(newFormData);
+        setTruckUpdateData(newFormData);
     }
 
     const handleUpdateTruck = async (id) => {
         const updatedTruck = {
             id: editTruckId,
-            truck_plate: editFormData.truck_plate,
-            truck_type: editFormData.truck_type,
-            cargo_type: editFormData.cargo_type,
-            driver: editFormData.driver,
-            price: editFormData.price,
-            dimension: editFormData.dimension,
-            parking_address: editFormData.parking_address,
-            production_year: editFormData.production_year,
-            status: editFormData.status
+            truck_plate: truckUpdateData.truck_plate,
+            truck_type: truckUpdateData.truck_type,
+            cargo_type: truckUpdateData.cargo_type,
+            driver: truckUpdateData.driver,
+            price: truckUpdateData.price,
+            dimension: truckUpdateData.dimension,
+            parking_address: truckUpdateData.parking_address,
+            production_year: truckUpdateData.production_year,
+            status: truckUpdateData.status
         }
         try {
             const response = await axios.put(`/trucks/${id}`, updatedTruck);
-            setTrucks(trucks.map(truck => truck.id === id ? { ...response.data } : truck));
+            setTrucks(trucks.map(
+                truck => truck.id === id ?
+                    { ...response.data } : truck));
+                    setEditTruckId(null);
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
@@ -68,7 +68,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
             production_year: truck.production_year,
             status: truck.status
         };
-        setEditFormData(formValues);
+        setTruckUpdateData(formValues);
     };
 
     const handleTruckCancel = () => {
@@ -97,7 +97,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
                             <Fragment>
                                 {editTruckId === truck.id ? (
                                     <EdiTableRow
-                                        editFormData={editFormData}
+                                        truckUpdateData={truckUpdateData}
                                         handleTruckChange={handleTruckChange}
                                         handleTruckCancel={handleTruckCancel}
                                         truck={truck}

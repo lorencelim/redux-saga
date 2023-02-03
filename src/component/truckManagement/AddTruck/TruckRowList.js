@@ -15,7 +15,7 @@ const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
                 <button type="button" onClick={(e) => handleTruckEdit(e, truck)}>
                     Edit
                 </button>
-                <button onClick={() => handleDelete(truck.id)}>
+                <button type="button" onClick={() => handleDelete(truck.id)}>
                     Delete
                 </button>
             </td>

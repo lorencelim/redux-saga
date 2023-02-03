@@ -8,7 +8,7 @@ const SearchTruck = ({search, setSearch}) => {
                 id='search'
                 type='text'
                 role='searchbox'
-                placeholder='Search Truck Plate'
+                placeholder='Search...'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />

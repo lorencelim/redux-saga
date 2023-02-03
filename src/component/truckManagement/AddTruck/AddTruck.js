@@ -1,19 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInputTruck from './CustomInputTruck';
+import CustomSelectTruck from './CustomSelectTruck';
 import { AddTruckSchema } from './AddTruckSchema';
 import axios from '../../../app/api/axios';
 import { Navigate } from 'react-router-dom';
+import CustomCheckboxTruck from './CustomCheckboxTruck';
 
-const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    await axios.post('/trucks', values);
-    actions.resetForm();
-    <Navigate to={"./TruckManagement"} />
-}
 
-const AddTruck = () => {
-    const [success, setSuccess] = useState(false);
+const AddTruck = ({ setTrucks }) => {
+    const [truckPostSuccess, setTruckPostSuccess] = useState(false);
+    const [cargoValue, setCargoValue] = useState('');
+
+    const  handleCargoChange = () => {
+      setCargoValue(cargoValue)
+    }
+
+    const options = [
+        { value: 'Computer', label: 'Computer' },
+        { value: 'Electronics', label: 'Electronics' },
+        { value: 'Vegetables', label: 'Vegetables' },
+        { value: 'Kid Toys', label: 'Kid Toys' },
+        { value: 'Chairs', label: 'Chairs' },
+        { value: 'Tables', label: 'Tables' },
+        { value: 'Fruits', label: 'Fruits' },
+        { value: 'Wires', label: 'Wires' },
+        { value: 'Ices', label: 'Ices' },
+        { value: 'Animals', label: 'Animals' },
+        { value: 'Masks', label: 'Masks' }
+    ]
+
+
+    const addTruckSubmit = async (values) => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        setTrucks(await axios.post('/trucks', values));
+        setTruckPostSuccess(true);
+    };
+
     return (
         <>
             <h2>Add Truck Details</h2>
@@ -29,28 +52,44 @@ const AddTruck = () => {
                 status: ""
             }}
                 validationSchema={AddTruckSchema}
-                onSubmit={onSubmit}
+                onSubmit={addTruckSubmit}
             >
                 {({ isSubmitting }) => (
                     <Form>
                         <CustomInputTruck
-                            label="Plate"
+                            label="Truck Plate"
                             name="truck_plate"
                             type="text"
                             placeholder="Truck Plate"
                         />
-                        <CustomInputTruck
-                            label="Cargo"
+                        <CustomCheckboxTruck
+                            label="Cargo Type"
                             name="cargo_type"
-                            type="text"
-                            placeholder="Cargo"
+                            options={options}
                         />
-                        <CustomInputTruck
+                            {/* <option value="">Please select cargo type</option>
+                            <option value="Computer">Computer</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Vegetables">Vegetables</option>
+                            <option value="Kid Toys">Kid Toys</option>
+                            <option value="Chairs">Chairs</option>
+                            <option value="Tables">Tables</option>
+                            <option value="Fruits">Fruits</option>
+                            <option value="Wires">Wires</option>
+                            <option value="Ices">Ices</option>
+                            <option value="Animals">Animals</option>
+                            <option value="Masks">Masks</option>
+                        </CustomCheckboxTruck> */}
+                        <CustomSelectTruck
                             label="Driver"
                             name="driver"
-                            type="text"
-                            placeholder="Driver"
-                        />
+                            
+                        >
+                            <option value="">Please select a driver</option>
+                            <option value="Nguyễn Văn A">Nguyễn Văn A</option>
+                            <option value="Nguyễn Văn B">Nguyễn Văn B</option>
+                            <option value="Nguyễn Văn C">Nguyễn Văn C</option>
+                        </CustomSelectTruck>
                         <CustomInputTruck
                             label="Truck Type"
                             name="truck_type"
@@ -87,13 +126,18 @@ const AddTruck = () => {
                             type="text"
                             placeholder="Status"
                         />
-
-                        <button disabled={isSubmitting} type="submit" >
+                        <button disabled={isSubmitting} type="submit">
                             Add Truck
                         </button>
                     </Form>
                 )}
             </Formik>
+            {truckPostSuccess ?
+                (
+                    <Navigate to={"/TruckManagement"} />
+                ) : (
+                    null
+                )}
         </>
     )
 }
