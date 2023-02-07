@@ -1,19 +1,19 @@
+import { Select } from "@mui/material";
 import { useField } from "formik";
-import Select from 'react-select';
 
-const CustomCheckboxTruck = ({ label, ...props}) => {
+const CustomCheckboxTruck = ({ label, ...props }) => {
     const [field, meta] = useField(props);
-    console.log("field", field);
-    console.log("meta", meta);
+    console.log(meta)
 
     return (
         <>
+            <label>{label}</label>
             <Select
                 {...field}
                 {...props}
                 className={meta.touched && meta.error ? "input-error" : ""}
-            />
-            <span>Test</span>
+            >
+            </Select>
             {meta.touched && meta.error && <div className="error">{meta.error}</div>}
         </>
     );

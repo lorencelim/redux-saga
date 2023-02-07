@@ -1,29 +1,70 @@
+import { Delete, Edit } from '@mui/icons-material';
+import { IconButton, TableCell } from '@mui/material';
 import React from 'react'
 
 const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
     return (
         <>
-            <td>{truck.truck_plate}</td>
-            <td>{truck.cargo_type}</td>
-            <td>{truck.driver}</td>
-            <td>{truck.truck_type}</td>
-            <td>{truck.dimension}</td>
-            <td>{truck.parking_address}</td>
-            <td>{truck.production_year}</td>
-            <td>{truck.status}</td>
-            <td>
-                <button type="button" onClick={(e) => handleTruckEdit(e, truck)}>
-                    Edit
-                </button>
-                <button type="button" onClick={() => handleDelete(truck.id)}>
-                    Delete
-                </button>
-            </td>
+            <TableCell
+                sx={{ color: "#616161"}}
+            >
+                {truck.truck_plate}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.cargo_type}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.driver}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.truck_type}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.dimension}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.parking_address}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.production_year}
+            </TableCell>
+            <TableCell
+                sx={{ color: "#616161" }}
+            >
+                {truck.status}
+            </TableCell>
+            <TableCell>
+                <IconButton
+                    aria-label="edit"
+                    sx={{ color: "#ffb300" }}
+                    type="button"
+                    onClick={(e) => handleTruckEdit(e, truck)}
+                >
+                    <Edit />
+                </IconButton>
+                <IconButton
+                    arial-label="delete"
+                    sx={{ color: "#ffb300" }}
+                    type="button"
+                    onClick={() => handleDelete(truck.id)}
+                >
+                    <Delete />
+                </IconButton>
+            </TableCell>
         </>
     )
 }
-
-
-
 
 export default TruckRowList;

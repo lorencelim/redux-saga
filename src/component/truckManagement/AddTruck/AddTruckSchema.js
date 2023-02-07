@@ -8,20 +8,20 @@ export const AddTruckSchema = yup.object().shape({
         .required("Required"),
     cargo_type: yup
         .string()
-        .required("Required")
-        .oneOf([
-            "Computer",
-            "Electronics",
-            "Vegetables",
-            "Kid Toys",
-            "Chairs",
-            "Tables",
-            "Fruits",
-            "Wires",
-            "Ices",
-            "Animals",
-            "Masks"
-        ]),
+        .required("Required"),
+        // .oneOf([
+        //     "Computer",
+        //     "Electronics",
+        //     "Vegetables",
+        //     "Kid Toys",
+        //     "Chairs",
+        //     "Tables",
+        //     "Fruits",
+        //     "Wires",
+        //     "Ices",
+        //     "Animals",
+        //     "Masks"
+        // ]),
     driver: yup
         .string()
         .required("Required")

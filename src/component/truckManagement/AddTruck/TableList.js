@@ -1,9 +1,21 @@
+import { Box, FormControl, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TablePagination, TableRow, Toolbar, Typography } from '@mui/material';
 import React, { useState, Fragment } from 'react';
 import axios from '../../../app/api/axios';
 import EdiTableRow from '../EditTruck/EditTableRow';
 import TruckRowList from './TruckRowList';
 
 const TableList = ({ trucks, handleDelete, setTrucks }) => {
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.common.white,
+            fontSize: "16px"
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: "29px",color: "#616161"
+        },
+    }));
 
     const [truckUpdateData, setTruckUpdateData] = useState({
         truck_plate: "",
@@ -16,6 +28,18 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
         production_year: "",
         status: ""
     });
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleChangePage = (e, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (e) => {
+        setRowsPerPage(parseInt(e.target.value, 10));
+        setPage(0);
+    };
 
     const [editTruckId, setEditTruckId] = useState(null);
 
@@ -46,7 +70,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
             setTrucks(trucks.map(
                 truck => truck.id === id ?
                     { ...response.data } : truck));
-                    setEditTruckId(null);
+            setEditTruckId(null);
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
@@ -76,47 +100,66 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
     };
 
     return (
-        <form>
-            <table trucks={trucks}>
-                <thead>
-                    <tr>
-                        <th> Truck Plate </th>
-                        <th> Cargo Type </th>
-                        <th> Driver </th>
-                        <th> Truck Type </th>
-                        <th> Dimension </th>
-                        <th> Parking Address </th>
-                        <th> Production Year </th>
-                        <th> Status </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trucks.map(truck => (
-                        <tr key={truck.id}>
-                            <Fragment>
-                                {editTruckId === truck.id ? (
-                                    <EdiTableRow
-                                        truckUpdateData={truckUpdateData}
-                                        handleTruckChange={handleTruckChange}
-                                        handleTruckCancel={handleTruckCancel}
-                                        truck={truck}
-                                        handleUpdateTruck={handleUpdateTruck}
-                                    />
-                                ) : (
-                                    <TruckRowList
-                                        truck={truck}
-                                        handleDelete={handleDelete}
-                                        handleTruckCancel={handleTruckCancel}
-                                        handleTruckEdit={handleTruckEdit}
-                                    />
-                                )}
-                            </Fragment>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </form>
+
+        <Box sx={{ width: '100%' }}>
+            <Paper sx={{ width: '100%', mb: 2 }}>
+                <FormControl>
+                    <TableContainer sx={{width: "95%", alignSelf:"center"}}>
+                        <Table trucks={trucks}>
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell > Truck Plate </StyledTableCell >
+                                    <StyledTableCell > Cargo Type </StyledTableCell >
+                                    <StyledTableCell > Driver </StyledTableCell >
+                                    <StyledTableCell > Truck Type </StyledTableCell >
+                                    <StyledTableCell > Dimension </StyledTableCell >
+                                    <StyledTableCell > Parking Address </StyledTableCell >
+                                    <StyledTableCell > Production Year </StyledTableCell >
+                                    <StyledTableCell > Status </StyledTableCell >
+                                    <StyledTableCell > Action </StyledTableCell >
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {trucks
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map(truck => (
+                                        <TableRow key={truck.id}>
+                                            <Fragment>
+                                                {editTruckId === truck.id ? (
+                                                    <EdiTableRow
+                                                        truckUpdateData={truckUpdateData}
+                                                        handleTruckChange={handleTruckChange}
+                                                        handleTruckCancel={handleTruckCancel}
+                                                        truck={truck}
+                                                        handleUpdateTruck={handleUpdateTruck}
+                                                    />
+                                                ) : (
+                                                    <TruckRowList
+                                                        truck={truck}
+                                                        handleDelete={handleDelete}
+                                                        handleTruckCancel={handleTruckCancel}
+                                                        handleTruckEdit={handleTruckEdit}
+                                                    />
+                                                )}
+                                            </Fragment>
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                            <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    component="div"
+                                    count={trucks.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                    sx={{ color: "#ffa000", width:"170%", padding:0}}
+                                />
+                        </Table>
+                    </TableContainer>
+                </FormControl>
+            </Paper>
+        </Box>
     )
 }
 

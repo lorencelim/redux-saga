@@ -6,30 +6,17 @@ import { AddTruckSchema } from './AddTruckSchema';
 import axios from '../../../app/api/axios';
 import { Navigate } from 'react-router-dom';
 import CustomCheckboxTruck from './CustomCheckboxTruck';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const AddTruck = ({ setTrucks }) => {
     const [truckPostSuccess, setTruckPostSuccess] = useState(false);
-    const [cargoValue, setCargoValue] = useState('');
-
-    const  handleCargoChange = () => {
-      setCargoValue(cargoValue)
+    const [values, setValues] = useState([]);
+    console.log(values)
+    
+    const handleChangeValues = (e) => {
+        setValues(() => e.target.value)
     }
-
-    const options = [
-        { value: 'Computer', label: 'Computer' },
-        { value: 'Electronics', label: 'Electronics' },
-        { value: 'Vegetables', label: 'Vegetables' },
-        { value: 'Kid Toys', label: 'Kid Toys' },
-        { value: 'Chairs', label: 'Chairs' },
-        { value: 'Tables', label: 'Tables' },
-        { value: 'Fruits', label: 'Fruits' },
-        { value: 'Wires', label: 'Wires' },
-        { value: 'Ices', label: 'Ices' },
-        { value: 'Animals', label: 'Animals' },
-        { value: 'Masks', label: 'Masks' }
-    ]
-
 
     const addTruckSubmit = async (values) => {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -65,25 +52,25 @@ const AddTruck = ({ setTrucks }) => {
                         <CustomCheckboxTruck
                             label="Cargo Type"
                             name="cargo_type"
-                            options={options}
-                        />
-                            {/* <option value="">Please select cargo type</option>
-                            <option value="Computer">Computer</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Vegetables">Vegetables</option>
-                            <option value="Kid Toys">Kid Toys</option>
-                            <option value="Chairs">Chairs</option>
-                            <option value="Tables">Tables</option>
-                            <option value="Fruits">Fruits</option>
-                            <option value="Wires">Wires</option>
-                            <option value="Ices">Ices</option>
-                            <option value="Animals">Animals</option>
-                            <option value="Masks">Masks</option>
-                        </CustomCheckboxTruck> */}
+                            value={values}
+                            onChange={handleChangeValues}
+                            multiple={true}
+                        >
+                            <MenuItem value="Computer">Computer</MenuItem>
+                            <MenuItem value="Electronics">Electronics</MenuItem>
+                            <MenuItem value="Vegetables">Vegetables</MenuItem>
+                            <MenuItem value="Kid Toys">Kid Toys</MenuItem>
+                            <MenuItem value="Chairs">Chairs</MenuItem>
+                            <MenuItem value="Tables">Tables</MenuItem>
+                            <MenuItem value="Fruits">Fruits</MenuItem>
+                            <MenuItem value="Wires">Wires</MenuItem>
+                            <MenuItem value="Ices">Ices</MenuItem>
+                            <MenuItem value="Animals">Animals</MenuItem>
+                            <MenuItem value="Masks">Masks</MenuItem>
+                        </CustomCheckboxTruck>
                         <CustomSelectTruck
                             label="Driver"
                             name="driver"
-                            
                         >
                             <option value="">Please select a driver</option>
                             <option value="Nguyễn Văn A">Nguyễn Văn A</option>
