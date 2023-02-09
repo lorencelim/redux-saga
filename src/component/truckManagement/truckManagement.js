@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import TableList from "./AddTruck/TableList";
+import TableList from "./TableList";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SearchTruck from "./SearchTruck";
 import axios from "../../app/api/axios";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -52,13 +52,6 @@ const TruckManagement = ({ trucks, setTrucks
     }, 100)
   }, [])
 
-  // useEffect(() => {
-  //     const filteredResults = trucks.filter((truck) => {
-  //         ((truck.truck_plate).toLowerCase()).includes(serach.toLowerCase())
-
-  //         setSearchResults(filteredResults.reverse());
-  //     }, [trucks, search])
-
   const handleDelete = async (id) => {
     try {
       await axios.delete(`trucks/${id}`);
@@ -70,28 +63,32 @@ const TruckManagement = ({ trucks, setTrucks
   }
 
   return (
-    <>
-      <Link style={{textDecoration: 'none'}} to="/AddTruck">
-        <Button variant="contained" color="primary" theme={theme} sx={{m:"16px"}}>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Link style={{ textDecoration: 'none' }} to="/AddTruck">
+        <Button variant="contained" color="primary" theme={theme} sx={{ m: "16px" }}>
           Add Truck
         </Button>
       </Link>
-      <SearchTruck
+      <SearchTruck 
         search={search}
         setSearch={setSearch}
       />
-      <main>
-        {trucks.length ? (
-          <TableList
-            trucks={trucks.filter((truck) =>
-              searchKeys.some(searchKey => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
-            handleDelete={handleDelete}
-            setTrucks={setTrucks}
-            theme={theme}
-          />
-        ) : null}
-      </main>
-    </>
+      {trucks.length ? (
+        <TableList
+          trucks={trucks.filter((truck) =>
+            searchKeys.some(searchKey => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
+          handleDelete={handleDelete}
+          setTrucks={setTrucks}
+          theme={theme}
+        />
+      ) : null}
+    </Grid>
   )
 }
 

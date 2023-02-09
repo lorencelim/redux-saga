@@ -12,16 +12,7 @@ const EditTableRow = ({
 
   return (
     <>
-      <TableCell
-        sx={{
-          ".MuiFormLabel-root.Mui-focused": {
-            color: '#ffb300'
-          },
-          '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-            borderColor: '#ffb300',
-          },
-        }}
-      >
+      <TableCell>
         <TextField
           label="Truck Plate"
           type="text"
@@ -32,16 +23,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-      >
+      <TableCell>
         <TextField
           label="Cargo Type"
           type="text"
@@ -52,16 +34,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Driver"
           type="text"
@@ -72,16 +45,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Truck Type"
           type="text"
@@ -92,16 +56,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Truck Dimension"
           type="text"
@@ -112,16 +67,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Parking Address"
           type="text"
@@ -132,16 +78,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Production Year"
           type="text"
@@ -152,16 +89,7 @@ const EditTableRow = ({
           onChange={handleTruckChange}
         />
       </TableCell>
-      <TableCell
-              sx={{
-                ".MuiFormLabel-root.Mui-focused": {
-                  color: '#ffb300'
-                },
-                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                  borderColor: '#ffb300',
-                },
-              }}
-              >
+      <TableCell>
         <TextField
           label="Status"
           type="text"

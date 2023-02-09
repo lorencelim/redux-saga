@@ -13,42 +13,6 @@
   ],
   "trucks": [
     {
-      "id": 1,
-      "truck_plate": "03A-12312",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "123",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "123"
-    },
-    {
-      "id": 2,
-      "truck_plate": "03A-12398",
-      "truck_type": "uil",
-      "cargo_type": "op[",
-      "driver": "qwe",
-      "price": "123",
-      "dimension": "123",
-      "parking_address": "123",
-      "production_year": "123",
-      "status": "123"
-    },
-    {
-      "id": 3,
-      "truck_plate": "03A-12398",
-      "truck_type": "222",
-      "cargo_type": "Vegetables",
-      "driver": "Nguyễn Văn A",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
       "id": 4,
       "truck_plate": "03A-12398",
       "truck_type": "123",
@@ -152,7 +116,7 @@
       "driver": "Nguyễn Văn A",
       "price": "abc",
       "dimension": "abc",
-      "parking_address": "abc",
+      "parking_address": "222",
       "production_year": "abc",
       "status": "abc"
     },
@@ -186,6 +150,18 @@
       "truck_type": "222",
       "cargo_type": "Vegetables",
       "driver": "Nguyễn Văn A",
+      "price": "abc",
+      "dimension": "abc",
+      "parking_address": "abc",
+      "production_year": "abc",
+      "status": "abc"
+    },
+    {
+      "id": 16,
+      "truck_plate": "03A-12398",
+      "truck_type": "123",
+      "cargo_type": "abc",
+      "driver": "abc",
       "price": "abc",
       "dimension": "abc",
       "parking_address": "abc",

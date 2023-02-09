@@ -7,21 +7,15 @@ export const AddTruckSchema = yup.object().shape({
         .matches(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[-])(?=.*[0-9])(?=.{7})/, "Must be in 30A-12345 format")
         .required("Required"),
     cargo_type: yup
-        .string()
-        .required("Required"),
-        // .oneOf([
-        //     "Computer",
-        //     "Electronics",
-        //     "Vegetables",
-        //     "Kid Toys",
-        //     "Chairs",
-        //     "Tables",
-        //     "Fruits",
-        //     "Wires",
-        //     "Ices",
-        //     "Animals",
-        //     "Masks"
-        // ]),
+        .array()
+        .max(10, "Maximum 10 Select")
+        .of(
+            yup.object().shape({
+                label: yup.string().required(),
+                value: yup.string().required()
+            })
+        )
+        .ensure(),
     driver: yup
         .string()
         .required("Required")
@@ -41,8 +35,8 @@ export const AddTruckSchema = yup.object().shape({
         .required("Required"),
     parking_address: yup
         .string()
-        .max(200, "Maximum 200 character")
         .required("Required"),
+        // .max(200, "Maximum 200 character"),
     production_year: yup
         .string()
         .required("Required"),

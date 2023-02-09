@@ -1,7 +1,7 @@
 import { Box, FormControl, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TablePagination, TableRow, Toolbar, Typography } from '@mui/material';
 import React, { useState, Fragment } from 'react';
-import axios from '../../../app/api/axios';
-import EdiTableRow from '../EditTruck/EditTableRow';
+import axios from '../../app/api/axios';
+import EdiTableRow from './EditTruck/EditTableRow';
 import TruckRowList from './TruckRowList';
 
 const TableList = ({ trucks, handleDelete, setTrucks }) => {
@@ -13,7 +13,7 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
             fontSize: "16px"
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: "29px",color: "#616161"
+            fontSize: "29px", color: "#616161"
         },
     }));
 
@@ -100,11 +100,17 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
     };
 
     return (
-
-        <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
+        <Box>
+            <Paper>
                 <FormControl>
-                    <TableContainer sx={{width: "95%", alignSelf:"center"}}>
+                    <TableContainer sx={{
+                        ".MuiFormLabel-root.Mui-focused": {
+                            color: '#ffb300'
+                        },
+                        '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                            borderColor: '#ffb300',
+                        },
+                    }}>
                         <Table trucks={trucks}>
                             <TableHead>
                                 <TableRow>
@@ -122,8 +128,17 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
                             <TableBody>
                                 {trucks
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map(truck => (
-                                        <TableRow key={truck.id}>
+                                    .map((truck) => (
+                                        <TableRow key={truck.id}
+                                            sx={{
+                                                ".MuiFormLabel-root.Mui-focused": {
+                                                    color: '#ffc107'
+                                                },
+                                                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                                                    borderColor: '#ffc107',
+                                                },
+                                            }}
+                                        >
                                             <Fragment>
                                                 {editTruckId === truck.id ? (
                                                     <EdiTableRow
@@ -145,19 +160,19 @@ const TableList = ({ trucks, handleDelete, setTrucks }) => {
                                         </TableRow>
                                     ))}
                             </TableBody>
-                            <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    component="div"
-                                    count={trucks.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
-                                    sx={{ color: "#ffa000", width:"170%", padding:0}}
-                                />
+
                         </Table>
                     </TableContainer>
                 </FormControl>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    count={trucks.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    sx={{ color: "#ffa000", width: "170%", padding: 0 }}
+                />
             </Paper>
         </Box>
     )

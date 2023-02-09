@@ -40,7 +40,11 @@ function App() {
               setTrucks={setTrucks}
             />} />
         <Route path='/AddTruck'
-          element={<AddTruck />}
+          element={
+            <AddTruck
+              setTrucks={setTrucks}
+            />
+          }
         />
         <Route
           path='/UserManagement'

@@ -1,19 +1,19 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-const SearchTruck = ({ search, setSearch }) => {
+const SearchTruck = ({ search, setSearch, setTrucks }) => {
     return (
         <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
             <TextField
-                sx={{
-                    ".MuiFormLabel-root.Mui-focused": {
-                        color: '#ffb300'
-                    },
-                    '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                        borderColor: '#ffb300',
-                    },
-                    m: "0px 0px 16px 16px"
-                }}
+
+              sx={{
+                ".MuiFormLabel-root.Mui-focused": {
+                  color: '#ffc107'
+                },
+                '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                  borderColor: '#ffc107',
+                },
+              }}
                 
                 label="Search..."
                 id='search'
@@ -23,7 +23,7 @@ const SearchTruck = ({ search, setSearch }) => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 size="small"
-            />
+            /> 
         </form>
     )
 }
