@@ -1,20 +1,20 @@
 import { TextField } from "@mui/material";
 import { useField } from "formik";
 
-const CustomInputTruck = ({label, ...props}) => {
+const CustomInputTruck = ({ label, placeholder, ...props }) => {
     const [field, meta] = useField(props);
     // console.log("field", field);
     // console.log("meta", meta);
-    
+
     return (
         <>
-            <label>{label}</label>
             <TextField
+                sx={{ m: 1, width: 1 }}
+                label={placeholder}
                 {...field}
                 {...props}
-                className={meta.touched && meta.error ? "input-error" : ""}
+                helperText={meta.touched && meta.error ? meta.error : ""}
             />
-            {meta.touched && meta.error && <div className="error">{meta.error}</div>}
         </>
     );
 };

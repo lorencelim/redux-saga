@@ -1,22 +1,21 @@
 import { TextField } from "@mui/material";
 import { useField } from "formik";
 
-const CustomTextCounter = ({ label, ...props }) => {
+const CustomTextCounter = ({ label, placeholder, ...props }) => {
     const [field, meta] = useField(props.field.name);
     const parkingWordLimit = 200;
 
     return (
         <>
-            <label>{label}</label>
             <TextField
+                sx={{ m: 1, width:1 }}
                 {...field}
                 {...props}
+                label={placeholder}
                 value={meta.value}
                 inputProps={{ maxLength: parkingWordLimit }}
                 helperText={`${meta.value.length}/${parkingWordLimit}`}
-                className={meta.touched && meta.error ? "input-error" : ""}
             />
-            {meta.touched && meta.error && <div className="error">{meta.error}</div>}
         </>
     );
 };

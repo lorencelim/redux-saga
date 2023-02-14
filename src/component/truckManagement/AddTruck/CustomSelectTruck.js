@@ -1,42 +1,30 @@
 import Select from 'react-select';
 import { useField } from "formik";
+import { Autocomplete, TextField } from '@mui/material';
 
-const CustomSelectTruck = ({label, ...props}) => {
-//     const [field, meta] = useField(props);
-//     // console.log("field", field);
-//     // console.log("meta", meta);
-    
-//     return (
-//         <>
-//             <label>{label}</label>
-//             <select
-//                 {...field}
-//                 {...props}
-//                 className={meta.touched && meta.error ? "input-error" : ""}
-//             />
-//             {meta.touched && meta.error && <div className="error">{meta.error}</div>}
-//         </>
-//     );
-// };
+function CustomSelectTruck({ placeholder, ...props }) {
+    const [field, { touched, error }, { setValue, setTouched }] = useField(props.field.name);
+    const onChange = (e, value) => {
+        setValue(value)
+    };
 
-const [field, { value, touched, error }, { setValue, setTouched }] = useField(props.field.name);
-console.log(value)
-const onChange = (value) => {
-    setValue(value);
-};
-
-return (
-    <>
-        <Select
-            {...props}
-            value={value}
-            onChange={onChange}
-            onBlur={setTouched}
-            className={touched && error ? "input-error" : ""}
-        />
-        {touched && error && <div className="error">{error}</div>}
-    </>
-);
+    return (
+        <>
+            <Autocomplete
+                sx={{ m: 1, width:1 }}
+                {...props}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                onOpen={setTouched}
+                freeSolo
+                onChange={onChange}
+                renderInput={(value) => (
+                    <TextField
+                        {...value}
+                        label={placeholder}
+                        helperText={touched && error ? "Required" : ""} />)}
+            />
+        </>
+    );
 }
 
 export default CustomSelectTruck

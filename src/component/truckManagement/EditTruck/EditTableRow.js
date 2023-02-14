@@ -1,6 +1,7 @@
-import { Check, Clear, Save } from '@mui/icons-material'
-import { IconButton, TableCell, TextField } from '@mui/material'
-import React from 'react'
+import { Check, Clear } from "@mui/icons-material";
+import { IconButton, TableCell, TextField } from "@mui/material";
+import React from "react";
+
 
 const EditTableRow = ({
   truckUpdateData,
@@ -9,7 +10,6 @@ const EditTableRow = ({
   truck,
   handleUpdateTruck
 }) => {
-
   return (
     <>
       <TableCell>
@@ -24,7 +24,7 @@ const EditTableRow = ({
         />
       </TableCell>
       <TableCell>
-        <TextField
+        <TextField 
           label="Cargo Type"
           type="text"
           required="required"
@@ -102,7 +102,7 @@ const EditTableRow = ({
       </TableCell>
       <TableCell>
         <IconButton
-          aria-label='save'
+          aria-label="save"
           sx={{ color: "#ffb300" }}
           type="button"
           onClick={() => { handleUpdateTruck(truck.id) }}>

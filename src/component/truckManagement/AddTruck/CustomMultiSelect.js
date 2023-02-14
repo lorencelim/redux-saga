@@ -1,25 +1,28 @@
-import Select from 'react-select';
 import { useField } from "formik";
+import { Autocomplete, TextField } from '@mui/material';
 
-
-function CustomMultiSelect(props) {
+function CustomMultiSelect({ placeholder, ...props }) {
     const [field, { value, touched, error }, { setValue, setTouched }] = useField(props.field.name);
-    console.log(value)
-    const onChange = (value) => {
-        setValue(value);
+    const onChange = (e, value) => {
+        setValue(value)
     };
 
     return (
         <>
-            <Select
+            <Autocomplete
+                sx={{ m: 1, width:1 }}
                 {...props}
-                value={value}
-                isMulti
+                multiple
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+                onOpen={setTouched}
                 onChange={onChange}
-                onBlur={setTouched}
-                className={touched && error ? "input-error" : ""}
+                renderInput={(value) => (
+                    <TextField
+                        {...value}
+                        label={placeholder}
+                        helperText={touched && error ? error : ""} />)}
+
             />
-            {touched && error && <div className="error">{error}</div>}
         </>
     );
 }

@@ -9,7 +9,7 @@ const SignIn = () => {
     const errRef = useRef();
 
     const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
+    const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
@@ -19,34 +19,38 @@ const SignIn = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd]);
+    }, [user, password]);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.get(SIGNIN_URL + "/" + user,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ user, password }),
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Accept": "application/json"
+                    },
                     withCredentials: true,
                 }
             );
-
-            console.log(response.data);
+            
+            localStorage.setItem("user-Info", response.data.map(account => account.username));
+            
 
             if (user === response.data[0].username &&
-                pwd === response.data[0].password) {
+                password === response.data[0].password) {
                 setSuccess(true);
             }
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 400){
+            } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401){
+            } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
-            } else{
+            } else {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
@@ -82,8 +86,8 @@ const SignIn = () => {
                         <input
                             type="password"
                             id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                             required
                         />
                         <button>Sign In</button>

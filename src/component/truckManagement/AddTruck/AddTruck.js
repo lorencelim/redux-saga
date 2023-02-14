@@ -7,36 +7,14 @@ import CustomTextCounter from './CustomTextCounter';
 import { AddTruckSchema } from './AddTruckSchema';
 import axios from '../../../app/api/axios';
 import { Navigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Button, FormControl, Grid, Paper, Typography } from '@mui/material';
 
-
-const AddTruck = ({ setTrucks }) => {
+const AddTruck = ({ setTrucks, cargoType, drivers}) => {
     const [truckPostSuccess, setTruckPostSuccess] = useState(false);
-
-    const cargoType = [
-        { value: "Computer", label: "Computer" },
-        { value: "Electronics", label: "Electronics" },
-        { value: "Vegetables", label: "Vegetables" },
-        { value: "Kid Toys", label: "Kid Toys" },
-        { value: "Chairs", label: "Chairs" },
-        { value: "Tables", label: "Tables" },
-        { value: "Fruits", label: "Fruits" },
-        { value: "Wires", label: "Wires" },
-        { value: "Ices", label: "Ices" },
-        { value: "Animals", label: "Animals" },
-        { value: "Masks", label: "Masks" }
-    ];
-
-    const driver = [
-        { value: "Nguyễn Văn A", label: "Nguyễn Văn A" },
-        { value: "Nguyễn Văn B", label: "Nguyễn Văn B" },
-        { value: "Nguyễn Văn C", label: "Nguyễn Văn C" }
-    ];
-
 
     const addTruckSubmit = async (values) => {
         values.cargo_type = values.cargo_type.map(item => item.value).join(", ")
-        values.driver = values.driver.map(item => item.value).pop("")
+        values.driver = values.driver.value
         await new Promise((resolve) => setTimeout(resolve, 100));
         console.log(values);
         setTrucks(await axios.post('/trucks', values));
@@ -46,93 +24,132 @@ const AddTruck = ({ setTrucks }) => {
     return (
         <Grid
             container
-            spacing={0}
-            direction="column"
             alignItems="center"
             justifyContent="center"
+            direction="column"
+            sx={{ bgcolor: "#ffb300", p:2}}
+            style={{ minHeight: '100vh' }}
         >
-            <h2>Add Truck Details</h2><br/>
-            <Formik initialValues={{
-                truck_plate: "",
-                cargo_type: "",
-                driver: "",
-                truck_type: "",
-                price: "",
-                dimension: "",
-                parking_address: "",
-                production_year: "",
-                status: ""
-            }}
+            <Formik
+
+                initialValues={{
+                    truck_plate: "",
+                    cargo_type: "",
+                    driver: "",
+                    truck_type: "",
+                    price: "",
+                    dimension: "",
+                    parking_address: "",
+                    production_year: "",
+                    status: ""
+                }}
                 validationSchema={AddTruckSchema}
                 onSubmit={addTruckSubmit}
             >
                 {({ isSubmitting }) => (
-                    <Form>
-                        <CustomInputTruck
-                            label="Truck Plate"
-                            name="truck_plate"
-                            type="text"
-                            placeholder="Truck Plate"
-                        />
-                        <Field
-                            component={CustomMultiSelect}
-                            name="cargo_type"
-                            options={cargoType}
-                        />
-                        <Field
-                            component={CustomSelectTruck}
-                            name="driver"
-                            options={driver}
-                        />
-                        <CustomInputTruck
-                            label="Truck Type"
-                            name="truck_type"
-                            type="text"
-                            placeholder="Truck Type"
-                        />
-                        <CustomInputTruck
-                            label="Price"
-                            name="price"
-                            type="text"
-                            placeholder="Price"
-                        />
-                        <CustomInputTruck
-                            label="Dimension"
-                            name="dimension"
-                            type="text"
-                            placeholder="Dimension"
-                        />
-                        <Field
-                            component={CustomTextCounter}
-                            label="Parking Address"
-                            name="parking_address"
-                            placeholder="Parking"
-                        />
-                        <CustomInputTruck
-                            label="ProductionYear"
-                            name="production_year"
-                            type="text"
-                            placeholder="Production Year"
-                        />
-                        <CustomInputTruck
-                            label="Status"
-                            name="status"
-                            type="text"
-                            placeholder="Status"
-                        />
-                        <button disabled={isSubmitting} type="submit">
-                            Add Truck
-                        </button>
-                    </Form>
+                    <Grid item width={0.3} sx={{ mt: 1 }} align='center'>
+                        <Paper >
+                            <Typography variant="h4" align='center' sx={{ pt: 2 }} >
+                                Add Truck Details
+                            </Typography>
+                            <Form>
+                                <FormControl
+                                    sx={{
+                                        ".MuiFormLabel-root.Mui-focused": {
+                                            color: '#ffb300'
+                                        },
+                                        '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                                            borderColor: '#ffb300',
+                                        },
+                                        '& .MuiFormHelperText-root': {
+                                            color: "#d50000"
+                                        },
+                                        width: 0.9,
+                                        mt: 1,
+                                        mr:2.3,
+                                        align:"center"
+                                    }}
+
+                                >
+                                    <CustomInputTruck
+                                        name="truck_plate"
+                                        type="text"
+                                        placeholder="Truck Plate"
+                                    />
+                                    <Field
+                                        component={CustomMultiSelect}
+                                        name="cargo_type"
+                                        options={cargoType}
+                                        placeholder="Cargo Type"
+                                    />
+                                    <Field
+                                        component={CustomSelectTruck}
+                                        name="driver"
+                                        options={drivers}
+                                        placeholder="Driver"
+                                    />
+                                    <CustomInputTruck
+                                        name="truck_type"
+                                        type="text"
+                                        placeholder="Truck Type"
+                                    />
+                                    <CustomInputTruck
+                                        name="price"
+                                        type="text"
+                                        placeholder="Price"
+                                    />
+                                    <CustomInputTruck
+                                        name="dimension"
+                                        type="text"
+                                        placeholder="Dimension"
+                                    />
+                                    <Field
+                                        component={CustomTextCounter}
+                                        name="parking_address"
+                                        placeholder="Parking"
+                                    />
+                                    <CustomInputTruck
+                                        name="production_year"
+                                        type="text"
+                                        placeholder="Production Year"
+                                    />
+                                    <CustomInputTruck
+                                        name="status"
+                                        type="text"
+                                        placeholder="Status"
+                                    />
+                                    <Button
+                                        disabled={isSubmitting}
+                                        type="submit"
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{
+                                            mt: "16px",
+                                            ml: "8px",
+                                            mb: "16px",
+                                            width: 1,
+                                            bgcolor: "#ff8f00",
+                                            '&:hover': {
+                                                backgroundColor: '#ff6f00'
+                                            }
+                                        }}>
+                                        Add Truck
+                                    </Button>
+                                </FormControl>
+                            </Form>
+                        </Paper>
+                    </Grid>
                 )}
             </Formik>
-            {truckPostSuccess ?
-                (
-                    <Navigate to={"/TruckManagement"} />
-                ) : (
-                    null
-                )}
-        </Grid>
+            {
+                truckPostSuccess ?
+                    (
+                        <Navigate to={"/TruckManagement"} />
+                    ) : (
+                        null
+                    )
+            }
+        </Grid >
     )
 }
 

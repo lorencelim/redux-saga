@@ -8,6 +8,7 @@ export const AddTruckSchema = yup.object().shape({
         .required("Required"),
     cargo_type: yup
         .array()
+        .min(1, "Minimum 1 selection")
         .max(10, "Maximum 10 Select")
         .of(
             yup.object().shape({
@@ -17,32 +18,21 @@ export const AddTruckSchema = yup.object().shape({
         )
         .ensure(),
     driver: yup
-        .string()
-        .required("Required")
-        .oneOf([
-            "Nguyễn Văn A",
-            "Nguyễn Văn B",
-            "Nguyễn Văn C"
-        ]),
+        .object()
+        .default(undefined)
+        .required("Required"),
     truck_type: yup
-        .string()
-        .required("Required"),
+        .string(),
     price: yup
-        .string()
-        .required("Required"),
+        .string(),
     dimension: yup
-        .string()
-        .required("Required"),
+        .string(),
     parking_address: yup
         .string()
-        .required("Required"),
-        // .max(200, "Maximum 200 character"),
+        .max(200, "Maximum 200 character"),
     production_year: yup
-        .string()
-        .required("Required"),
+        .string(),
     status: yup
         .string()
-        .required("Required")
-
 });
 

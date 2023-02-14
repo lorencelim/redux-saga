@@ -6,12 +6,12 @@ const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
     return (
         <>
             <TableCell
-                sx={{ color: "#616161"}}
+                sx={{ color: "#616161" }}
             >
                 {truck.truck_plate}
             </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
+            <TableCell 
+                sx={{ color: "#616161", width:"200px"}}
             >
                 {truck.cargo_type}
             </TableCell>

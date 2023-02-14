@@ -13,23 +13,11 @@
   ],
   "trucks": [
     {
-      "id": 4,
-      "truck_plate": "03A-12398",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "abc",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
       "id": 5,
-      "truck_plate": "03A-12398",
-      "truck_type": "uil",
-      "cargo_type": "op[",
-      "driver": "qwe",
+      "truck_plate": "Test 1",
+      "truck_type": "Test 1",
+      "cargo_type": "qwe",
+      "driver": "op[",
       "price": "123",
       "dimension": "123",
       "parking_address": "123",
@@ -167,6 +155,78 @@
       "parking_address": "abc",
       "production_year": "abc",
       "status": "abc"
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Electronics",
+      "driver": "Nguyễn Văn B",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 18
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Computer",
+      "driver": "Nguyễn Văn A",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 19
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Vegetables, Computer, Electronics, Kid Toys, Chairs, Tables, Fruits, Wires, Ices, Animals",
+      "driver": "Nguyễn Văn A",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 20
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Computer, Fruits",
+      "driver": "Nguyễn Văn B",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "123",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 21
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Electronics, Wires",
+      "driver": "Nguyễn Văn C",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 22
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Electronics",
+      "driver": "Nguyễn Văn B",
+      "truck_type": "Test 1",
+      "price": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 23
     }
   ],
   "items": [

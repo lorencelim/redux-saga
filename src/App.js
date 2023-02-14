@@ -12,6 +12,26 @@ function App() {
   const Redirect = true;
   const [trucks, setTrucks] = useState([]);
 
+  const cargoType = [
+    { value: "Computer", label: "Computer" },
+    { value: "Electronics", label: "Electronics" },
+    { value: "Vegetables", label: "Vegetables" },
+    { value: "Kid Toys", label: "Kid Toys" },
+    { value: "Chairs", label: "Chairs" },
+    { value: "Tables", label: "Tables" },
+    { value: "Fruits", label: "Fruits" },
+    { value: "Wires", label: "Wires" },
+    { value: "Ices", label: "Ices" },
+    { value: "Animals", label: "Animals" },
+    { value: "Masks", label: "Masks" }
+  ];
+  
+  const drivers = [
+    { value: "Nguyễn Văn A", label: "Nguyễn Văn A" },
+    { value: "Nguyễn Văn B", label: "Nguyễn Văn B" },
+    { value: "Nguyễn Văn C", label: "Nguyễn Văn C" }
+  ];
+
   return (
     <BrowserRouter>
       <Routes>
@@ -38,11 +58,15 @@ function App() {
             <TruckManagement
               trucks={trucks}
               setTrucks={setTrucks}
+              cargoType={cargoType}
+              drivers={drivers}
             />} />
         <Route path='/AddTruck'
           element={
             <AddTruck
               setTrucks={setTrucks}
+              cargoType={cargoType}
+              drivers={drivers}
             />
           }
         />

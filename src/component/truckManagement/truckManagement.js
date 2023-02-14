@@ -16,7 +16,7 @@ const theme = createTheme({
   }
 });
 
-const TruckManagement = ({ trucks, setTrucks
+const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
 }) => {
 
   const [search, setSearch] = useState('');
@@ -31,6 +31,10 @@ const TruckManagement = ({ trucks, setTrucks
     "production_year",
     "status"
   ]
+
+  const logout = () => {
+    localStorage.clear();
+  }
 
   useEffect(() => {
     const fetchTrucks = async () => {
@@ -50,7 +54,7 @@ const TruckManagement = ({ trucks, setTrucks
     setTimeout(() => {
       fetchTrucks();
     }, 100)
-  }, [])
+  }, [setTrucks])
 
   const handleDelete = async (id) => {
     try {
@@ -69,25 +73,62 @@ const TruckManagement = ({ trucks, setTrucks
       direction="column"
       alignItems="center"
       justifyContent="center"
+      sx={{ mt: 1 }}
     >
-      <Link style={{ textDecoration: 'none' }} to="/AddTruck">
-        <Button variant="contained" color="primary" theme={theme} sx={{ m: "16px" }}>
-          Add Truck
-        </Button>
-      </Link>
-      <SearchTruck 
-        search={search}
-        setSearch={setSearch}
-      />
-      {trucks.length ? (
-        <TableList
-          trucks={trucks.filter((truck) =>
-            searchKeys.some(searchKey => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
-          handleDelete={handleDelete}
-          setTrucks={setTrucks}
-          theme={theme}
+      <Grid item>
+        <Link style={{ textDecoration: 'none' }} to="/SignIn">
+          <Button
+            variant="outlined"
+            color="primary"
+            theme={theme}
+            sx={{
+              mt: 1,
+              '&:hover': {
+                backgroundColor: '#ff6f00'
+              }
+            }}
+            onClick={logout}
+          >
+            Sign Out
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item>
+        <Link style={{ textDecoration: 'none' }} to="/AddTruck">
+          <Button
+            variant="contained"
+            color="primary"
+            theme={theme}
+            sx={{
+              m: 1,
+              '&:hover': {
+                backgroundColor: '#ff6f00'
+              }
+            }}
+          >
+            Add Truck
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item>
+        <SearchTruck
+          search={search}
+          setSearch={setSearch}
         />
-      ) : null}
+      </Grid>
+      <Grid item>
+        {trucks.length ? (
+          <TableList
+            trucks={trucks.filter((truck) =>
+              searchKeys.some(searchKey => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
+            handleDelete={handleDelete}
+            setTrucks={setTrucks}
+            theme={theme}
+            cargoType={cargoType}
+            drivers={drivers}
+          />
+        ) : null}
+      </Grid>
     </Grid>
   )
 }

@@ -13,6 +13,7 @@ const SearchTruck = ({ search, setSearch, setTrucks }) => {
                 '& .MuiOutlinedInput-root.Mui-focused fieldset': {
                   borderColor: '#ffc107',
                 },
+                mb:1
               }}
                 
                 label="Search..."
