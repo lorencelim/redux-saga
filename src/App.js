@@ -6,9 +6,20 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TruckManagement from './component/truckManagement/TruckManagement';
 import UserManagement from './component/UserManagement/UserManagement';
 import AddTruck from './component/truckManagement/AddTruck/AddTruck';
+import { createTheme } from '@mui/material';
 
 
 function App() {
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#ff8f00',
+        contrastText: 'white'
+      }
+    }
+  });
+
   const Redirect = true;
   const [trucks, setTrucks] = useState([]);
 
@@ -25,7 +36,7 @@ function App() {
     { value: "Animals", label: "Animals" },
     { value: "Masks", label: "Masks" }
   ];
-  
+
   const drivers = [
     { value: "Nguyễn Văn A", label: "Nguyễn Văn A" },
     { value: "Nguyễn Văn B", label: "Nguyễn Văn B" },
@@ -44,13 +55,17 @@ function App() {
               null
             )
           } />
-        < Route
+        <Route
           path='/SignIn'
-          element={<SignIn />}
+          element={<SignIn
+            theme={theme}
+          />}
         />
         <Route
           path='/SignUp'
-          element={<SignUp />}
+          element={<SignUp
+            theme={theme}
+          />}
         />
         <Route
           path='/TruckManagement'
@@ -60,6 +75,7 @@ function App() {
               setTrucks={setTrucks}
               cargoType={cargoType}
               drivers={drivers}
+              theme={theme}
             />} />
         <Route path='/AddTruck'
           element={

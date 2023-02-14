@@ -15,7 +15,7 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
             fontSize: "16px"
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: "29px", color: "#616161"
+            fontSize: "14px", color: "#616161", backgroundColor:"white"
         },
     }));
 
@@ -158,6 +158,7 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
                                                     handleDelete={handleDelete}
                                                     handleTruckCancel={handleTruckCancel}
                                                     handleTruckEdit={handleTruckEdit}
+                                                    StyledTableCell={StyledTableCell}
                                                 />
                                             )}
                                         </Fragment>

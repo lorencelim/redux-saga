@@ -1,22 +1,11 @@
 import { useEffect } from "react";
 import TableList from "./TableList";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import SearchTruck from "./SearchTruck";
 import axios from "../../app/api/axios";
-import { Button, Grid } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
+import { Button, Grid, Link } from "@mui/material";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#ff8f00',
-      contrastText: 'white'
-    }
-  }
-});
-
-const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
+const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
 }) => {
 
   const [search, setSearch] = useState('');
@@ -76,7 +65,7 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
       sx={{ mt: 1 }}
     >
       <Grid item>
-        <Link style={{ textDecoration: 'none' }} to="/SignIn">
+        <Link style={{ textDecoration: 'none' }} href="/SignIn">
           <Button
             variant="outlined"
             color="primary"
@@ -84,7 +73,7 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
             sx={{
               mt: 1,
               '&:hover': {
-                backgroundColor: '#ff6f00'
+                color: '#ff6f00'
               }
             }}
             onClick={logout}
@@ -94,7 +83,7 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
         </Link>
       </Grid>
       <Grid item>
-        <Link style={{ textDecoration: 'none' }} to="/AddTruck">
+        <Link style={{ textDecoration: 'none' }} href="/AddTruck">
           <Button
             variant="contained"
             color="primary"
@@ -132,12 +121,6 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers
     </Grid>
   )
 }
-
-TruckManagement.defaultProps = {
-  title: "Title"
-}
-
-
 
 
 export default TruckManagement;

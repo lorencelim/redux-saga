@@ -2,50 +2,34 @@ import { Delete, Edit } from '@mui/icons-material';
 import { IconButton, TableCell } from '@mui/material';
 import React from 'react'
 
-const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
+const TruckRowList = ({ truck, handleDelete, handleTruckEdit, StyledTableCell }) => {
     return (
         <>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            <StyledTableCell>
                 {truck.truck_plate}
-            </TableCell>
-            <TableCell 
-                sx={{ color: "#616161", width:"200px"}}
-            >
+            </StyledTableCell>
+            <StyledTableCell sx={{ width: "200px" }} >
                 {truck.cargo_type}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.driver}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.truck_type}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.dimension}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.parking_address}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.production_year}
-            </TableCell>
-            <TableCell
-                sx={{ color: "#616161" }}
-            >
+            </StyledTableCell>
+            <StyledTableCell>
                 {truck.status}
-            </TableCell>
-            <TableCell>
+            </StyledTableCell>
+            <StyledTableCell>
                 <IconButton
                     aria-label="edit"
                     sx={{ color: "#ffb300" }}
@@ -62,7 +46,7 @@ const TruckRowList = ({ truck, handleDelete, handleTruckEdit }) => {
                 >
                     <Delete />
                 </IconButton>
-            </TableCell>
+            </StyledTableCell>
         </>
     )
 }

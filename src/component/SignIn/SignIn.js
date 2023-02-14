@@ -1,9 +1,11 @@
+import { Button, CssBaseline, Grid, Link, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { useEffect, useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from '../../app/api/axios';
 
 
-const SignIn = () => {
+const SignIn = ({ theme }) => {
     const SIGNIN_URL = '/users';
     const userRef = useRef();
     const errRef = useRef();
@@ -35,9 +37,7 @@ const SignIn = () => {
                     withCredentials: true,
                 }
             );
-            
             localStorage.setItem("user-Info", response.data.map(account => account.username));
-            
 
             if (user === response.data[0].username &&
                 password === response.data[0].password) {
@@ -61,47 +61,94 @@ const SignIn = () => {
 
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             {success ? (
-                <section>
+                <Grid>
                     <Navigate to={"/TruckManagement"} />
-                </section>
+                </Grid>
             ) : (
-                <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Sign In</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                        />
+                <Grid container component="main" sx={{ height: '100vh' }}>
+                    <CssBaseline />
+                    <Grid
+                        item
+                        xs={false}
+                        sm={4}
+                        md={7}
+                        sx={{
+                            backgroundImage: 'url(https://source.unsplash.com/random)',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: (t) =>
+                                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+                    <Grid
+                        item
+                        xs={12}
+                        sm={8}
+                        md={5}
+                        component={Paper}
+                        elevation={6}
+                        square>
+                        <Box
+                            sx={{
+                                my: 8,
+                                mx: 4,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                            <Typography component="h1" variant="h5">
+                                Sign In
+                            </Typography>
+                            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+                                <TextField
+                                    type="text"
+                                    id="username"
+                                    label="Username"
+                                    ref={userRef}
+                                    autoComplete="off"
+                                    onChange={(e) => setUser(e.target.value)}
+                                    value={user}
+                                    required
+                                    fullWidth
+                                    sx={{ my: 2 }}
+                                />
 
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                        />
-                        <button>Sign In</button>
-                    </form>
-                    <p>
-                        Need an Account?<br />
-                        <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign Up</a>
-                        </span>
-                    </p>
-                </section>
+                                <TextField
+                                    type="password"
+                                    id="password"
+                                    label="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                    required
+                                    fullWidth
+                                    sx={{ my: 2 }}
+                                />
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Sign In
+                                </Button>
+                            </Box>
+                            <Grid item>
+                                Need an Account?<br />
+                            </Grid>
+                            <Grid item>
+                                {/*put router link here*/}
+                                    <Link href="/SignUp">Sign Up</Link>
+                            </Grid>
+                        </Box>
+                    </Grid>
+                </Grid>
             )}
-        </>
+        </ThemeProvider>
     );
 };
 
