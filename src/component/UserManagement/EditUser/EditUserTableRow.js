@@ -117,7 +117,7 @@ const EditTableRow = ({
         </IconButton>
       </TableCell>
     </>
-  );
-};
+  )
+}
 
 export default EditTableRow

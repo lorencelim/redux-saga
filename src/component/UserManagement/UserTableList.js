@@ -1,8 +1,8 @@
 import { Box, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import React, { useState, Fragment } from 'react';
 import axios from '../../app/api/axios';
-import EdiTableRow from './EditTruck/EditTableRow';
-import TruckRowList from './TruckRowList';
+import EdiTableRow from './EditUser/EditUserTableRow';
+import TruckRowList from './UserRowList';
 
 const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
 
@@ -179,7 +179,7 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
                 />
             </Paper >
         </Box >
-    );
-};
+    )
+}
 
 export default TableList;

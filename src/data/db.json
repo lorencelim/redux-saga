@@ -3,12 +3,14 @@
     {
       "username": "abc",
       "password": "aA2$",
-      "roles": "Admin"
+      "designation": "Admin",
+      "id": 1
     },
     {
       "username": "efg",
       "password": "bB2$",
-      "roles": "Management"
+      "designation": "Management",
+      "id": 2
     }
   ],
   "trucks": [

@@ -21,6 +21,7 @@ function App() {
   });
 
   const Redirect = true;
+  
   const [trucks, setTrucks] = useState([]);
 
   const cargoType = [
@@ -83,13 +84,20 @@ function App() {
               setTrucks={setTrucks}
               cargoType={cargoType}
               drivers={drivers}
+              theme={theme}
             />
           }
         />
         <Route
           path='/UserManagement'
-          element={<UserManagement />}
-        />
+          element={
+            <TruckManagement
+              trucks={trucks}
+              setTrucks={setTrucks}
+              cargoType={cargoType}
+              drivers={drivers}
+              theme={theme}
+            />} />
       </Routes>
     </BrowserRouter>
   );

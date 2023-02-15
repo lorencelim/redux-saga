@@ -1,8 +1,9 @@
-import { Button, CssBaseline, Grid, Link, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Button, CssBaseline, Grid, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from '../../app/api/axios';
+import { Link } from 'react-router-dom';
 
 
 const SignIn = ({ theme }) => {
@@ -17,7 +18,7 @@ const SignIn = ({ theme }) => {
 
     useEffect(() => {
         userRef.current.focus();
-    }, [])
+    }, []);
 
     useEffect(() => {
         setErrMsg('');
@@ -38,27 +39,18 @@ const SignIn = ({ theme }) => {
                 }
             );
             localStorage.setItem("user-Info", response.data.map(account => account.username));
-
-            if (user === response.data[0].username &&
-                password === response.data[0].password) {
+            if (user === response.data[0].username && password === response.data[0].password) {
                 setSuccess(true);
+            } else if (user !== response.data.username || password !== response.data.password) {
+                setErrMsg('Incorrect Username or Password');
             }
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
             }
             errRef.current.focus();
         }
     };
-
-
-
 
     return (
         <ThemeProvider theme={theme}>
@@ -100,7 +92,7 @@ const SignIn = ({ theme }) => {
                                 alignItems: 'center',
                             }}
                         >
-                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                            <Typography ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive" sx={{ color: "red" }}>{errMsg}</Typography>
                             <Typography component="h1" variant="h5">
                                 Sign In
                             </Typography>
@@ -138,11 +130,11 @@ const SignIn = ({ theme }) => {
                                 </Button>
                             </Box>
                             <Grid item>
-                                Need an Account?<br />
+                                <Typography variant="subtitle1"> Need an Account?</Typography>
                             </Grid>
                             <Grid item>
                                 {/*put router link here*/}
-                                    <Link href="/SignUp">Sign Up</Link>
+                                <Link to="/SignUp">Sign Up</Link>
                             </Grid>
                         </Box>
                     </Grid>

@@ -48,7 +48,7 @@ const TruckRowList = ({ truck, handleDelete, handleTruckEdit, StyledTableCell })
                 </IconButton>
             </StyledTableCell>
         </>
-    );
-};
+    )
+}
 
 export default TruckRowList;

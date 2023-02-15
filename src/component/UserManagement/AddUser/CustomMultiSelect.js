@@ -1,10 +1,10 @@
 import { useField } from "formik";
 import { Autocomplete, TextField } from '@mui/material';
 
-function CustomSelectTruck({ placeholder, ...props }) {
-    const [field, { touched, error }, { setValue, setTouched }] = useField(props.field.name);
+function CustomMultiSelect({ placeholder, ...props }) {
+    const [field, { value, touched, error }, { setValue, setTouched }] = useField(props.field.name);
     const onChange = (e, value) => {
-        setValue(value);
+        setValue(value)
     };
 
     return (
@@ -12,6 +12,7 @@ function CustomSelectTruck({ placeholder, ...props }) {
             <Autocomplete
                 sx={{ m: 1, width:1 }}
                 {...props}
+                multiple
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 onOpen={setTouched}
                 onChange={onChange}
@@ -19,10 +20,11 @@ function CustomSelectTruck({ placeholder, ...props }) {
                     <TextField
                         {...value}
                         label={placeholder}
-                        helperText={touched && error ? "Required" : ""} />)}
+                        helperText={touched && error ? error : ""} />)}
+
             />
         </>
     );
-};
+}
 
-export default CustomSelectTruck
+export default CustomMultiSelect

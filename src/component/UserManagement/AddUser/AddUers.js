@@ -14,7 +14,7 @@ const AddTruck = ({ setTrucks, cargoType, drivers, theme }) => {
     const [truckPostSuccess, setTruckPostSuccess] = useState(false);
     let navigate = useNavigate();
     const addTruckSubmit = async (values) => {
-        values.cargo_type = values.cargo_type.map(item => item.value).join(", ");
+        values.cargo_type = values.cargo_type.map(item => item.value).join(", ")
         values.driver = values.driver.value
         await new Promise((resolve) => setTimeout(resolve, 100));
         console.log(values);
@@ -131,8 +131,9 @@ const AddTruck = ({ setTrucks, cargoType, drivers, theme }) => {
                                             variant="contained"
                                             color="primary"
                                             sx={{
-                                                my: 4,
+                                                mt: "16px",
                                                 ml: "8px",
+                                                mb: "16px",
                                                 width: 1,
                                                 bgcolor: "#ff8f00",
                                                 '&:hover': {
@@ -157,7 +158,7 @@ const AddTruck = ({ setTrucks, cargoType, drivers, theme }) => {
                 }
             </Grid >
         </ThemeProvider>
-    );
-};
+    )
+}
 
 export default AddTruck

@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useField } from "formik";
 
 const CustomTextCounter = ({ label, placeholder, ...props }) => {
-    const [field, {value}] = useField(props.field.name);
+    const [field, meta] = useField(props.field.name);
     const parkingWordLimit = 200;
 
     return (
@@ -12,9 +12,9 @@ const CustomTextCounter = ({ label, placeholder, ...props }) => {
                 {...field}
                 {...props}
                 label={placeholder}
-                value={value}
+                value={meta.value}
                 inputProps={{ maxLength: parkingWordLimit }}
-                helperText={`${value.length}/${parkingWordLimit}`}
+                helperText={`${meta.value.length}/${parkingWordLimit}`}
             />
         </>
     );

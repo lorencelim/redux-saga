@@ -1,21 +1,18 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@emotion/react';
+import { ArrowBackIos } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Paper } from '@mui/material';
 
 
-const SignUp = ({theme}) => {
-
+const SignUp = ({ theme }) => {
+    let navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -23,44 +20,59 @@ const SignUp = ({theme}) => {
                 <Box
                     sx={{
                         marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        height: '100vh'
                     }}
                 >
-                    <Typography component="h1" variant="h5">
-                        Sign Up
-                    </Typography>
-                    <Box component="form" noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign In
-                        </Button>
-                    </Box>
+                    <Paper
+                        elevation={2}
+                        sx={{
+                            p: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            borderRadius: "20px"
+                        }}>
+                        <Box sx={{ display: "flex", alignSelf: "start" }}>
+                            <Button onClick={() => { navigate("/SignIn"); }}>
+                                <ArrowBackIos />
+                            </Button>
+                        </Box>
+                        <Box>
+                            <Typography component="h1" variant="h5">
+                                Sign Up
+                            </Typography>
+                        </Box>
+                        <Box component="form" noValidate sx={{ mt: 1 }}>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="user"
+                                label="Username"
+                                name="username"
+                                autoComplete="email"
+                                autoFocus
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Sign In
+                            </Button>
+                        </Box>
+                    </Paper>
                 </Box>
             </Container>
         </ThemeProvider>

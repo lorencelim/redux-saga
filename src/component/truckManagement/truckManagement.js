@@ -3,7 +3,8 @@ import TableList from "./TableList";
 import { useState } from "react";
 import SearchTruck from "./SearchTruck";
 import axios from "../../app/api/axios";
-import { Button, Grid, Link } from "@mui/material";
+import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
 }) => {
@@ -36,14 +37,14 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
           console.log(err.response.status);
           console.log(err.response.headers);
         } else {
-          console.log(`Error: ${err.message}`)
+          console.log(`Error: ${err.message}`);
         }
       }
     }
     setTimeout(() => {
       fetchTrucks();
-    }, 100)
-  }, [setTrucks])
+    }, 100);
+  }, [setTrucks]);
 
   const handleDelete = async (id) => {
     try {
@@ -65,7 +66,7 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
       sx={{ mt: 1 }}
     >
       <Grid item>
-        <Link style={{ textDecoration: 'none' }} href="/SignIn">
+        <Link style={{ textDecoration: 'none' }} to="/SignIn">
           <Button
             variant="outlined"
             color="primary"
@@ -83,7 +84,7 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
         </Link>
       </Grid>
       <Grid item>
-        <Link style={{ textDecoration: 'none' }} href="/AddTruck">
+        <Link style={{ textDecoration: 'none' }} to="/AddTruck">
           <Button
             variant="contained"
             color="primary"
@@ -119,8 +120,8 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
         ) : null}
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
 
 export default TruckManagement;

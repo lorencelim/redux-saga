@@ -4,7 +4,7 @@ import { Autocomplete, TextField } from '@mui/material';
 function CustomMultiSelect({ placeholder, ...props }) {
     const [field, { value, touched, error }, { setValue, setTouched }] = useField(props.field.name);
     const onChange = (e, value) => {
-        setValue(value)
+        setValue(value);
     };
 
     return (
@@ -25,6 +25,6 @@ function CustomMultiSelect({ placeholder, ...props }) {
             />
         </>
     );
-}
+};
 
 export default CustomMultiSelect

@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-const SearchTruck = ({ search, setSearch }) => {
+const SearchTruck = ({ search, setSearch, setTrucks }) => {
     return (
         <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
             <TextField
@@ -26,7 +26,7 @@ const SearchTruck = ({ search, setSearch }) => {
                 size="small"
             /> 
         </form>
-    );
-};
+    )
+}
 
 export default SearchTruck
