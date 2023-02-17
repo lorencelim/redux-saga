@@ -28,16 +28,7 @@ const SignIn = ({ theme }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(SIGNIN_URL + "/" + user,
-                JSON.stringify({ user, password }),
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "Accept": "application/json"
-                    },
-                    withCredentials: true,
-                }
-            );
+            const response = await axios.get(SIGNIN_URL + "/" + user);
             localStorage.setItem("user-Info", response.data.map(account => account.username));
             if (user === response.data[0].username && password === response.data[0].password) {
                 setSuccess(true);

@@ -165,7 +165,6 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
                                     </TableRow>
                                 ))}
                         </TableBody>
-
                     </Table>
                 </TableContainer>
                 <TablePagination

@@ -20,7 +20,6 @@ const SearchTruck = ({ search, setSearch }) => {
                 id='search'
                 type='text'
                 role='searchbox'
-                placeholder='Search'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 size="small"

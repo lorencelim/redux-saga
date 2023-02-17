@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import SignIn from './component/SignIn/SignIn';
 import SignUp from './component/SignUp/SignUp';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import TruckManagement from './component/truckManagement/TruckManagement';
+import TruckManagement from './component/TruckManagement/TruckManagement';
 import UserManagement from './component/UserManagement/UserManagement';
-import AddTruck from './component/truckManagement/AddTruck/AddTruck';
+import AddTruck from './component/TruckManagement/AddTruck/AddTruck';
 import { createTheme } from '@mui/material';
+import Abc from './Abc';
 
 
 function App() {
@@ -18,11 +19,10 @@ function App() {
       }
     }
   });
-
-  const Redirect = true;
   
   const [trucks, setTrucks] = useState([]);
-
+  const signInAccount = localStorage.getItem("user-Info");
+  
   const cargoType = [
     { value: "Computer", label: "Computer" },
     { value: "Electronics", label: "Electronics" },
@@ -49,10 +49,10 @@ function App() {
         <Route
           path=""
           element={
-            Redirect ? (
-              <Navigate replace to="/SignIn" />
+            signInAccount ? (
+              <Navigate replace to="/TruckManagement" />
             ) : (
-              null
+              <Navigate replace to="/SignIn" />
             )
           } />
         <Route
@@ -97,6 +97,10 @@ function App() {
               drivers={drivers}
               theme={theme}
             />} />
+        <Route
+          path='/abc'
+          element={<Abc />}
+        />
       </Routes>
     </BrowserRouter>
   );
