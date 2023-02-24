@@ -28,9 +28,14 @@ const SignIn = ({ theme }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // const test = axios.get("/users/2")
+            // console.log(test.data)
+
             const response = await axios.get(SIGNIN_URL + "/" + user);
+            // console.log(response.data.map(account => account.designation))
             localStorage.setItem("user-Info", response.data.map(account => account.username));
-            if (user === response.data[0].username && password === response.data[0].password) {
+            localStorage.setItem("position", response.data.map(account => account.designation));
+            if (user === response.data.map(acc => acc.username).join("") && password === response.data.map(acc => acc.password).join("")) {
                 setSuccess(true);
             } else if (user !== response.data.username || password !== response.data.password) {
                 setErrMsg('Incorrect Username or Password');
@@ -47,7 +52,7 @@ const SignIn = ({ theme }) => {
         <ThemeProvider theme={theme}>
             {success ? (
                 <Grid>
-                    <Navigate to={"/TruckManagement"} />
+                    <Navigate to={`/${localStorage.getItem("user-Info")}/TruckManagement`} />
                 </Grid>
             ) : (
                 <Grid container component="main" sx={{ height: '100vh' }}>
@@ -84,7 +89,7 @@ const SignIn = ({ theme }) => {
                             }}
                         >
                             <Typography ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive" sx={{ color: "red" }}>{errMsg}</Typography>
-                            <Typography component="h1" variant="h5">
+                            <Typography variant="h4" sx={{ color: "#ff6f00" }}>
                                 Sign In
                             </Typography>
                             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>

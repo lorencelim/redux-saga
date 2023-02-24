@@ -38,7 +38,7 @@ const SignUp = ({ theme }) => {
                             </Button>
                         </Box>
                         <Box>
-                            <Typography component="h1" variant="h5">
+                            <Typography variant="h4" sx={{color: "#ff6f00"}}>
                                 Sign Up
                             </Typography>
                         </Box>

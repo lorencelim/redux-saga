@@ -1,10 +1,14 @@
-import { Delete, Edit } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import React from 'react'
+import { Delete, Edit } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import React from "react";
 
 const TruckRowList = ({ truck, handleDelete, handleTruckEdit, StyledTableCell }) => {
+
+    // usedispatch method
+
     return (
         <>
+        {/* {isNotesDataFetching ? <CircularProgress /> : null} */}
             <StyledTableCell>
                 {truck.truck_plate}
             </StyledTableCell>

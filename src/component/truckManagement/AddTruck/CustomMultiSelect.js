@@ -1,10 +1,12 @@
 import { useField } from "formik";
 import { Autocomplete, TextField } from '@mui/material';
 
-function CustomMultiSelect({ placeholder, ...props }) {
-    const [field, { value, touched, error }, { setValue, setTouched }] = useField(props.field.name);
+function CustomMultiSelect({ placeholder, truck, setTruck, ...props }) {
+    const [field, { touched, error }, { setValue, setTouched }] = useField(props.field.name);
     const onChange = (e, value) => {
+        console.log(value)
         setValue(value);
+        setTruck({...truck,[field.name]: value.map(item=>item.value)});
     };
 
     return (

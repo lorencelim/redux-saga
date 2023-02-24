@@ -7,7 +7,8 @@ import UserManagement from './component/UserManagement/UserManagement';
 import AddTruck from './component/TruckManagement/AddTruck/AddTruck';
 import { createTheme } from '@mui/material';
 import Abc from './Abc';
-
+import User from './component/User/User';
+import Account from './component/UserSetting/Account';
 
 function App() {
 
@@ -19,11 +20,10 @@ function App() {
       }
     }
   });
-  
-  const [trucks, setTrucks] = useState([]);
-  const signInAccount = localStorage.getItem("user-Info");
-  
-  const cargoType = [
+
+  const username = localStorage.getItem("user-Info");
+
+  const cargoTypes = [
     { value: "Computer", label: "Computer" },
     { value: "Electronics", label: "Electronics" },
     { value: "Vegetables", label: "Vegetables" },
@@ -49,10 +49,10 @@ function App() {
         <Route
           path=""
           element={
-            signInAccount ? (
-              <Navigate replace to="/TruckManagement" />
+            username ? (
+              <Navigate to={`/${username}/TruckManagement`} />
             ) : (
-              <Navigate replace to="/SignIn" />
+              <Navigate to="/SignIn" />
             )
           } />
         <Route
@@ -68,38 +68,45 @@ function App() {
           />}
         />
         <Route
-          path='/TruckManagement'
-          element={
-            <TruckManagement
-              trucks={trucks}
-              setTrucks={setTrucks}
-              cargoType={cargoType}
-              drivers={drivers}
-              theme={theme}
-            />} />
-        <Route path='/AddTruck'
-          element={
-            <AddTruck
-              setTrucks={setTrucks}
-              cargoType={cargoType}
-              drivers={drivers}
-              theme={theme}
-            />
-          }
-        />
-        <Route
-          path='/UserManagement'
-          element={
-            <TruckManagement
-              trucks={trucks}
-              setTrucks={setTrucks}
-              cargoType={cargoType}
-              drivers={drivers}
-              theme={theme}
-            />} />
+          path={`/${localStorage.getItem("user-Info")}`}
+          element={<User
+            theme={theme}
+          />} >
+          <Route
+            path={`/${localStorage.getItem("user-Info")}/TruckManagement`}
+            element={
+              <TruckManagement
+                cargoTypes={cargoTypes}
+                drivers={drivers}
+                theme={theme}
+              />} />
+          <Route path={`/${localStorage.getItem("user-Info")}/AddTruck`}
+            element={
+              <AddTruck
+                cargoTypes={cargoTypes}
+                drivers={drivers}
+                theme={theme}
+              />
+            }
+          />
+          <Route
+            path={`/${localStorage.getItem("user-Info")}/UserManagement`}
+            element={
+              <UserManagement
+
+              />} />
+          <Route
+            path={`/${localStorage.getItem("user-Info")}/Account`}
+            element={
+              <Account
+                theme={theme}
+              />} />
+        </Route>
         <Route
           path='/abc'
-          element={<Abc />}
+          element={<Abc
+            theme={theme}
+          />}
         />
       </Routes>
     </BrowserRouter>

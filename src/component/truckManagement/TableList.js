@@ -1,12 +1,30 @@
-import { Box, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { Box, CircularProgress, FormControl, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, tableContainerClasses, TableHead, TablePagination, TableRow, tableRowClasses } from '@mui/material';
 import React, { useState, Fragment } from 'react';
-import axios from '../../app/api/axios';
 import EdiTableRow from './EditTruck/EditTableRow';
 import TruckRowList from './TruckRowList';
+import { useDispatch, useSelector } from 'react-redux';
+import { initEditTruck } from '../../containers/truck/editTruck/store/actions';
+import { initDeleteTruck } from '../../containers/truck/deleteTruck/store/actions';
+import { initGetListTruck } from '../../containers/truck/truckList/store/actions';
 
-const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
-
+const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableContainerClasses}`]: {
+            ".MuiFormLabel-root.Mui-focused": {
+                color: '#ffb300'
+            },
+            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                borderColor: '#ffb300',
+            }
+        },
+        [`&.${tableRowClasses.body}`]: {
+            ".MuiFormLabel-root.Mui-focused": {
+                color: '#ffc107'
+            },
+            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                borderColor: '#ffc107',
+            },
+        },
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.warning.light,
             color: theme.palette.common.white,
@@ -16,22 +34,18 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
             fontSize: "14px",
             color: "#616161",
             backgroundColor: "white"
-        },
+        }
     }));
 
-    const [truckUpdateData, setTruckUpdateData] = useState({
-        truck_plate: "",
-        truck_type: "",
-        cargo_type: "",
-        driver: "",
-        price: "",
-        dimension: "",
-        parking_address: "",
-        production_year: "",
-        status: ""
-    });
+    const dispatch = useDispatch();
+    const { deletingTruck } = useSelector(state => state.DeleteTruckReducer);
+    const { fetchingTruckData } = useSelector(state => state.EditTrucksReducer);
 
+    // useEffect(() => {
+    //     dispatch(initGetListTruck());
+    // }, [])
 
+    const [truckUpdateData, setTruckUpdateData] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -55,7 +69,7 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
         setTruckUpdateData(newFormData);
     };
 
-    const handleUpdateTruck = async (id) => {
+    const handleUpdateTruck = (id) => {
         const updatedTruck = {
             id: editTruckId,
             truck_plate: truckUpdateData?.truck_plate,
@@ -68,116 +82,111 @@ const TableList = ({ trucks, handleDelete, setTrucks, cargoType, drivers }) => {
             production_year: truckUpdateData?.production_year,
             status: truckUpdateData?.status
         };
-        try {
-            const response = await axios.put(`/trucks/${id}`, updatedTruck);
-            setTrucks(trucks.map(
-                truck => truck.id === id ?
-                    { ...response.data } : truck));
-            setEditTruckId(null);
-        } catch (err) {
-            console.log(`Error: ${err.message}`);
-        };
+        dispatch(initEditTruck({ updatedTruck, id }));
+        dispatch(initGetListTruck());
+        setEditTruckId(null);
     };
 
-    const handleTruckEdit = (e, truck) => {
-        e.preventDefault();
-        setEditTruckId(truck.id);
 
+    const handleTruckEdit = (e, trucksList) => {
+        e.preventDefault();
+        setEditTruckId(trucksList.id);
         const formValues = {
-            truck_plate: truck.truck_plate,
-            truck_type: truck.truck_type,
-            cargo_type: truck.cargo_type,
-            driver: truck.driver,
-            price: truck.price,
-            dimension: truck.dimension,
-            parking_address: truck.parking_address,
-            production_year: truck.production_year,
-            status: truck.status
+            truck_plate: trucksList.truck_plate,
+            truck_type: trucksList.truck_type,
+            cargo_type: trucksList.cargo_type,
+            driver: trucksList.driver,
+            dimension: trucksList.dimension,
+            parking_address: trucksList.parking_address,
+            production_year: trucksList.production_year,
+            status: trucksList.status
         };
         setTruckUpdateData(formValues);
     };
 
     const handleTruckCancel = () => {
         setEditTruckId(null);
-    };
+    }
+
+    const handleDelete = (id) => {
+        dispatch(initDeleteTruck(id));
+        dispatch(initGetListTruck(id));
+    }
 
     return (
-        <Box>
-            <Paper>
-                <TableContainer sx={{
-                    ".MuiFormLabel-root.Mui-focused": {
-                        color: '#ffb300'
-                    },
-                    '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                        borderColor: '#ffb300',
-                    }
-                }}>
-                    <Table trucks={trucks} >
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell > Truck Plate </StyledTableCell >
-                                <StyledTableCell > Cargo Type </StyledTableCell >
-                                <StyledTableCell > Driver </StyledTableCell >
-                                <StyledTableCell > Truck Type </StyledTableCell >
-                                <StyledTableCell > Dimension </StyledTableCell >
-                                <StyledTableCell > Parking Address </StyledTableCell >
-                                <StyledTableCell > Production Year </StyledTableCell >
-                                <StyledTableCell > Status </StyledTableCell >
-                                <StyledTableCell > Action </StyledTableCell >
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {trucks
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((truck) => (
-                                    <TableRow key={truck.id}
-                                        sx={{
-                                            ".MuiFormLabel-root.Mui-focused": {
-                                                color: '#ffc107'
-                                            },
-                                            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                                                borderColor: '#ffc107',
-                                            },
-
-                                        }}
-                                    >
-                                        <Fragment>
-                                            {editTruckId === truck.id ? (
-                                                <EdiTableRow
-                                                    truckUpdateData={truckUpdateData}
-                                                    handleTruckChange={handleTruckChange}
-                                                    handleTruckCancel={handleTruckCancel}
-                                                    truck={truck}
-                                                    handleUpdateTruck={handleUpdateTruck}
-                                                    cargoType={cargoType}
-                                                    drivers={drivers}
-                                                />
-                                            ) : (
-                                                <TruckRowList
-                                                    truck={truck}
-                                                    handleDelete={handleDelete}
-                                                    handleTruckCancel={handleTruckCancel}
-                                                    handleTruckEdit={handleTruckEdit}
-                                                    StyledTableCell={StyledTableCell}
-                                                />
-                                            )}
-                                        </Fragment>
+        (isTrucksDataFetching ?
+            <CircularProgress sx={{ color: "#ffc107" }} />
+            :
+            <Box>
+                <Paper>
+                    <TableContainer sx={{
+                        ".MuiFormLabel-root.Mui-focused": {
+                            color: '#ffb300'
+                        },
+                        '& .MuiOutlinedInput-root.Mui-focused fieldset': {
+                            borderColor: '#ffb300',
+                        }
+                    }}>
+                        <FormControl>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell > Truck Plate </StyledTableCell >
+                                        <StyledTableCell > Cargo Type </StyledTableCell >
+                                        <StyledTableCell > Driver </StyledTableCell >
+                                        <StyledTableCell > Truck Type </StyledTableCell >
+                                        <StyledTableCell > Dimension </StyledTableCell >
+                                        <StyledTableCell > Parking Address </StyledTableCell >
+                                        <StyledTableCell > Production Year </StyledTableCell >
+                                        <StyledTableCell > Status </StyledTableCell >
+                                        <StyledTableCell > Action </StyledTableCell >
                                     </TableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    count={trucks.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    sx={{ color: "#ffa000" }}
-                />
-            </Paper >
-        </Box >
+                                </TableHead>
+                                <TableBody>
+                                    {trucksList && trucksList
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((truck) => (
+                                            <TableRow key={truck.id}>
+                                                <Fragment>
+                                                    {editTruckId === truck.id ? (
+                                                        <EdiTableRow
+                                                            truckUpdateData={truckUpdateData}
+                                                            setTruckUpdateData={setTruckUpdateData}
+                                                            handleTruckChange={handleTruckChange}
+                                                            handleTruckCancel={handleTruckCancel}
+                                                            truck={truck}
+                                                            handleUpdateTruck={handleUpdateTruck}
+                                                            cargoTypes={cargoTypes}
+                                                            drivers={drivers}
+                                                        />
+                                                    ) : (
+                                                        <TruckRowList
+                                                            truck={truck}
+                                                            handleDelete={handleDelete}
+                                                            handleTruckCancel={handleTruckCancel}
+                                                            handleTruckEdit={handleTruckEdit}
+                                                            StyledTableCell={StyledTableCell}
+                                                        />
+                                                    )}
+                                                </Fragment>
+                                            </TableRow>
+                                        ))}
+                                </TableBody>
+                            </Table>
+                        </FormControl>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        count={trucksList.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                        sx={{ color: "#ffa000" }}
+                    />
+                </Paper >
+            </Box >
+        )
     );
 };
 

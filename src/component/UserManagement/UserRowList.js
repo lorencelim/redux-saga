@@ -1,40 +1,27 @@
-import { Delete, Edit } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import React from 'react'
+import { Delete, Edit } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import React from "react";
 
-const TruckRowList = ({ truck, handleDelete, handleTruckEdit, StyledTableCell }) => {
+
+
+const UserRowList = ({ user, handleUserDelete, handleUserEdit, StyledTableCell }) => {
+
+    // usedispatch method
     return (
         <>
-            <StyledTableCell>
-                {truck.truck_plate}
+            {/* {isNotesDataFetching ? <CircularProgress /> : null} */}
+            <StyledTableCell sx={{width:"502px"}} >
+                {user.username}
             </StyledTableCell>
-            <StyledTableCell sx={{ width: "200px" }}>
-                {truck.cargo_type}
+            <StyledTableCell sx={{width:"502px"}} >
+                {user.designation}
             </StyledTableCell>
-            <StyledTableCell>
-                {truck.driver}
-            </StyledTableCell>
-            <StyledTableCell>
-                {truck.truck_type}
-            </StyledTableCell>
-            <StyledTableCell>
-                {truck.dimension}
-            </StyledTableCell>
-            <StyledTableCell>
-                {truck.parking_address}
-            </StyledTableCell>
-            <StyledTableCell>
-                {truck.production_year}
-            </StyledTableCell>
-            <StyledTableCell>
-                {truck.status}
-            </StyledTableCell>
-            <StyledTableCell>
+            <StyledTableCell >
                 <IconButton
                     aria-label="edit"
                     sx={{ color: "#ffb300" }}
                     type="button"
-                    onClick={(e) => handleTruckEdit(e, truck)}
+                    onClick={(e) => handleUserEdit(e, user)}
                 >
                     <Edit />
                 </IconButton>
@@ -42,13 +29,13 @@ const TruckRowList = ({ truck, handleDelete, handleTruckEdit, StyledTableCell })
                     arial-label="delete"
                     sx={{ color: "#ffb300" }}
                     type="button"
-                    onClick={() => handleDelete(truck.id)}
+                    onClick={() => handleUserDelete(user.id)}
                 >
                     <Delete />
                 </IconButton>
             </StyledTableCell>
         </>
-    )
-}
+    );
+};
 
-export default TruckRowList;
+export default UserRowList;

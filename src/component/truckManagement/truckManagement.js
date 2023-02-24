@@ -2,57 +2,31 @@ import { useEffect } from "react";
 import TableList from "./TableList";
 import { useState } from "react";
 import SearchTruck from "./SearchTruck";
-import axios from "../../app/api/axios";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { initGetListTruck } from "../../containers/truck/truckList/store/actions";
 
-const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
+const TruckManagement = ({ cargoTypes, drivers, theme
 }) => {
 
+  const dispatch = useDispatch();
+  const { trucksList, isTrucksDataFetching } = useSelector(state => state.TrucksListReducer);
   const [search, setSearch] = useState('');
   const searchKeys = [
     "truck_plate",
     "truck_type",
     "cargo_type",
     "driver",
-    "price",
     "dimension",
     "parking_address",
     "production_year",
     "status"
   ]
 
-  const logout = () => {
-    localStorage.clear();
-  }
-
   useEffect(() => {
-    const fetchTrucks = async () => {
-      try {
-        const response = await axios.get('/trucks');
-        setTrucks(response.data);
-      } catch (err) {
-        if (err.response) {
-          console.log(err.response.data);
-        } else {
-          console.log(`Error: ${err.message}`);
-        }
-      }
-    }
-    setTimeout(() => {
-      fetchTrucks();
-    }, 100);
-  }, [setTrucks]);
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`trucks/${id}`);
-      const listTrucks = trucks.filter(truck => truck.id !== id);
-      setTrucks(listTrucks);
-    } catch (err) {
-      console.log(`Error: ${err.message}`);
-    }
-  }
+    dispatch(initGetListTruck());
+  }, [])
 
   return (
     <Grid
@@ -63,32 +37,34 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
       justifyContent="center"
       sx={{ mt: 1 }}
     >
-      <Grid item>
-        <Link style={{ textDecoration: 'none' }} to="/SignIn">
-          <Button
-            variant="outlined"
-            color="primary"
-            theme={theme}
-            sx={{
-              mt: 1,
-              '&:hover': {
-                color: '#ff6f00'
-              }
-            }}
-            onClick={logout}
-          >
-            Sign Out
-          </Button>
-        </Link>
+      <Grid item sx={{ my: 2 }}>
+        <Typography variant="h3" sx={{color:"#ff6f00"}}>Truck Management</Typography>
+      </Grid>
+      <Grid item sx={{ my: 2 }}>
+        <SearchTruck
+          search={search}
+          setSearch={setSearch}
+        />
       </Grid>
       <Grid item>
-        <Link style={{ textDecoration: 'none' }} to="/AddTruck">
+        {trucksList.length ? (
+          <TableList
+            trucksList={trucksList.filter((truck) =>
+              searchKeys.some((searchKey) => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
+            isTrucksDataFetching={isTrucksDataFetching}
+            theme={theme}
+            cargoTypes={cargoTypes}
+            drivers={drivers}
+          />
+        ) : null}
+      </Grid>
+      <Grid item sx={{ my: 2 }}>
+        <Link style={{ textDecoration: 'none' }} to={`/${localStorage.getItem("user-Info")}/AddTruck`}>
           <Button
             variant="contained"
             color="primary"
             theme={theme}
             sx={{
-              m: 1,
               '&:hover': {
                 backgroundColor: '#ff6f00'
               }
@@ -97,25 +73,6 @@ const TruckManagement = ({ trucks, setTrucks, cargoType, drivers, theme
             Add Truck
           </Button>
         </Link>
-      </Grid>
-      <Grid item>
-        <SearchTruck
-          search={search}
-          setSearch={setSearch}
-        />
-      </Grid>
-      <Grid item>
-        {trucks.length ? (
-          <TableList
-            trucks={trucks.filter((truck) =>
-              searchKeys.some(searchKey => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
-            handleDelete={handleDelete}
-            setTrucks={setTrucks}
-            theme={theme}
-            cargoType={cargoType}
-            drivers={drivers}
-          />
-        ) : null}
       </Grid>
     </Grid>
   );

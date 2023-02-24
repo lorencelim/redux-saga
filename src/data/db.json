@@ -1,234 +1,57 @@
 {
   "users": [
     {
+      "id": 1,
       "username": "abc",
       "password": "aA2$",
-      "designation": "Admin",
-      "id": 1
+      "designation": "Admin"
     },
     {
+      "id": 2,
       "username": "efg",
       "password": "bB2$",
-      "designation": "Management",
-      "id": 2
+      "designation": "Management"
+    },
+    {
+      "id": 3,
+      "username": "123",
+      "password": "bB2$",
+      "designation": "Management"
     }
   ],
   "trucks": [
     {
-      "id": 5,
-      "truck_plate": "Test 1",
+      "id": 1,
+      "truck_plate": "03A-12398",
       "truck_type": "Test 1",
-      "cargo_type": "qwe",
-      "driver": "op[",
-      "price": "123",
-      "dimension": "123",
-      "parking_address": "123",
-      "production_year": "123",
-      "status": "123"
-    },
-    {
-      "id": 6,
-      "truck_plate": "03A-12398",
-      "truck_type": "222",
-      "cargo_type": "Vegetables",
-      "driver": "Nguyễn Văn A",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 7,
-      "truck_plate": "03A-12398",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "abc",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 8,
-      "truck_plate": "03A-12398",
-      "truck_type": "uil",
-      "cargo_type": "op[",
-      "driver": "qwe",
-      "price": "123",
-      "dimension": "123",
-      "parking_address": "123",
-      "production_year": "123",
-      "status": "123"
-    },
-    {
-      "id": 9,
-      "truck_plate": "03A-12398",
-      "truck_type": "222",
-      "cargo_type": "Vegetables",
-      "driver": "Nguyễn Văn A",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 10,
-      "truck_plate": "03A-12398",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "abc",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 11,
-      "truck_plate": "03A-12398",
-      "truck_type": "uil",
-      "cargo_type": "op[",
-      "driver": "qwe",
-      "price": "123",
-      "dimension": "123",
-      "parking_address": "123",
-      "production_year": "123",
-      "status": "123"
-    },
-    {
-      "id": 12,
-      "truck_plate": "03A-12398",
-      "truck_type": "222",
-      "cargo_type": "Vegetables",
-      "driver": "Nguyễn Văn A",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "222",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 13,
-      "truck_plate": "03A-12398",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "abc",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 14,
-      "truck_plate": "03A-12398",
-      "truck_type": "uil",
-      "cargo_type": "op[",
-      "driver": "qwe",
-      "price": "123",
-      "dimension": "123",
-      "parking_address": "123",
-      "production_year": "123",
-      "status": "123"
-    },
-    {
-      "id": 15,
-      "truck_plate": "03A-12398",
-      "truck_type": "222",
-      "cargo_type": "Vegetables",
-      "driver": "Nguyễn Văn A",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "id": 16,
-      "truck_plate": "03A-12398",
-      "truck_type": "123",
-      "cargo_type": "abc",
-      "driver": "abc",
-      "price": "abc",
-      "dimension": "abc",
-      "parking_address": "abc",
-      "production_year": "abc",
-      "status": "abc"
-    },
-    {
-      "truck_plate": "03A-12398",
-      "cargo_type": "Electronics",
+      "cargo_type": "Electronics, Kid Toys",
       "driver": "Nguyễn Văn B",
-      "truck_type": "Test 1",
-      "price": "Test 1",
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 18
+      "status": "Test 1"
     },
     {
+      "id": 2,
       "truck_plate": "03A-12398",
-      "cargo_type": "Computer",
-      "driver": "Nguyễn Văn A",
       "truck_type": "Test 1",
-      "price": "Test 1",
-      "dimension": "Test 1",
-      "parking_address": "Test 1",
-      "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 19
-    },
-    {
-      "truck_plate": "03A-12398",
-      "cargo_type": "Vegetables, Computer, Electronics, Kid Toys, Chairs, Tables, Fruits, Wires, Ices, Animals",
-      "driver": "Nguyễn Văn A",
-      "truck_type": "Test 1",
-      "price": "Test 1",
-      "dimension": "Test 1",
-      "parking_address": "Test 1",
-      "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 20
-    },
-    {
-      "truck_plate": "03A-12398",
-      "cargo_type": "Computer, Fruits",
+      "cargo_type": "Electronics, Kid Toys",
       "driver": "Nguyễn Văn B",
-      "truck_type": "Test 1",
-      "price": "Test 1",
-      "dimension": "Test 1",
-      "parking_address": "123",
-      "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 21
-    },
-    {
-      "truck_plate": "03A-12398",
-      "cargo_type": "Electronics, Wires",
-      "driver": "Nguyễn Văn C",
-      "truck_type": "Test 1",
-      "price": "Test 1",
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 22
+      "status": "Test 1"
     },
     {
+      "id": 3,
       "truck_plate": "03A-12398",
-      "cargo_type": "Electronics",
+      "truck_type": "Test 1",
+      "cargo_type": "Electronics, Kid Toys",
       "driver": "Nguyễn Văn B",
-      "truck_type": "Test 1",
-      "price": "Test 1",
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 23
+      "status": "Test 1"
     }
   ],
   "items": [
@@ -253,58 +76,34 @@
   ],
   "NotesList": [
     {
-      "id": 1,
-      "name": "poi"
+      "abc": "123",
+      "efg": "123",
+      "id": 64
     },
     {
-      "id": 2
+      "abc": "123",
+      "efg": "123",
+      "id": 13
     },
     {
-      "id": 3
+      "abc": "123",
+      "efg": "123",
+      "id": 7
     },
     {
-      "name": "asdasd",
-      "id": 75
+      "abc": "123",
+      "efg": "123",
+      "id": 62
     },
     {
-      "name": "123",
-      "id": 55
+      "abc": "abc",
+      "efg": "123",
+      "id": 77
     },
     {
-      "name": "jkl",
-      "id": 82
-    },
-    {
-      "name": "zxc",
-      "id": 27
-    },
-    {
-      "name": "qwe",
-      "id": 53
-    },
-    {
-      "name": "time to sleep",
-      "id": 47
-    },
-    {
-      "name": "987",
-      "id": 81
-    },
-    {
-      "name": "654",
-      "id": 58
-    },
-    {
-      "name": "654",
-      "id": 44
-    },
-    {
-      "name": "98765432111",
-      "id": 37
-    },
-    {
-      "name": "qwer",
-      "id": 20
+      "abc": "abc",
+      "efg": "123",
+      "id": 84
     }
   ]
 }

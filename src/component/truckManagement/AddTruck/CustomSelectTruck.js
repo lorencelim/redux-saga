@@ -1,10 +1,11 @@
 import { useField } from "formik";
 import { Autocomplete, TextField } from '@mui/material';
 
-function CustomSelectTruck({ placeholder, ...props }) {
-    const [field, { touched, error }, { setValue, setTouched }] = useField(props.field.name);
+function CustomSelectTruck({ placeholder,truck,setTruck, ...props }) {
+    const [field, {touched, error }, { setValue, setTouched }] = useField(props.field.name);
     const onChange = (e, value) => {
         setValue(value);
+        setTruck({...truck,[field.name]: value.value});
     };
 
     return (
