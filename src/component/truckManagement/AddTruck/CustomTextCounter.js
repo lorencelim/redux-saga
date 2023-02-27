@@ -5,7 +5,6 @@ const CustomTextCounter = ({  truck, setTruck, ...props }) => {
     const [field, meta, { setValue }] = useField(props.field.name);
     const parkingWordLimit = 200;
     const handleOnChange = (e) => {
-        console.log({[field.name]: e.target.value})
         setValue(e.target.value)
         setTruck({...truck,[field.name]: e.target.value})
     }
@@ -16,7 +15,6 @@ const CustomTextCounter = ({  truck, setTruck, ...props }) => {
                 sx={{ m: 1, width: 1 }}
                 {...field}
                 {...props}
-                
                 onChange={handleOnChange}
                 value={meta.value}
                 helperText={`${meta.value.length}/${parkingWordLimit}`}

@@ -2,17 +2,15 @@ import { useEffect } from "react";
 import TableList from "./TableList";
 import { useState } from "react";
 import SearchTruck from "./SearchTruck";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { initGetListTruck } from "../../containers/truck/truckList/store/actions";
 
-const TruckManagement = ({ cargoTypes, drivers, theme
-}) => {
-
+const TruckManagement = ({ theme }) => {
   const dispatch = useDispatch();
   const { trucksList, isTrucksDataFetching } = useSelector(state => state.TrucksListReducer);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const searchKeys = [
     "truck_plate",
     "truck_type",
@@ -24,11 +22,23 @@ const TruckManagement = ({ cargoTypes, drivers, theme
     "status"
   ]
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(initGetListTruck());
   }, [])
 
   return (
+    (isTrucksDataFetching ? (
+      <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ mt: 1, height:"90vh"}}
+    >
+      <CircularProgress sx={{ color: "#ffc107" }} />
+      </Grid>
+    ) : (
     <Grid
       container
       spacing={0}
@@ -38,7 +48,7 @@ const TruckManagement = ({ cargoTypes, drivers, theme
       sx={{ mt: 1 }}
     >
       <Grid item sx={{ my: 2 }}>
-        <Typography variant="h3" sx={{color:"#ff6f00"}}>Truck Management</Typography>
+        <Typography variant="h3" sx={{ color: "#ff6f00" }}>Truck Management</Typography>
       </Grid>
       <Grid item sx={{ my: 2 }}>
         <SearchTruck
@@ -53,20 +63,18 @@ const TruckManagement = ({ cargoTypes, drivers, theme
               searchKeys.some((searchKey) => truck[searchKey].toLowerCase().includes(search.toLowerCase())))}
             isTrucksDataFetching={isTrucksDataFetching}
             theme={theme}
-            cargoTypes={cargoTypes}
-            drivers={drivers}
           />
         ) : null}
       </Grid>
       <Grid item sx={{ my: 2 }}>
-        <Link style={{ textDecoration: 'none' }} to={`/${localStorage.getItem("user-Info")}/AddTruck`}>
+        <Link style={{ textDecoration: "none" }} to={`/${localStorage.getItem("user-Info")}/AddTruck`}>
           <Button
             variant="contained"
             color="primary"
             theme={theme}
             sx={{
-              '&:hover': {
-                backgroundColor: '#ff6f00'
+              "&:hover": {
+                backgroundColor: "#ff6f00"
               }
             }}
           >
@@ -75,6 +83,7 @@ const TruckManagement = ({ cargoTypes, drivers, theme
         </Link>
       </Grid>
     </Grid>
+    ))
   );
 };
 

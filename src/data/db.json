@@ -4,19 +4,46 @@
       "id": 1,
       "username": "abc",
       "password": "aA2$",
-      "designation": "Admin"
+      "confirm_password": "aA2$",
+      "designation": "Management"
     },
     {
       "id": 2,
       "username": "efg",
       "password": "bB2$",
+      "confirm_password": "bB2$",
       "designation": "Management"
     },
     {
       "id": 3,
       "username": "123",
-      "password": "bB2$",
-      "designation": "Management"
+      "password": "123",
+      "confirm_password": "123",
+      "designation": "Admin"
+    },
+    {
+      "username": "qwe",
+      "password": "qwe",
+      "confirm_password": "qwe",
+      "id": 4
+    },
+    {
+      "username": "tyu",
+      "password": "tyu",
+      "confirm_password": "tyu",
+      "id": 5
+    },
+    {
+      "username": "jkl",
+      "password": "jkl",
+      "confirm_password": "jkl",
+      "id": 6
+    },
+    {
+      "username": "hjk",
+      "password": "hjk",
+      "confirm_password": "hjk",
+      "id": 7
     }
   ],
   "trucks": [
@@ -29,7 +56,7 @@
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 1"
+      "status": "Test 2"
     },
     {
       "id": 2,
@@ -52,58 +79,118 @@
       "parking_address": "Test 1",
       "production_year": "Test 1",
       "status": "Test 1"
+    },
+    {
+      "id": 4,
+      "truck_plate": "03A-12398",
+      "truck_type": "Test 1",
+      "cargo_type": "Computer, Vegetables",
+      "driver": "Nguyễn Văn B",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1"
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Computers, Electronics",
+      "driver": "Nguyễn Văn C",
+      "truck_type": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 5
+    },
+    {
+      "truck_plate": "03A-12398",
+      "cargo_type": "Computers, Kid Toys",
+      "driver": "Nguyễn Văn A",
+      "truck_type": "Test 1",
+      "dimension": "Test 1",
+      "parking_address": "Test 1",
+      "production_year": "Test 1",
+      "status": "Test 1",
+      "id": 6
     }
   ],
-  "items": [
+  "cargoTypeMaster": [
     {
       "id": 1,
-      "vehicle": "Car",
-      "checked": true,
-      "item": "Apple"
+      "value": "Computers",
+      "label": "Computers"
     },
     {
       "id": 2,
-      "vehicle": "Motor",
-      "checked": true,
-      "item": "Banana"
+      "value": "Electronics",
+      "label": "Electronics"
     },
     {
       "id": 3,
-      "vehicle": "Lorry",
-      "checked": false,
-      "item": "Table"
+      "value": "Vegetables",
+      "label": "Vegetables"
+    },
+    {
+      "id": 4,
+      "value": "Kid Toys",
+      "label": "Kid Toys"
+    },
+    {
+      "id": 5,
+      "value": "Chairs",
+      "label": "Chairs"
+    },
+    {
+      "id": 6,
+      "value": "Tables",
+      "label": "Tables"
+    },
+    {
+      "id": 7,
+      "value": "Fruits",
+      "label": "Fruits"
+    },
+    {
+      "id": 8,
+      "value": "Wires",
+      "label": "Wires"
+    },
+    {
+      "id": 9,
+      "value": "Ices",
+      "label": "Ices"
+    },
+    {
+      "id": 10,
+      "value": "shirts",
+      "label": "shirts"
+    },
+    {
+      "id": 11,
+      "value": "Masks",
+      "label": "Masks"
+    },
+    {
+      "id": 12,
+      "value": "Tiles",
+      "label": "Tiles"
     }
   ],
-  "NotesList": [
+  "drivers": [
     {
-      "abc": "123",
-      "efg": "123",
-      "id": 64
+      "id": 1,
+      "value": "Nguyễn Văn A",
+      "label": "Nguyễn Văn A"
     },
     {
-      "abc": "123",
-      "efg": "123",
-      "id": 13
+      "id": 2,
+      "value": "Nguyễn Văn B",
+      "label": "Nguyễn Văn B"
     },
     {
-      "abc": "123",
-      "efg": "123",
-      "id": 7
-    },
-    {
-      "abc": "123",
-      "efg": "123",
-      "id": 62
-    },
-    {
-      "abc": "abc",
-      "efg": "123",
-      "id": 77
-    },
-    {
-      "abc": "abc",
-      "efg": "123",
-      "id": 84
+      "id": 3,
+      "value": "Nguyễn Văn C",
+      "label": "Nguyễn Văn C"
     }
   ]
 }

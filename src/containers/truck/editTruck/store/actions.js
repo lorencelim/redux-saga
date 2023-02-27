@@ -1,10 +1,4 @@
-
-// action is simply a javascript function
-// type : mandatory
-// additional parameter that you can pass to that particular action
-
 import { EDITING_TRUCK_FAILED, EDITING_TRUCK_SUCCESSFULL, INIT_EDIT_TRUCK } from "./actionTypes";
-
 
 export function initEditTruck(truckDetail) {
     return {

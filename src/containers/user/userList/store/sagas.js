@@ -9,10 +9,8 @@ export default function* UsersListSaga() {
 
 function* getUsersListData() {
     yield put(initFetchingGetListUser());
-    // console.log(axios.get("/users"));
     try {
         const response = yield call(axios.get, "/users")
-        // console.log(response);
         if (response && response.status === 200) {
             const {data} = response;
             const createData = [];

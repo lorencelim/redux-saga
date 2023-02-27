@@ -1,7 +1,9 @@
-// all, fork from redux-saga
 import { all, fork } from "redux-saga/effects";
-import AddNotesSaga from "../containers/note/addNotes/store/sagas";
-import NotesListSaga from "../containers/note/notesList/store/sagas";
+import AddCargoSaga from "../containers/cargo/addCargo/store/sagas";
+import CargoListSaga from "../containers/cargo/cargoList/store/sagas";
+import DeleteCargoSaga from "../containers/cargo/deleteCargo/store/sagas";
+import EditCargoSaga from "../containers/cargo/editCargo/store/sagas";
+import DriverListSaga from "../containers/driver/driverList/store/sagas";
 import AddTrucksSaga from "../containers/truck/addTruck/store/sagas";
 import DeleteTruckSaga from "../containers/truck/deleteTruck/store/sagas";
 import EditTrucksSaga from "../containers/truck/editTruck/store/sagas";
@@ -13,8 +15,6 @@ import UsersListSaga from "../containers/user/userList/store/sagas";
 
 export default function* rootSaga() {
     yield all([
-        fork(AddNotesSaga),
-        fork(NotesListSaga),
         fork(AddTrucksSaga),
         fork(DeleteTruckSaga),
         fork(EditTrucksSaga),
@@ -22,6 +22,11 @@ export default function* rootSaga() {
         fork(AddUsersSaga),
         fork(DeleteUserSaga),
         fork(EditUsersSaga),
-        fork(UsersListSaga)
+        fork(UsersListSaga),
+        fork(AddCargoSaga),
+        fork(CargoListSaga),
+        fork(DeleteCargoSaga),
+        fork(EditCargoSaga),
+        fork(DriverListSaga)
     ]);
 }

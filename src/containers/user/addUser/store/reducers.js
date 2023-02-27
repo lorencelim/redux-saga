@@ -9,7 +9,6 @@ const initialState ={
 const AddUsersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SAVE_USERS_VALUE_SUCCESSFULL:
-            // console.log(action)
             return {
                 ...state,
                 success : action.success

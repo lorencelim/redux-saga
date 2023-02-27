@@ -9,14 +9,12 @@ const initialState = {
 const UsersListReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCHING_GET_LIST_USER:
-            // console.log(action);
             return {
                 ...state,
                 isUsersDataFetching: true
             }
 
         case FETCHING_GET_LIST_USER_SUCCESS:
-            // console.log(action)
             return {
                 ...state,
                 usersList : action.usersListData,

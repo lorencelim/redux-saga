@@ -11,7 +11,6 @@ export function initFetchingGetListUser(){
     }
 }
 export function initFetchingGetListUserSuccessfull(usersListData){
-    // console.log(usersListData);
     return{
         type : FETCHING_GET_LIST_USER_SUCCESS,
         usersListData

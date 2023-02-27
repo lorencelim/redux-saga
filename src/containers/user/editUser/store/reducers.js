@@ -9,13 +9,11 @@ const initialState = {
 const EditUserReducer = (state = initialState, action) => {
     switch (action.type) {
         case INIT_EDIT_USER:
-            console.log(action);
             return {
                 ...state,
                 fetchingUserData: action.userDetail
             };
         case EDITING_USER_SUCCESSFULL:
-            console.log(action)
             return {
                 ...state,
                 fetchingUserData: false

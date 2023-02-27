@@ -2,7 +2,6 @@ import { Check, Clear } from "@mui/icons-material";
 import { IconButton, TableCell, TextField } from "@mui/material";
 import React from "react";
 
-
 const UserEditTableRow = ({
   userUpdateData,
   handleUserChange,
@@ -21,6 +20,15 @@ const UserEditTableRow = ({
           name="username"
           value={userUpdateData.username}
           onChange={handleUserChange}
+        />
+      </TableCell>
+      <TableCell>
+        <TextField 
+          label="Password"
+          type="password"
+          required="required"
+          name="designation"
+          value={userUpdateData.password}
         />
       </TableCell>
       <TableCell>

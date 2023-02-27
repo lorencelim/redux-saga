@@ -1,28 +1,32 @@
-import { Box, CircularProgress, FormControl, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, tableContainerClasses, TableHead, TablePagination, TableRow, tableRowClasses } from '@mui/material';
-import React, { useState, Fragment } from 'react';
-import EdiTableRow from './EditTruck/EditTableRow';
-import TruckRowList from './TruckRowList';
-import { useDispatch, useSelector } from 'react-redux';
-import { initEditTruck } from '../../containers/truck/editTruck/store/actions';
-import { initDeleteTruck } from '../../containers/truck/deleteTruck/store/actions';
-import { initGetListTruck } from '../../containers/truck/truckList/store/actions';
+import { Box, CircularProgress, FormControl,
+    Paper, styled, Table, TableBody,
+    TableCell, tableCellClasses, TableContainer, 
+    tableContainerClasses, TableHead, 
+    TablePagination, TableRow, tableRowClasses } from "@mui/material";
+import React, { useState, Fragment } from "react";
+import EdiTableRow from "./EditTruck/EditTableRow";
+import TruckRowList from "./TruckRowList";
+import { useDispatch } from "react-redux";
+import { initEditTruck } from "../../containers/truck/editTruck/store/actions";
+import { initDeleteTruck } from "../../containers/truck/deleteTruck/store/actions";
+import { initGetListTruck } from "../../containers/truck/truckList/store/actions";
 
-const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) => {
+const TableList = ({ trucksList, isTrucksDataFetching }) => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableContainerClasses}`]: {
             ".MuiFormLabel-root.Mui-focused": {
-                color: '#ffb300'
+                color: "#ffb300"
             },
-            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                borderColor: '#ffb300',
+            "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                borderColor: "#ffb300",
             }
         },
         [`&.${tableRowClasses.body}`]: {
             ".MuiFormLabel-root.Mui-focused": {
-                color: '#ffc107'
+                color: "#ffc107"
             },
-            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                borderColor: '#ffc107',
+            "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                borderColor: "#ffc107",
             },
         },
         [`&.${tableCellClasses.head}`]: {
@@ -38,13 +42,6 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
     }));
 
     const dispatch = useDispatch();
-    const { deletingTruck } = useSelector(state => state.DeleteTruckReducer);
-    const { fetchingTruckData } = useSelector(state => state.EditTrucksReducer);
-
-    // useEffect(() => {
-    //     dispatch(initGetListTruck());
-    // }, [])
-
     const [truckUpdateData, setTruckUpdateData] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -69,7 +66,7 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
         setTruckUpdateData(newFormData);
     };
 
-    const handleUpdateTruck = (id) => {
+    const handleUpdateTruck = async(id) => {
         const updatedTruck = {
             id: editTruckId,
             truck_plate: truckUpdateData?.truck_plate,
@@ -82,8 +79,8 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
             production_year: truckUpdateData?.production_year,
             status: truckUpdateData?.status
         };
-        dispatch(initEditTruck({ updatedTruck, id }));
-        dispatch(initGetListTruck());
+        await dispatch(initEditTruck({ updatedTruck, id }));
+        await dispatch(initGetListTruck());
         setEditTruckId(null);
     };
 
@@ -108,9 +105,9 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
         setEditTruckId(null);
     }
 
-    const handleDelete = (id) => {
-        dispatch(initDeleteTruck(id));
-        dispatch(initGetListTruck(id));
+    const handleDelete = async(id) => {
+        await dispatch(initDeleteTruck(id));
+        await dispatch(initGetListTruck(id));
     }
 
     return (
@@ -121,10 +118,10 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
                 <Paper>
                     <TableContainer sx={{
                         ".MuiFormLabel-root.Mui-focused": {
-                            color: '#ffb300'
+                            color: "#ffb300"
                         },
-                        '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                            borderColor: '#ffb300',
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#ffb300",
                         }
                     }}>
                         <FormControl>
@@ -156,8 +153,6 @@ const TableList = ({ trucksList, isTrucksDataFetching, cargoTypes, drivers }) =>
                                                             handleTruckCancel={handleTruckCancel}
                                                             truck={truck}
                                                             handleUpdateTruck={handleUpdateTruck}
-                                                            cargoTypes={cargoTypes}
-                                                            drivers={drivers}
                                                         />
                                                     ) : (
                                                         <TruckRowList

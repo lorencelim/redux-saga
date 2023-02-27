@@ -1,6 +1,5 @@
 import { INIT_EDIT_TRUCK, EDITING_TRUCK_SUCCESSFULL, EDITING_TRUCK_FAILED } from "./actionTypes";
 
-
 const initialState = {
     fetchingTruckData: false,
     fetchingTruckDataFailed: false
@@ -9,7 +8,6 @@ const initialState = {
 const EditTrucksReducer = (state = initialState, action) => {
     switch (action.type) {
         case INIT_EDIT_TRUCK:
-            console.log(action);
             return {
                 ...state,
                 fetchingTruckData: action.truckDetail

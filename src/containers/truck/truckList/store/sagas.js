@@ -11,7 +11,6 @@ function* getTrucksListTruck() {
     yield put(initFetchingGetListTruck());
     try {
         const response = yield call(axios.get, "/Trucks")
-        // console.log(response);
         if (response && response.status === 200) {
             const {data} = response;
             const createData = [];

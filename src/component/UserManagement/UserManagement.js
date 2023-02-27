@@ -2,17 +2,15 @@ import { useEffect } from "react";
 import TableList from "./TableList";
 import { useState } from "react";
 import SearchUser from "./SearchUser";
-import { Button, Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { initGetListUser } from "../../containers/user/userList/store/actions";
 
-const UserManagement = ({ cargoTypes, drivers, theme
-}) => {
+const UserManagement = ({ theme }) => {
 
   const dispatch = useDispatch();
   const { usersList, isUsersDataFetching } = useSelector(state => state.UsersListReducer);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const searchKeys = [
     "username",
     "designation"
@@ -20,9 +18,21 @@ const UserManagement = ({ cargoTypes, drivers, theme
 
   useEffect(() => {
     dispatch(initGetListUser());
-  }, [])
+  }, [dispatch])
 
   return (
+    (isUsersDataFetching ? (
+      <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ mt: 1, height:"90vh"}}
+    >
+      <CircularProgress sx={{ color: "#ffc107" }} />
+      </Grid>
+    ) : (
     <Grid
       container
       spacing={0}
@@ -47,12 +57,11 @@ const UserManagement = ({ cargoTypes, drivers, theme
               searchKeys.some((searchKey) => user[searchKey].toLowerCase().includes(search.toLowerCase())))}
             isUsersDataFetching={isUsersDataFetching}
             theme={theme}
-            cargoTypes={cargoTypes}
-            drivers={drivers}
           />
         ) : null}
       </Grid>
     </Grid>
+    ))
   );
 };
 

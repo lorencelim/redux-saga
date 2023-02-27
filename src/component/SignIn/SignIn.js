@@ -1,49 +1,47 @@
-import { Button, CssBaseline, Grid, Paper, TextField, ThemeProvider, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { useEffect, useState, useRef } from 'react';
-import { Navigate } from 'react-router-dom';
-import axios from '../../app/api/axios';
-import { Link } from 'react-router-dom';
-
+import { Button, CssBaseline, Grid, Paper, TextField, ThemeProvider, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { useEffect, useState, useRef } from "react";
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { initGetListUser } from "../../containers/user/userList/store/actions";
 
 const SignIn = ({ theme }) => {
-    const SIGNIN_URL = '/users';
     const userRef = useRef();
     const errRef = useRef();
-
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
-    const [errMsg, setErrMsg] = useState('');
+    const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
+    const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-
+    const dispatch = useDispatch();
+    const { usersList } = useSelector(state => state.UsersListReducer);
+    
     useEffect(() => {
         userRef.current.focus();
     }, []);
 
     useEffect(() => {
-        setErrMsg('');
-    }, [user, password]);
+        setErrMsg("");
+    }, [user, password])
 
+    useEffect(() => {
+        dispatch(initGetListUser())
+    }, [dispatch])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            // const test = axios.get("/users/2")
-            // console.log(test.data)
-
-            const response = await axios.get(SIGNIN_URL + "/" + user);
-            // console.log(response.data.map(account => account.designation))
-            localStorage.setItem("user-Info", response.data.map(account => account.username));
-            localStorage.setItem("position", response.data.map(account => account.designation));
-            if (user === response.data.map(acc => acc.username).join("") && password === response.data.map(acc => acc.password).join("")) {
+            const userMatch = usersList.some(acc => acc.username === user && acc.password === password);
+            const filterUser = usersList.filter(acc => acc.username === user && acc.password === password);
+            if (userMatch) {
+                localStorage.setItem("user-Info", filterUser.map(acc => acc.username));
+                localStorage.setItem("designation", filterUser.map(acc => acc.designation));
                 setSuccess(true);
-            } else if (user !== response.data.username || password !== response.data.password) {
-                setErrMsg('Incorrect Username or Password');
+            } else if (!userMatch) {
+                setErrMsg("Incorrect Username And Password");
             }
         } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            }
+                setErrMsg("No Server Response");
             errRef.current.focus();
         }
     };
@@ -55,7 +53,7 @@ const SignIn = ({ theme }) => {
                     <Navigate to={`/${localStorage.getItem("user-Info")}/TruckManagement`} />
                 </Grid>
             ) : (
-                <Grid container component="main" sx={{ height: '100vh' }}>
+                <Grid container component="main" sx={{ height: "100vh" }}>
                     <CssBaseline />
                     <Grid
                         item
@@ -63,12 +61,12 @@ const SignIn = ({ theme }) => {
                         sm={4}
                         md={7}
                         sx={{
-                            backgroundImage: 'url(https://source.unsplash.com/random)',
-                            backgroundRepeat: 'no-repeat',
+                            backgroundImage: "url(https://source.unsplash.com/random)",
+                            backgroundRepeat: "no-repeat",
                             backgroundColor: (t) =>
-                                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
+                                t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
                         }}
                     />
                     <Grid
@@ -83,12 +81,18 @@ const SignIn = ({ theme }) => {
                             sx={{
                                 my: 8,
                                 mx: 4,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
                             }}
                         >
-                            <Typography ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive" sx={{ color: "red" }}>{errMsg}</Typography>
+                            <Typography
+                                ref={errRef}
+                                className={errMsg ? "errmsg" : "offscreen"}
+                                aria-live="assertive"
+                                sx={{ color: "red" }}>
+                                {errMsg}
+                            </Typography>
                             <Typography variant="h4" sx={{ color: "#ff6f00" }}>
                                 Sign In
                             </Typography>
@@ -128,8 +132,7 @@ const SignIn = ({ theme }) => {
                             <Grid item>
                                 <Typography variant="subtitle1"> Need an Account?</Typography>
                             </Grid>
-                            <Grid item>
-                                {/*put router link here*/}
+                            <Grid item >
                                 <Link to="/SignUp">Sign Up</Link>
                             </Grid>
                         </Box>
@@ -139,6 +142,5 @@ const SignIn = ({ theme }) => {
         </ThemeProvider>
     );
 };
-
 
 export default SignIn;

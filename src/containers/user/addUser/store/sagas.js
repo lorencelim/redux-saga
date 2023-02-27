@@ -1,4 +1,4 @@
-import axios from "../../../../app/api/axios" ;
+import axios from "../../../../app/api/axios";
 import { takeEvery, call, put } from "redux-saga/effects";
 import { INIT_SAVE_USERS_VALUE } from "./actionTypes";
 import { initSaveUsersValueFailed, initSaveUsersValueSuccessfull } from "./actions";
@@ -9,21 +9,21 @@ export default function* AddUsersSaga() {
 
 function* saveUsersSaga(action) {
     const headerParams = {
-        "content-type" : "application/json"
+        "content-type": "application/json"
     }
     const createFinalUsersData = {
-        Users: action.Users
-    } 
-    // console.log(createFinalUsersData);
+        Users: action.users
+    }
+    console.log(createFinalUsersData);
     try {
-        const response = yield call(axios.post,"/users", createFinalUsersData.Users, { headers: headerParams })
-        
-        if(response.status === 201){
-            yield put(initSaveUsersValueSuccessfull(true))
+        const response = yield call(axios.post, "/users", createFinalUsersData.Users, { headers: headerParams })
+        if (response.status === 201) {
+            yield put(initSaveUsersValueSuccessfull(true));
+            alert("Account Successfully Created");
         }
-        // console.log(response);
     } catch (err) {
         yield put(initSaveUsersValueFailed(true))
+        alert("Server down, please try it again later");
     }
 }
 

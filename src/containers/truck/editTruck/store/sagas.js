@@ -10,7 +10,6 @@ export default function* EditTrucksSaga() {
 function* editTrucksSaga({truckDetail: {id, updatedTruck: truck}}) {
     try {
         const response = yield call(axios.put, `/Trucks/${id}`, truck)
-        console.log(response)
             if (response.status === 200) {
                 yield put(initEditingTruckDataSuccessful(true))
             }

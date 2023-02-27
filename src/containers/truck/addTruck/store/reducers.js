@@ -1,6 +1,5 @@
 import { SAVE_TRUCKS_VALUE_SUCCESSFULL, SAVE_TRUCKS_VALUE_FAILED } from "./actionTypes";
 
-
 const initialState ={
     success : false,
     failed : false

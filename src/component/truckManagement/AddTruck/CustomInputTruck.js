@@ -3,11 +3,7 @@ import { useField } from "formik";
 
 const CustomInputTruck = ({ setTruck, truck, ...props }) => {
     const [field, meta, {setValue}] = useField(props.field.name);
-    // console.log("field", field);
-    // console.log("meta", meta);
-
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         setValue(e.target.value)
         setTruck({...truck, [field.name]: e.target.value})
     }

@@ -2,18 +2,17 @@ import { Delete, Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React from "react";
 
-
-
 const UserRowList = ({ user, handleUserDelete, handleUserEdit, StyledTableCell }) => {
-
-    // usedispatch method
     return (
         <>
             {/* {isNotesDataFetching ? <CircularProgress /> : null} */}
-            <StyledTableCell sx={{width:"502px"}} >
+            <StyledTableCell sx={{ width: "325px" }} >
                 {user.username}
             </StyledTableCell>
-            <StyledTableCell sx={{width:"502px"}} >
+            <StyledTableCell sx={{ width: "325px" }} >
+                ********
+            </StyledTableCell>
+            <StyledTableCell sx={{ width: "325px" }} >
                 {user.designation}
             </StyledTableCell>
             <StyledTableCell >

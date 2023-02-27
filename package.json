@@ -31,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "db": " json-server -w src/data/db.json -p 3001 -r src/data/routes.json"
+    "db": "json-server -w src/data/db.json -p 3001"
   },
   "eslintConfig": {
     "extends": [

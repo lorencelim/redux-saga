@@ -15,7 +15,6 @@ const TrucksListReducer = (state = initialState, action) => {
             }
 
         case FETCHING_GET_LIST_TRUCK_SUCCESS:
-            // console.log(action)
             return {
                 ...state,
                 trucksList : action.trucksListData,

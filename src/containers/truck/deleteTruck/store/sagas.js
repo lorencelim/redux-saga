@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "../../../../app/api/axios" ;
 import { initDeleteTruck, initDeteleTruckSuccessfull } from "./actions";
 import { INIT_DELETE_TRUCK } from "./actionTypes";
@@ -8,7 +8,6 @@ export default function* DeleteTruckSaga() {
 }
 
 function* getTrucksListData({id}) {
-    // console.log(payload)
     try{
         const response = yield call(axios.delete, `/Trucks/${id}`)
         if(response.status === 200){

@@ -1,6 +1,5 @@
 import { EDITING_USER_FAILED, EDITING_USER_SUCCESSFULL, INIT_EDIT_USER } from "./actionTypes";
 
-
 export function initEditUser(userDetail) {
     return {
         type: INIT_EDIT_USER,

@@ -1,10 +1,4 @@
-
-// action is simply a javascript function
-// type : mandatory
-// additional parameter that you can pass to that particular action
-
 import { INIT_SAVE_TRUCKS_VALUE, SAVE_TRUCKS_VALUE_SUCCESSFULL, SAVE_TRUCKS_VALUE_FAILED } from "./actionTypes";
-
 
 export function initSaveTrucksValue(trucks) {
     return {

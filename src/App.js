@@ -1,47 +1,26 @@
-import React, { useState } from 'react';
-import SignIn from './component/SignIn/SignIn';
-import SignUp from './component/SignUp/SignUp';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import TruckManagement from './component/TruckManagement/TruckManagement';
-import UserManagement from './component/UserManagement/UserManagement';
-import AddTruck from './component/TruckManagement/AddTruck/AddTruck';
-import { createTheme } from '@mui/material';
-import Abc from './Abc';
-import User from './component/User/User';
-import Account from './component/UserSetting/Account';
+import React from "react";
+import SignIn from "./component/SignIn/SignIn";
+import SignUp from "./component/SignUp/SignUp";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import TruckManagement from "./component/TruckManagement/TruckManagement";
+import UserManagement from "./component/UserManagement/UserManagement";
+import AddTruck from "./component/TruckManagement/AddTruck/AddTruck";
+import { createTheme } from "@mui/material";
+import Account from "./component/Account/Account";
+import Navbar from "./component/Navbar/Navbar";
+import AddCargo from "./component/Cargo/AddCargo/AddCargo";
+import CargoManagement from "./component/Cargo/CargoManagement";
 
 function App() {
-
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#ff8f00',
-        contrastText: 'white'
+        main: "#ff8f00",
+        contrastText: "white"
       }
     }
   });
-
   const username = localStorage.getItem("user-Info");
-
-  const cargoTypes = [
-    { value: "Computer", label: "Computer" },
-    { value: "Electronics", label: "Electronics" },
-    { value: "Vegetables", label: "Vegetables" },
-    { value: "Kid Toys", label: "Kid Toys" },
-    { value: "Chairs", label: "Chairs" },
-    { value: "Tables", label: "Tables" },
-    { value: "Fruits", label: "Fruits" },
-    { value: "Wires", label: "Wires" },
-    { value: "Ices", label: "Ices" },
-    { value: "Animals", label: "Animals" },
-    { value: "Masks", label: "Masks" }
-  ];
-
-  const drivers = [
-    { value: "Nguyễn Văn A", label: "Nguyễn Văn A" },
-    { value: "Nguyễn Văn B", label: "Nguyễn Văn B" },
-    { value: "Nguyễn Văn C", label: "Nguyễn Văn C" }
-  ];
 
   return (
     <BrowserRouter>
@@ -56,35 +35,31 @@ function App() {
             )
           } />
         <Route
-          path='/SignIn'
+          path="/SignIn"
           element={<SignIn
             theme={theme}
           />}
         />
         <Route
-          path='/SignUp'
+          path="/SignUp"
           element={<SignUp
             theme={theme}
           />}
         />
         <Route
           path={`/${localStorage.getItem("user-Info")}`}
-          element={<User
+          element={<Navbar
             theme={theme}
           />} >
           <Route
             path={`/${localStorage.getItem("user-Info")}/TruckManagement`}
             element={
               <TruckManagement
-                cargoTypes={cargoTypes}
-                drivers={drivers}
                 theme={theme}
               />} />
           <Route path={`/${localStorage.getItem("user-Info")}/AddTruck`}
             element={
               <AddTruck
-                cargoTypes={cargoTypes}
-                drivers={drivers}
                 theme={theme}
               />
             }
@@ -93,7 +68,18 @@ function App() {
             path={`/${localStorage.getItem("user-Info")}/UserManagement`}
             element={
               <UserManagement
-
+              />} />
+          <Route
+            path={`/${localStorage.getItem("user-Info")}/CargoManagement`}
+            element={
+              <CargoManagement
+              theme={theme}
+              />} />
+          <Route
+            path={`/${localStorage.getItem("user-Info")}/AddCargo`}
+            element={
+              <AddCargo
+              theme={theme}
               />} />
           <Route
             path={`/${localStorage.getItem("user-Info")}/Account`}
@@ -102,12 +88,6 @@ function App() {
                 theme={theme}
               />} />
         </Route>
-        <Route
-          path='/abc'
-          element={<Abc
-            theme={theme}
-          />}
-        />
       </Routes>
     </BrowserRouter>
   );

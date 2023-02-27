@@ -1,29 +1,33 @@
-import { Box, CircularProgress, FormControl, Paper, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, tableContainerClasses, TableHead, TablePagination, TableRow, tableRowClasses } from '@mui/material';
-import React, { useState, Fragment } from 'react';
-import UserEditTableRow from './EditUser/UserEditTableRow';
-import UserRowList from './UserRowList';
-import { useDispatch, useSelector } from 'react-redux';
-import { initDeleteUser } from '../../containers/user/deleteUser/store/actions';
-import { initGetListUser } from '../../containers/user/userList/store/actions';
-import { initEditUser } from '../../containers/user/editUser/store/actions';
+import { Box, CircularProgress, FormControl, 
+    Paper, styled, Table, TableBody, 
+    TableCell, tableCellClasses, TableContainer, 
+    tableContainerClasses, TableHead, TablePagination, 
+    TableRow, tableRowClasses } from "@mui/material";
+import React, { useState, Fragment } from "react";
+import UserEditTableRow from "./EditUser/UserEditTableRow";
+import UserRowList from "./UserRowList";
+import { useDispatch } from "react-redux";
+import { initDeleteUser } from "../../containers/user/deleteUser/store/actions";
+import { initGetListUser } from "../../containers/user/userList/store/actions";
+import { initEditUser } from "../../containers/user/editUser/store/actions";
 
-const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
+const TableList = ({ usersList, isUsersDataFetching }) => {
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableContainerClasses}`]: {
             ".MuiFormLabel-root.Mui-focused": {
-                color: '#ffb300'
+                color: "#ffb300"
             },
-            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                borderColor: '#ffb300',
+            "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                borderColor: "#ffb300",
             }
         },
         [`&.${tableRowClasses.body}`]: {
             ".MuiFormLabel-root.Mui-focused": {
-                color: '#ffc107'
+                color: "#ffc107"
             },
-            '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                borderColor: '#ffc107',
+            "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                borderColor: "#ffc107",
             }
         },
         [`&.${tableCellClasses.head}`]: {
@@ -37,11 +41,8 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
             backgroundColor: "white",
         }
     }));
-
+    
     const dispatch = useDispatch();
-    const { deletingUser } = useSelector(state => state.DeleteUserReducer);
-    const { fetchingUserData } = useSelector(state => state.EditUserReducer);
-    console.log(fetchingUserData);
     const [userUpdateData, setUserUpdateData] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -66,23 +67,24 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
         setUserUpdateData(newFormData);
     };
 
-    const handleUpdateUser = (id) => {
+    const handleUpdateUser = async(id) => {
         const updatedUser = {
             id: editUserId,
             username: userUpdateData?.username,
+            password: userUpdateData?.password,
             designation: userUpdateData?.designation
         };
-        dispatch(initEditUser({ id, updatedUser }));
-        dispatch(initGetListUser());
+        await dispatch(initEditUser({ id, updatedUser }));
+        await dispatch(initGetListUser({ id, updatedUser }));
         setEditUserId(null);
     };
-
 
     const handleUserEdit = (e, usersList) => {
         e.preventDefault();
         setEditUserId(usersList.id);
         const formValues = {
             username: usersList.username,
+            password: usersList.password,
             designation: usersList.designation
         };
         setUserUpdateData(formValues);
@@ -92,9 +94,9 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
         setEditUserId(null);
     }
 
-    const handleUserDelete = (id) => {
-        dispatch(initDeleteUser(id));
-        dispatch(initGetListUser(id));
+    const handleUserDelete = async(id) => {
+        await dispatch(initDeleteUser(id));
+        await dispatch(initGetListUser(id));
     }
 
     return (
@@ -105,10 +107,10 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
                 <Paper>
                     <TableContainer sx={{
                         ".MuiFormLabel-root.Mui-focused": {
-                            color: '#ffb300'
+                            color: "#ffb300"
                         },
-                        '& .MuiOutlinedInput-root.Mui-focused fieldset': {
-                            borderColor: '#ffb300',
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#ffb300",
                         }
                     }}>
                         <FormControl>
@@ -116,6 +118,7 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
                                 <TableHead>
                                     <TableRow>
                                         <StyledTableCell > Username </StyledTableCell>
+                                        <StyledTableCell > Password </StyledTableCell>
                                         <StyledTableCell > Designation </StyledTableCell>
                                         <StyledTableCell > Action </StyledTableCell>
                                     </TableRow>
@@ -134,8 +137,6 @@ const TableList = ({ usersList, isUsersDataFetching, cargoTypes, drivers }) => {
                                                             handleUserCancel={handleUserCancel}
                                                             user={user}
                                                             handleUpdateUser={handleUpdateUser}
-                                                            cargoTypes={cargoTypes}
-                                                            drivers={drivers}
                                                         />
                                                     ) : (
                                                         <UserRowList
