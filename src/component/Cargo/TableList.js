@@ -1,9 +1,9 @@
-import { 
-    Box, CircularProgress, FormControl, 
-    Paper, styled, Table, 
-    TableBody, TableCell, tableCellClasses, 
-    TableContainer, tableContainerClasses, TableHead, 
-    TablePagination, TableRow, tableRowClasses 
+import {
+    Box, CircularProgress, FormControl,
+    Paper, styled, Table,
+    TableBody, TableCell, tableCellClasses,
+    TableContainer, tableContainerClasses, TableHead,
+    TablePagination, TableRow, tableRowClasses
 } from "@mui/material";
 import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
@@ -69,14 +69,14 @@ const TableList = ({ cargoList, isCargoDataFetching }) => {
         setCargoUpdateData(newFormData);
     };
 
-    const handleUpdateCargo = async(id) => {
+    const handleUpdateCargo = async (id) => {
         const updatedCargo = {
             id: editCargoId,
             value: cargoUpdateData?.value,
             label: cargoUpdateData?.value
         };
         await dispatch(initEditCargo({ id, updatedCargo }));
-        await dispatch(initGetListCargo({ id, updatedCargo }));
+        await dispatch(initGetListCargo());
         setEditCargoId(null);
     };
 
@@ -93,9 +93,9 @@ const TableList = ({ cargoList, isCargoDataFetching }) => {
         setEditCargoId(null);
     }
 
-    const handleCargoDelete = async(id) => {
-        await dispatch(initDeleteCargo (id));
-        await dispatch(initGetListCargo(id));
+    const handleCargoDelete = async (id) => {
+        await dispatch(initDeleteCargo(id));
+        dispatch(initGetListCargo(id));
     }
 
     return (
@@ -152,6 +152,7 @@ const TableList = ({ cargoList, isCargoDataFetching }) => {
                         </FormControl>
                     </TableContainer>
                     <TablePagination
+                        component="div"
                         rowsPerPageOptions={[5, 10, 25]}
                         count={cargoList.length}
                         rowsPerPage={rowsPerPage}

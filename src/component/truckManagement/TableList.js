@@ -1,8 +1,10 @@
-import { Box, CircularProgress, FormControl,
+import {
+    Box, CircularProgress, FormControl,
     Paper, styled, Table, TableBody,
-    TableCell, tableCellClasses, TableContainer, 
-    tableContainerClasses, TableHead, 
-    TablePagination, TableRow, tableRowClasses } from "@mui/material";
+    TableCell, tableCellClasses, TableContainer,
+    tableContainerClasses, TableHead,
+    TablePagination, TableRow, tableRowClasses
+} from "@mui/material";
 import React, { useState, Fragment } from "react";
 import EdiTableRow from "./EditTruck/EditTableRow";
 import TruckRowList from "./TruckRowList";
@@ -66,7 +68,7 @@ const TableList = ({ trucksList, isTrucksDataFetching }) => {
         setTruckUpdateData(newFormData);
     };
 
-    const handleUpdateTruck = async(id) => {
+    const handleUpdateTruck = async (id) => {
         const updatedTruck = {
             id: editTruckId,
             truck_plate: truckUpdateData?.truck_plate,
@@ -105,9 +107,9 @@ const TableList = ({ trucksList, isTrucksDataFetching }) => {
         setEditTruckId(null);
     }
 
-    const handleDelete = async(id) => {
+    const handleDelete = async (id) => {
         await dispatch(initDeleteTruck(id));
-        await dispatch(initGetListTruck(id));
+        dispatch(initGetListTruck(id));
     }
 
     return (
@@ -171,6 +173,7 @@ const TableList = ({ trucksList, isTrucksDataFetching }) => {
                         </FormControl>
                     </TableContainer>
                     <TablePagination
+                        component="div"
                         rowsPerPageOptions={[5, 10, 25]}
                         count={trucksList.length}
                         rowsPerPage={rowsPerPage}

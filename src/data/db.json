@@ -4,15 +4,13 @@
       "id": 1,
       "username": "abc",
       "password": "aA2$",
-      "confirm_password": "aA2$",
       "designation": "Management"
     },
     {
       "id": 2,
       "username": "efg",
       "password": "bB2$",
-      "confirm_password": "bB2$",
-      "designation": "Management"
+      "designation": "Admin"
     },
     {
       "id": 3,
@@ -22,28 +20,16 @@
       "designation": "Admin"
     },
     {
+      "id": 4,
       "username": "qwe",
       "password": "qwe",
-      "confirm_password": "qwe",
-      "id": 4
+      "designation": "Management"
     },
     {
-      "username": "tyu",
-      "password": "tyu",
-      "confirm_password": "tyu",
-      "id": 5
-    },
-    {
-      "username": "jkl",
-      "password": "jkl",
-      "confirm_password": "jkl",
-      "id": 6
-    },
-    {
-      "username": "hjk",
-      "password": "hjk",
-      "confirm_password": "hjk",
-      "id": 7
+      "id": 5,
+      "username": "098",
+      "password": "098",
+      "designation": "Management"
     }
   ],
   "trucks": [
@@ -92,26 +78,15 @@
       "status": "Test 1"
     },
     {
+      "id": 6,
       "truck_plate": "03A-12398",
-      "cargo_type": "Computers, Electronics",
-      "driver": "Nguyễn Văn C",
       "truck_type": "Test 1",
-      "dimension": "Test 1",
-      "parking_address": "Test 1",
-      "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 5
-    },
-    {
-      "truck_plate": "03A-12398",
       "cargo_type": "Computers, Kid Toys",
       "driver": "Nguyễn Văn A",
-      "truck_type": "Test 1",
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 1",
-      "id": 6
+      "status": "Test 1"
     }
   ],
   "cargoTypeMaster": [
@@ -169,11 +144,6 @@
       "id": 11,
       "value": "Masks",
       "label": "Masks"
-    },
-    {
-      "id": 12,
-      "value": "Tiles",
-      "label": "Tiles"
     }
   ],
   "drivers": [

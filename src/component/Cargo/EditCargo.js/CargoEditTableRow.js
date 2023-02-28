@@ -16,7 +16,7 @@ const CargoEditTableRow = ({
         <TextField
           label="Cargo Type"
           type="text"
-          required="required"
+          required
           name="value"
           value={cargoUpdateData.value}
           onChange={handleCargoChange}

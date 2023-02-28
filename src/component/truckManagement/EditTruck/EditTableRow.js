@@ -16,7 +16,7 @@ const EditTableRow = ({
         <TextField
           label="Truck Plate"
           type="text"
-          required="required"
+          required
           name="truck_plate"
           value={truckUpdateData.truck_plate}
           onChange={handleTruckChange}
@@ -26,7 +26,7 @@ const EditTableRow = ({
         <TextField 
           label="Cargo Type"
           type="text"
-          required="required"
+          required
           name="cargo_type"
           value={truckUpdateData.cargo_type}
           onChange={handleTruckChange}
@@ -36,7 +36,7 @@ const EditTableRow = ({
         <TextField
           label="Driver"
           type="text"
-          required="required"
+          required
           name="driver"
           value={truckUpdateData.driver}
           onChange={handleTruckChange}
@@ -46,7 +46,7 @@ const EditTableRow = ({
         <TextField
           label="Truck Type"
           type="text"
-          required="required"
+          required
           name="truck_type"
           value={truckUpdateData.truck_type}
           onChange={handleTruckChange}
@@ -56,7 +56,7 @@ const EditTableRow = ({
         <TextField
           label="Truck Dimension"
           type="text"
-          required="required"
+          required
           name="dimension"
           value={truckUpdateData.dimension}
           onChange={handleTruckChange}
@@ -66,7 +66,7 @@ const EditTableRow = ({
         <TextField
           label="Parking Address"
           type="text"
-          required="required"
+          required
           name="parking_address"
           value={truckUpdateData.parking_address}
           onChange={handleTruckChange}
@@ -76,7 +76,7 @@ const EditTableRow = ({
         <TextField
           label="Production Year"
           type="text"
-          required="required"
+          required
           name="production_year"
           value={truckUpdateData.production_year}
           onChange={handleTruckChange}
@@ -86,7 +86,7 @@ const EditTableRow = ({
         <TextField
           label="Status"
           type="text"
-          required="required"
+          required
           name="status"
           value={truckUpdateData.status}
           onChange={handleTruckChange}

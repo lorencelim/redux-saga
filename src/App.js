@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SignIn from "./component/SignIn/SignIn";
 import SignUp from "./component/SignUp/SignUp";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -20,24 +20,18 @@ function App() {
       }
     }
   });
+
   const username = localStorage.getItem("user-Info");
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path=""
-          element={
-            username ? (
-              <Navigate to={`/${username}/TruckManagement`} />
-            ) : (
-              <Navigate to="/SignIn" />
-            )
-          } />
+        
         <Route
           path="/SignIn"
           element={<SignIn
             theme={theme}
+
           />}
         />
         <Route
@@ -47,47 +41,46 @@ function App() {
           />}
         />
         <Route
-          path={`/${localStorage.getItem("user-Info")}`}
+          path={`/:id`}
           element={<Navbar
             theme={theme}
           />} >
           <Route
-            path={`/${localStorage.getItem("user-Info")}/TruckManagement`}
+            path={`/:id/TruckManagement`}
             element={
               <TruckManagement
                 theme={theme}
               />} />
-          <Route path={`/${localStorage.getItem("user-Info")}/AddTruck`}
+          <Route path={`/:id/AddTruck`}
             element={
               <AddTruck
                 theme={theme}
-              />
-            }
-          />
+              />} />
           <Route
-            path={`/${localStorage.getItem("user-Info")}/UserManagement`}
+            path={`/:id/UserManagement`}
             element={
               <UserManagement
               />} />
           <Route
-            path={`/${localStorage.getItem("user-Info")}/CargoManagement`}
+            path={`/:id/CargoManagement`}
             element={
               <CargoManagement
-              theme={theme}
+                theme={theme}
               />} />
           <Route
-            path={`/${localStorage.getItem("user-Info")}/AddCargo`}
+            path={`/:id/AddCargo`}
             element={
               <AddCargo
-              theme={theme}
+                theme={theme}
               />} />
           <Route
-            path={`/${localStorage.getItem("user-Info")}/Account`}
+            path={"/:id/Account"}
             element={
               <Account
                 theme={theme}
               />} />
         </Route>
+        {/* <Route path="*" element={<Navigate to="SignIn" />} /> */}
       </Routes>
     </BrowserRouter>
   );

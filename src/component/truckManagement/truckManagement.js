@@ -10,6 +10,7 @@ import { initGetListTruck } from "../../containers/truck/truckList/store/actions
 const TruckManagement = ({ theme }) => {
   const dispatch = useDispatch();
   const { trucksList, isTrucksDataFetching } = useSelector(state => state.TrucksListReducer);
+  const [rerender, setRerender] = useState("");
   const [search, setSearch] = useState("");
   const searchKeys = [
     "truck_plate",
@@ -22,8 +23,11 @@ const TruckManagement = ({ theme }) => {
     "status"
   ]
 
+
+
   useEffect( () => {
     dispatch(initGetListTruck());
+    setRerender(Math.random());
   }, [])
 
   return (

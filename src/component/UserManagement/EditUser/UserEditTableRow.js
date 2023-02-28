@@ -9,14 +9,13 @@ const UserEditTableRow = ({
   user,
   handleUpdateUser
 }) => {
-  // console.log(userUpdateData);
   return (
     <>
       <TableCell>
         <TextField
           label="Username"
           type="text"
-          required="required"
+          required={true}
           name="username"
           value={userUpdateData.username}
           onChange={handleUserChange}
@@ -25,17 +24,18 @@ const UserEditTableRow = ({
       <TableCell>
         <TextField 
           label="Password"
-          type="password"
-          required="required"
-          name="designation"
+          type="text"
+          required={true}
+          name="password"
           value={userUpdateData.password}
+          onChange={handleUserChange}
         />
       </TableCell>
       <TableCell>
         <TextField 
           label="Designation"
           type="text"
-          required="required"
+          required={true}
           name="designation"
           value={userUpdateData.designation}
           onChange={handleUserChange}

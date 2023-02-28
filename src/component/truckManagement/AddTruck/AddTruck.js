@@ -72,7 +72,7 @@ const AddTruck = ({ theme }) => {
                         <Grid sx={{ mt: 1, width: 0.6 }} >
                             <Paper elevation={2} sx={{ borderRadius: "16px" }}>
                                 <Box sx={{ display: "flex", alignSelf: "center" }}>
-                                    <Button onClick={() => { navigate(`/${localStorage.getItem("user-Info")}/TruckManagement`) }}>
+                                    <Button onClick={() => { navigate(`/User/TruckManagement`) }}>
                                         <ArrowBackIos />
                                     </Button>
                                 </Box>
@@ -185,7 +185,7 @@ const AddTruck = ({ theme }) => {
                 {
                     truckPostSuccess ?
                         (
-                            <Navigate to={`/${localStorage.getItem("user-Info")}/TruckManagement`} />
+                            <Navigate to={`/User/TruckManagement`} />
                         ) : (
                             null
                         )

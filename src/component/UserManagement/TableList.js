@@ -1,8 +1,10 @@
-import { Box, CircularProgress, FormControl, 
-    Paper, styled, Table, TableBody, 
-    TableCell, tableCellClasses, TableContainer, 
-    tableContainerClasses, TableHead, TablePagination, 
-    TableRow, tableRowClasses } from "@mui/material";
+import {
+    Box, CircularProgress, FormControl,
+    Paper, styled, Table, TableBody,
+    TableCell, tableCellClasses, TableContainer,
+    tableContainerClasses, TableHead, TablePagination,
+    TableRow, tableRowClasses
+} from "@mui/material";
 import React, { useState, Fragment } from "react";
 import UserEditTableRow from "./EditUser/UserEditTableRow";
 import UserRowList from "./UserRowList";
@@ -41,9 +43,9 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
             backgroundColor: "white",
         }
     }));
-    
+
     const dispatch = useDispatch();
-    const [userUpdateData, setUserUpdateData] = useState(false);
+    const [userUpdateData, setUserUpdateData] = useState("");
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -67,15 +69,17 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
         setUserUpdateData(newFormData);
     };
 
-    const handleUpdateUser = async(id) => {
+    const handleUpdateUser = async (id) => {
         const updatedUser = {
             id: editUserId,
             username: userUpdateData?.username,
             password: userUpdateData?.password,
             designation: userUpdateData?.designation
         };
+        localStorage.setItem("user-Info", userUpdateData?.username)
+        localStorage.setItem("designation", userUpdateData?.designation)
         await dispatch(initEditUser({ id, updatedUser }));
-        await dispatch(initGetListUser({ id, updatedUser }));
+        await dispatch(initGetListUser());
         setEditUserId(null);
     };
 
@@ -94,9 +98,9 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
         setEditUserId(null);
     }
 
-    const handleUserDelete = async(id) => {
+    const handleUserDelete = async (id) => {
         await dispatch(initDeleteUser(id));
-        await dispatch(initGetListUser(id));
+        dispatch(initGetListUser(id));
     }
 
     return (
@@ -155,6 +159,7 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
                         </FormControl>
                     </TableContainer>
                     <TablePagination
+                        component="div"
                         rowsPerPageOptions={[5, 10, 25]}
                         count={usersList.length}
                         rowsPerPage={rowsPerPage}

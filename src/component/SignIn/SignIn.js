@@ -15,7 +15,11 @@ const SignIn = ({ theme }) => {
     const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
     const { usersList } = useSelector(state => state.UsersListReducer);
-    
+
+    useEffect(() => {
+      localStorage.setItem("user-Info", user);
+    }, [user]);
+
     useEffect(() => {
         userRef.current.focus();
     }, []);
@@ -41,7 +45,7 @@ const SignIn = ({ theme }) => {
                 setErrMsg("Incorrect Username And Password");
             }
         } catch (err) {
-                setErrMsg("No Server Response");
+            setErrMsg("No Server Response");
             errRef.current.focus();
         }
     };
@@ -50,7 +54,7 @@ const SignIn = ({ theme }) => {
         <ThemeProvider theme={theme}>
             {success ? (
                 <Grid>
-                    <Navigate to={`/${localStorage.getItem("user-Info")}/TruckManagement`} />
+                    <Navigate to={`/${user}/TruckManagement`} />
                 </Grid>
             ) : (
                 <Grid container component="main" sx={{ height: "100vh" }}>
