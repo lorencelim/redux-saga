@@ -80,7 +80,7 @@ function App() {
                 theme={theme}
               />} />
         </Route>
-        {/* <Route path="*" element={<Navigate to="SignIn" />} /> */}
+        <Route path="*" element={<Navigate to="SignIn" />} />
       </Routes>
     </BrowserRouter>
   );
