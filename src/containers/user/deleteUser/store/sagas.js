@@ -8,7 +8,6 @@ export default function* DeleteUserSaga() {
 }
 
 function* getUsersListData({id}) {
-    console.log(id);
     try{
         const response = yield call(axios.delete, `/users/${id}`)
         if(response.status === 200){

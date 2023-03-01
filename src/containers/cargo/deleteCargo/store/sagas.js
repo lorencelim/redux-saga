@@ -13,7 +13,6 @@ function* getCargoListData({id}) {
         if(response.status === 200){
             yield put(initDeteleCargoSuccessfull(true))
         }
-        console.log(response);
     } catch (err) {
         yield put(initDeleteCargo(true));
     }

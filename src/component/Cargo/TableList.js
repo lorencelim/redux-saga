@@ -76,7 +76,7 @@ const TableList = ({ cargoList, isCargoDataFetching }) => {
             label: cargoUpdateData?.value
         };
         await dispatch(initEditCargo({ id, updatedCargo }));
-        await dispatch(initGetListCargo());
+        dispatch(initGetListCargo());
         setEditCargoId(null);
     };
 

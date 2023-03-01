@@ -23,9 +23,9 @@ const SignUp = ({ theme }) => {
     const [user, setUser] = useState("");
     const errRef = useRef();
     const [errMsg, setErrMsg] = useState("");
-    const { usersList } = useSelector(state => state.UsersListReducer)
-    const { success } = useSelector(state => state.AddUsersReducer)
-    const accountMatch = usersList.some(acc => acc.username === user.username)
+    const { usersList } = useSelector(state => state.UsersListReducer);
+    const { success } = useSelector(state => state.AddUsersReducer);
+    const accountMatch = usersList.some(acc => acc.username === user.username);
 
     useEffect(() => {
         dispatch(initGetListUser())
@@ -39,7 +39,6 @@ const SignUp = ({ theme }) => {
     }, [dispatch])
 
     const handleSubmit = async (e) => {
-        console.log(e);
             if (!accountMatch) {
                 await dispatch(initSaveUsersValue(user));
                 setUserPostSuccess(true);

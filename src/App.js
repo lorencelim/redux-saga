@@ -21,8 +21,6 @@ function App() {
     }
   });
 
-  const username = localStorage.getItem("user-Info");
-
   return (
     <BrowserRouter>
       <Routes>

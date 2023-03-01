@@ -82,7 +82,7 @@ const TableList = ({ trucksList, isTrucksDataFetching }) => {
             status: truckUpdateData?.status
         };
         await dispatch(initEditTruck({ updatedTruck, id }));
-        await dispatch(initGetListTruck());
+        dispatch(initGetListTruck());
         setEditTruckId(null);
     };
 

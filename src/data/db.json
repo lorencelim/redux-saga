@@ -42,7 +42,7 @@
       "dimension": "Test 1",
       "parking_address": "Test 1",
       "production_year": "Test 1",
-      "status": "Test 2"
+      "status": "Test 1"
     },
     {
       "id": 2,
@@ -92,8 +92,8 @@
   "cargoTypeMaster": [
     {
       "id": 1,
-      "value": "Computers",
-      "label": "Computers"
+      "value": "Computer",
+      "label": "Computer"
     },
     {
       "id": 2,

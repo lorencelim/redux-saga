@@ -13,7 +13,6 @@ function* getTrucksListData({id}) {
         if(response.status === 200){
             yield put(initDeteleTruckSuccessfull(true))
         }
-        console.log(response);
     } catch (err) {
         yield put(initDeleteTruck(true));
     }

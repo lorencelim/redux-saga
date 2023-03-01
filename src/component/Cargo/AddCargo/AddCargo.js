@@ -49,7 +49,7 @@ const AddCargo = ({ theme }) => {
                         <Grid sx={{ mt: 1, width: 0.6 }} >
                             <Paper elevation={2} sx={{ borderRadius: "16px" }}>
                                 <Box sx={{ display: "flex", alignSelf: "center" }}>
-                                    <Button onClick={() => {navigate(`/User/CargoManagement`)}}>
+                                    <Button onClick={() => {navigate(`/${localStorage.getItem("user-Info")}/CargoManagement`)}}>
                                         <ArrowBackIos />
                                     </Button>
                                 </Box>
@@ -107,7 +107,7 @@ const AddCargo = ({ theme }) => {
                 {
                     cargoPostSuccess ?
                         (
-                            <Navigate to={`/User/CargoManagement`} />
+                            <Navigate to={`/${localStorage.getItem("user-Info")}/CargoManagement`} />
                         ) : (
                             null
                         )

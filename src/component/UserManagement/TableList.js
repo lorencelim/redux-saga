@@ -79,7 +79,7 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
         localStorage.setItem("user-Info", userUpdateData?.username)
         localStorage.setItem("designation", userUpdateData?.designation)
         await dispatch(initEditUser({ id, updatedUser }));
-        await dispatch(initGetListUser());
+        dispatch(initGetListUser());
         setEditUserId(null);
     };
 

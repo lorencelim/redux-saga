@@ -25,7 +25,7 @@ const TruckManagement = ({ theme }) => {
 
 
 
-  useEffect( () => {
+  useEffect(() => {
     dispatch(initGetListTruck());
     setRerender(Math.random());
   }, [])

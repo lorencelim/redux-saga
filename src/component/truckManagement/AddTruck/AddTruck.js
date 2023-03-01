@@ -27,8 +27,8 @@ const AddTruck = ({ theme }) => {
 
     useEffect(() => {
         dispatch(initGetListCargo());
-        dispatch(initGetListDriver())
-    }, [])
+        dispatch(initGetListDriver());
+    }, [dispatch])
 
     useEffect(() => {
         if (success) {
@@ -72,7 +72,7 @@ const AddTruck = ({ theme }) => {
                         <Grid sx={{ mt: 1, width: 0.6 }} >
                             <Paper elevation={2} sx={{ borderRadius: "16px" }}>
                                 <Box sx={{ display: "flex", alignSelf: "center" }}>
-                                    <Button onClick={() => { navigate(`/User/TruckManagement`) }}>
+                                    <Button onClick={() => { navigate(`/${localStorage.getItem("user-Info")}/TruckManagement`)}}>
                                         <ArrowBackIos />
                                     </Button>
                                 </Box>
@@ -185,7 +185,7 @@ const AddTruck = ({ theme }) => {
                 {
                     truckPostSuccess ?
                         (
-                            <Navigate to={`/User/TruckManagement`} />
+                            <Navigate to={`/${localStorage.getItem("user-Info")}/TruckManagement`} />
                         ) : (
                             null
                         )
