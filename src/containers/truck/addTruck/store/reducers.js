@@ -8,7 +8,6 @@ const initialState ={
 const AddTrucksReducer = (state = initialState, action) => {
     switch (action.type) {
         case SAVE_TRUCKS_VALUE_SUCCESSFULL:
-            console.log(action)
             return {
                 ...state,
                 success : action.success

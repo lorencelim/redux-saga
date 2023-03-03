@@ -35,11 +35,10 @@ const SignIn = ({ theme }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            const userMatch = usersList.some(acc => acc.username === user && acc.password === password);
-            const filterUser = usersList.filter(acc => acc.username === user && acc.password === password);
+            const userMatch = usersList.find(acc => acc.username === user && acc.password === password);
             if (userMatch) {
-                localStorage.setItem("user-Info", filterUser.map(acc => acc.username));
-                localStorage.setItem("designation", filterUser.map(acc => acc.designation));
+                localStorage.setItem("user-Info", userMatch.username);
+                localStorage.setItem("designation", userMatch.designation);
                 setSuccess(true);
             } else if (!userMatch) {
                 setErrMsg("Incorrect Username And Password");

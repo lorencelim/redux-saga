@@ -13,7 +13,6 @@ function* saveCargoSaga(action) {
     const createFinalCargoData = {
         cargo: action.cargo
     } 
-    console.log(createFinalCargoData);
     try {
         const response = yield call(axios.post,"/cargoTypeMaster", createFinalCargoData.cargo, { headers: headerParams })
         
@@ -21,7 +20,6 @@ function* saveCargoSaga(action) {
             yield put(initSaveCargoValueSuccessfull(true));
             alert("Cargo successfully added");
         }
-        console.log(response);
     } catch (err) {
         yield put(initSaveCargoValueFailed(true));
         alert("Server down, please try it again later");

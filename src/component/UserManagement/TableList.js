@@ -76,8 +76,6 @@ const TableList = ({ usersList, isUsersDataFetching }) => {
             password: userUpdateData?.password,
             designation: userUpdateData?.designation
         };
-        localStorage.setItem("user-Info", userUpdateData?.username)
-        localStorage.setItem("designation", userUpdateData?.designation)
         await dispatch(initEditUser({ id, updatedUser }));
         dispatch(initGetListUser());
         setEditUserId(null);

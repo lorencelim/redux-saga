@@ -3,9 +3,7 @@ import { useField } from "formik";
 
 const CustomInputCargo = ({ cargo, setCargo, ...props }) => {
     const [field, meta, {setValue}] = useField(props.field.name);
-
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         setValue(e.target.value)
         setCargo({...cargo, [field.name]: e.target.value})
     }

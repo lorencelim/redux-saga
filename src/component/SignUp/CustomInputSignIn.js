@@ -4,7 +4,6 @@ import { useField } from "formik";
 const CustomInputSignIn = ({ setUser, user, ...props }) => {
     const [field, meta, {setValue}] = useField(props.field.name);
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         setValue(e.target.value)
         setUser({...user, [field.name]: e.target.value})
     }

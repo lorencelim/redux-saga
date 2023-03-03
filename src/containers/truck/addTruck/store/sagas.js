@@ -13,7 +13,6 @@ function* saveTrucksSaga(action) {
     const createFinalTrucksData = {
         trucks: action.trucks
     }
-    console.log(createFinalTrucksData);
     try {
         const response = yield call(axios.post, "/Trucks", createFinalTrucksData.trucks, { headers: headerParams })
 

@@ -9,7 +9,6 @@ const initialState ={
 const AddCargoReducer = (state = initialState, action) => {
     switch (action.type) {
         case SAVE_CARGO_VALUE_SUCCESSFULL:
-            console.log(action)
             return {
                 ...state,
                 success : action.success

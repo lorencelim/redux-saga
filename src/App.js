@@ -24,7 +24,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
         <Route
           path="/SignIn"
           element={<SignIn

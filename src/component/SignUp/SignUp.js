@@ -25,7 +25,7 @@ const SignUp = ({ theme }) => {
     const [errMsg, setErrMsg] = useState("");
     const { usersList } = useSelector(state => state.UsersListReducer);
     const { success } = useSelector(state => state.AddUsersReducer);
-    const accountMatch = usersList.some(acc => acc.username === user.username);
+    const accountMatch = usersList.find(acc => acc.username === user.username);
 
     useEffect(() => {
         dispatch(initGetListUser())
@@ -67,7 +67,7 @@ const SignUp = ({ theme }) => {
                             borderRadius: "20px"
                         }}>
                         <Box sx={{ display: "flex", alignSelf: "start" }}>
-                            <Button onClick={() => { navigate("/SignIn"); }}>
+                            <Button onClick={() => { navigate(-1); }}>
                                 <ArrowBackIos />
                             </Button>
                         </Box>
